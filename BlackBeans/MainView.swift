@@ -16,20 +16,24 @@ struct MainView: View {
   
   var body: some View {
     NavigationView {
-      List {
-        ForEach(beans, id: \.self) { bean in
-          HStack {
-            Text(bean.name ?? "")
-            Text("\(bean.value)")
+      VStack {
+        List {
+          ForEach(beans, id: \.self) {
+            BeanCell(bean: $0)
           }
         }
+        Spacer()
+        HStack {
+          Text("Total")
+          Spacer()
+          Text(Persistency.allBeansSum.toCurrency)
+        }.padding()
+      }.sheet(isPresented: self.$showAddBeanView) {
+        AddBeanView(isPresenting: self.$showAddBeanView)
       }
-      .sheet(isPresented: self.$showAddBeanView) {
-        AddBeanView()
-      }
-      .navigationBarTitle("All Beans")
+      .navigationBarTitle("Everything")
       .navigationBarItems(trailing: Button(action: {
-        self.showAddBeanView = true
+        self.showAddBeanView.toggle()
       }) {
         Image(systemName: "plus")
       })
@@ -37,8 +41,16 @@ struct MainView: View {
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    MainView()
+struct BeanCell: View {
+  
+  @State var bean: Bean
+  
+  var body: some View {
+    HStack {
+      Text(bean.name ?? "")
+      Spacer()
+      Text(bean.valueWithCurrency)
+    }
   }
+  
 }

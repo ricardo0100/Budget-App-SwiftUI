@@ -13,9 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
 
-
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    let context = CoreData.shared.viewContext
+    let context = Persistency.viewContext
     let contentView = MainView().environment(\.managedObjectContext, context)
 
     if let windowScene = scene as? UIWindowScene {
@@ -27,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 
   func sceneDidEnterBackground(_ scene: UIScene) {
-    CoreData.shared.saveContext()
+    try! Persistency.saveContext()
   }
 
 }

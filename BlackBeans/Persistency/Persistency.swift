@@ -1,5 +1,5 @@
 //
-//  CoreData.swift
+//  Persistency.swift
 //  BlackBeans
 //
 //  Created by Ricardo Gehrke on 12/01/20.
@@ -10,11 +10,11 @@ import Foundation
 import CoreData
 import UIKit
 
-class CoreData: NSObject {
+class Persistency: NSObject {
   
-  static let shared = CoreData()
+  private static let shared = Persistency()
   
-  var allBeansSum: Double {
+  static var allBeansSum: Double {
     let expression = NSExpressionDescription()
     expression.expression = NSExpression(forFunction: "sum:", arguments:[NSExpression(forKeyPath: "value")])
     expression.name = "sum"
@@ -25,9 +25,13 @@ class CoreData: NSObject {
     fetchRequest.propertiesToFetch = [expression]
     fetchRequest.resultType = .dictionaryResultType
     
-    let res = try! viewContext.fetch(fetchRequest)[0] as? [String: Double]
+    let res = try! Persistency.viewContext.fetch(fetchRequest)[0] as? [String: Double]
     
     return res?["sum"] ?? 0
+  }
+  
+  static var viewContext: NSManagedObjectContext {
+    return shared.persistentContainer.viewContext
   }
   
   private lazy var persistentContainer: NSPersistentContainer = {
@@ -40,28 +44,27 @@ class CoreData: NSObject {
       return container
   }()
   
-  var viewContext: NSManagedObjectContext {
-    return persistentContainer.viewContext
-  }
-
-  func saveContext () {
-      let context = persistentContainer.viewContext
-      if context.hasChanges {
-          do {
-              try context.save()
-          } catch {
-              let nserror = error as NSError
-              fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-          }
-      }
+  static func saveContext() throws {
+    let context = Persistency.viewContext
+    if context.hasChanges {
+      try context.save()
+    }
   }
   
-  func createMockData() {
-    let bean = Bean.init(context: persistentContainer.viewContext)
-    bean.name = "Teste"
+  static func createBean(name: String, value: Decimal) -> NSError? {
+    let bean = Bean(context: Persistency.viewContext)
+    bean.name = name
+    bean.value = NSDecimalNumber(decimal: value)
     bean.creationTimestamp = Date()
-    bean.value = 10
-    saveContext()
+    
+    do {
+      try Persistency.saveContext()
+      return nil
+    } catch {
+      Persistency.viewContext.delete(bean)
+      let error = error as NSError
+      return error
+    }
   }
   
 }
