@@ -20,6 +20,10 @@ struct MainView: View {
         List {
           ForEach(beans, id: \.self) {
             BeanCell(bean: $0)
+          }.onDelete { indexSet in
+            for index in indexSet {
+              try? Persistency.deleteBean(bean: self.beans[index])
+            }
           }
         }
         Spacer()

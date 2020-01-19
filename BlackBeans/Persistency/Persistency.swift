@@ -67,4 +67,9 @@ class Persistency: NSObject {
     }
   }
   
+  static func deleteBean(bean: Bean) throws {
+    Persistency.viewContext.delete(bean)
+    try saveContext()
+  }
+  
 }

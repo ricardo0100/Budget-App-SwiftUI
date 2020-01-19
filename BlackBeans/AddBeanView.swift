@@ -16,11 +16,29 @@ struct AddBeanView: View {
   @State var showingAlert = false
   @State var alertMessage = ""
   
+  var someNumberProxy: Binding<String> {
+    Binding<String>(
+      get: {
+        print(self.viewModel.value.toCurrency)
+        return self.viewModel.value.toCurrency
+      },
+      set: {
+        print($0)
+        if let value = StringFormatter.currencyFormatter.number(from: $0) {
+          self.viewModel.value = value.doubleValue
+        }
+      }
+    )
+  }
+  
   var body: some View {
     NavigationView {
       VStack {
         TextField("Name", text: $viewModel.name)
-        TextField("Value", text: $viewModel.value)
+          .textFieldStyle(RoundedBorderTextFieldStyle())
+        TextField("Value", text: someNumberProxy)
+          .textFieldStyle(RoundedBorderTextFieldStyle())
+          .keyboardType(.decimalPad)
         Spacer()
       }.padding()
       .navigationBarTitle("New Bean")
@@ -45,11 +63,10 @@ struct AddBeanView: View {
 class AddBeanViewModel: ObservableObject, Identifiable {
   
   @Published var name: String = ""
-  @Published var value: String = ""
+  @Published var value: Double = 0
   
   func createBean() -> NSError? {
-    let value = Decimal(string: self.value) ?? 0
-    return Persistency.createBean(name: name, value: value)
+    return Persistency.createBean(name: name, value: Decimal(value))
   }
 
 }
