@@ -10,7 +10,7 @@ import Foundation
 
 struct StringFormatter {
   
-  static var currencyFormatter: NumberFormatter {
+  static var currency: NumberFormatter {
     let formatter = NumberFormatter()
     formatter.numberStyle = .currency
     formatter.maximumFractionDigits = 2

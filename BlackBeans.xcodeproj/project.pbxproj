@@ -7,11 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59047E5423EAE09200EC0388 /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639AE023D643C100DD18DC /* CurrencyTextField.swift */; };
+		59047E5523EAE21A00EC0388 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4923D3601F00E13D90 /* StringFormatter.swift */; };
+		59047E5623EAE29800EC0388 /* Decimal+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */; };
+		59047E5723EAE29800EC0388 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A49B6023E70CC8005221C9 /* String+Extension.swift */; };
+		5930E11C23D6411D008E8B27 /* BeanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5930E11B23D6411D008E8B27 /* BeanCell.swift */; };
 		59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59446D7C23CB4FD000BC8176 /* Persistency.swift */; };
-		5947E6F223D1FD590012997E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947E6F123D1FD590012997E /* MainView.swift */; };
+		5947E6F223D1FD590012997E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947E6F123D1FD590012997E /* HomeView.swift */; };
 		5947E6F423D1FD6A0012997E /* AddBeanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947E6F323D1FD6A0012997E /* AddBeanView.swift */; };
-		59600E4723D35F6D00E13D90 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4623D35F6D00E13D90 /* Double+Extension.swift */; };
+		5950765723DDFC6A00A5446A /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5950765623DDFC6A00A5446A /* Log.swift */; };
+		59600E4723D35F6D00E13D90 /* Decimal+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */; };
 		59600E4A23D3601F00E13D90 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4923D3601F00E13D90 /* StringFormatter.swift */; };
+		59639ADF23D6430D00DD18DC /* AddBeanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639ADE23D6430D00DD18DC /* AddBeanViewModel.swift */; };
+		59639AE123D643C100DD18DC /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639AE023D643C100DD18DC /* CurrencyTextField.swift */; };
+		59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A49B6023E70CC8005221C9 /* String+Extension.swift */; };
 		59C780C423C2723A000EFB5B /* Bean+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C780C323C2723A000EFB5B /* Bean+Extension.swift */; };
 		59F2C4AD23C226610040077D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4AC23C226610040077D /* AppDelegate.swift */; };
 		59F2C4AF23C226610040077D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4AE23C226610040077D /* SceneDelegate.swift */; };
@@ -21,12 +30,29 @@
 		59F2C4BC23C226660040077D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59F2C4BA23C226660040077D /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5950764F23DDF92A00A5446A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59F2C4A123C226610040077D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 59F2C4A823C226610040077D;
+			remoteInfo = BlackBeans;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		5930E11B23D6411D008E8B27 /* BeanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanCell.swift; sourceTree = "<group>"; };
 		59446D7C23CB4FD000BC8176 /* Persistency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistency.swift; sourceTree = "<group>"; };
-		5947E6F123D1FD590012997E /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		5947E6F123D1FD590012997E /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5947E6F323D1FD6A0012997E /* AddBeanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeanView.swift; sourceTree = "<group>"; };
-		59600E4623D35F6D00E13D90 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		5950764A23DDF92A00A5446A /* BlackBeansTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackBeansTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5950764E23DDF92A00A5446A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5950765623DDFC6A00A5446A /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extension.swift"; sourceTree = "<group>"; };
 		59600E4923D3601F00E13D90 /* StringFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
+		59639ADE23D6430D00DD18DC /* AddBeanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeanViewModel.swift; sourceTree = "<group>"; };
+		59639AE023D643C100DD18DC /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
+		59A49B6023E70CC8005221C9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		59C780C323C2723A000EFB5B /* Bean+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bean+Extension.swift"; sourceTree = "<group>"; };
 		59F2C4A923C226610040077D /* BlackBeans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackBeans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F2C4AC23C226610040077D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +65,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5950764723DDF92A00A5446A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		59F2C4A623C226610040077D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -49,10 +82,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5950764B23DDF92A00A5446A /* BlackBeansTests */ = {
+			isa = PBXGroup;
+			children = (
+				5950764E23DDF92A00A5446A /* Info.plist */,
+			);
+			path = BlackBeansTests;
+			sourceTree = "<group>";
+		};
 		59600E4523D35F5C00E13D90 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				59600E4623D35F6D00E13D90 /* Double+Extension.swift */,
+				59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */,
+				59A49B6023E70CC8005221C9 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -61,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				59600E4923D3601F00E13D90 /* StringFormatter.swift */,
+				59639AE023D643C100DD18DC /* CurrencyTextField.swift */,
+				5950765623DDFC6A00A5446A /* Log.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -92,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				59F2C4AB23C226610040077D /* BlackBeans */,
+				5950764B23DDF92A00A5446A /* BlackBeansTests */,
 				59F2C4AA23C226610040077D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				59F2C4A923C226610040077D /* BlackBeans.app */,
+				5950764A23DDF92A00A5446A /* BlackBeansTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,8 +153,8 @@
 		59F2C4AB23C226610040077D /* BlackBeans */ = {
 			isa = PBXGroup;
 			children = (
-				5947E6F123D1FD590012997E /* MainView.swift */,
-				5947E6F323D1FD6A0012997E /* AddBeanView.swift */,
+				59FF74C123EB52EE0066C3A5 /* Home */,
+				59FF74C023EB52DD0066C3A5 /* Add Bean */,
 				59A621C623D1F8D4006C7750 /* Persistency */,
 				59A621C523D1F8B7006C7750 /* Application */,
 				59600E4523D35F5C00E13D90 /* Extensions */,
@@ -125,9 +171,45 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		59FF74C023EB52DD0066C3A5 /* Add Bean */ = {
+			isa = PBXGroup;
+			children = (
+				5947E6F323D1FD6A0012997E /* AddBeanView.swift */,
+				59639ADE23D6430D00DD18DC /* AddBeanViewModel.swift */,
+			);
+			path = "Add Bean";
+			sourceTree = "<group>";
+		};
+		59FF74C123EB52EE0066C3A5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				5947E6F123D1FD590012997E /* HomeView.swift */,
+				5930E11B23D6411D008E8B27 /* BeanCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5950764923DDF92A00A5446A /* BlackBeansTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5950765323DDF92A00A5446A /* Build configuration list for PBXNativeTarget "BlackBeansTests" */;
+			buildPhases = (
+				5950764623DDF92A00A5446A /* Sources */,
+				5950764723DDF92A00A5446A /* Frameworks */,
+				5950764823DDF92A00A5446A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5950765023DDF92A00A5446A /* PBXTargetDependency */,
+			);
+			name = BlackBeansTests;
+			productName = BlackBeansTests;
+			productReference = 5950764A23DDF92A00A5446A /* BlackBeansTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		59F2C4A823C226610040077D /* BlackBeans */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 59F2C4C023C226660040077D /* Build configuration list for PBXNativeTarget "BlackBeans" */;
@@ -151,10 +233,14 @@
 		59F2C4A123C226610040077D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Ricardo Gehrke Filho";
 				TargetAttributes = {
+					5950764923DDF92A00A5446A = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 59F2C4A823C226610040077D;
+					};
 					59F2C4A823C226610040077D = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
@@ -174,11 +260,19 @@
 			projectRoot = "";
 			targets = (
 				59F2C4A823C226610040077D /* BlackBeans */,
+				5950764923DDF92A00A5446A /* BlackBeansTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5950764823DDF92A00A5446A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		59F2C4A723C226610040077D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -192,15 +286,31 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5950764623DDF92A00A5446A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59047E5423EAE09200EC0388 /* CurrencyTextField.swift in Sources */,
+				59047E5623EAE29800EC0388 /* Decimal+Extension.swift in Sources */,
+				59047E5523EAE21A00EC0388 /* StringFormatter.swift in Sources */,
+				59047E5723EAE29800EC0388 /* String+Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		59F2C4A523C226610040077D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				59F2C4AD23C226610040077D /* AppDelegate.swift in Sources */,
 				59F2C4AF23C226610040077D /* SceneDelegate.swift in Sources */,
-				5947E6F223D1FD590012997E /* MainView.swift in Sources */,
-				59600E4723D35F6D00E13D90 /* Double+Extension.swift in Sources */,
+				5947E6F223D1FD590012997E /* HomeView.swift in Sources */,
+				5930E11C23D6411D008E8B27 /* BeanCell.swift in Sources */,
+				59600E4723D35F6D00E13D90 /* Decimal+Extension.swift in Sources */,
 				59600E4A23D3601F00E13D90 /* StringFormatter.swift in Sources */,
+				59639AE123D643C100DD18DC /* CurrencyTextField.swift in Sources */,
+				5950765723DDFC6A00A5446A /* Log.swift in Sources */,
+				59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */,
+				59639ADF23D6430D00DD18DC /* AddBeanViewModel.swift in Sources */,
 				59F2C4B223C226610040077D /* BlackBeans.xcdatamodeld in Sources */,
 				59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */,
 				59C780C423C2723A000EFB5B /* Bean+Extension.swift in Sources */,
@@ -209,6 +319,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5950765023DDF92A00A5446A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 59F2C4A823C226610040077D /* BlackBeans */;
+			targetProxy = 5950764F23DDF92A00A5446A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		59F2C4BA23C226660040077D /* LaunchScreen.storyboard */ = {
@@ -222,6 +340,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5950765123DDF92A00A5446A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2T9EKFYB5P;
+				INFOPLIST_FILE = BlackBeansTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rrghkf.BlackBeansTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlackBeans.app/BlackBeans";
+			};
+			name = Debug;
+		};
+		5950765223DDF92A00A5446A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2T9EKFYB5P;
+				INFOPLIST_FILE = BlackBeansTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rrghkf.BlackBeansTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlackBeans.app/BlackBeans";
+			};
+			name = Release;
+		};
 		59F2C4BE23C226660040077D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -379,6 +537,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5950765323DDF92A00A5446A /* Build configuration list for PBXNativeTarget "BlackBeansTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5950765123DDF92A00A5446A /* Debug */,
+				5950765223DDF92A00A5446A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		59F2C4A423C226610040077D /* Build configuration list for PBXProject "BlackBeans" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

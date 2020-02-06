@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HomeView.swift
 //  BlackBeans
 //
 //  Created by Ricardo Gehrke on 05/01/20.
@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreData
 
-struct MainView: View {
+struct HomeView: View {
   
   @FetchRequest(fetchRequest: Bean.allBeansFetchRequest()) var beans: FetchedResults<Bean>
   @State private var showAddBeanView: Bool = false
@@ -22,7 +22,8 @@ struct MainView: View {
             BeanCell(bean: $0)
           }.onDelete { indexSet in
             for index in indexSet {
-              try? Persistency.deleteBean(bean: self.beans[index])
+              let bean = self.beans[index]
+              try? Persistency.deleteBean(bean: bean)
             }
           }
         }
@@ -30,7 +31,7 @@ struct MainView: View {
         HStack {
           Text("Total")
           Spacer()
-          Text(Persistency.allBeansSum.toCurrency)
+          Text(Persistency.allBeansSum.toCurrency ?? "")
         }.padding()
       }.sheet(isPresented: self.$showAddBeanView) {
         AddBeanView(isPresenting: self.$showAddBeanView)
@@ -43,18 +44,4 @@ struct MainView: View {
       })
     }
   }
-}
-
-struct BeanCell: View {
-  
-  @State var bean: Bean
-  
-  var body: some View {
-    HStack {
-      Text(bean.name ?? "")
-      Spacer()
-      Text(bean.valueWithCurrency)
-    }
-  }
-  
 }

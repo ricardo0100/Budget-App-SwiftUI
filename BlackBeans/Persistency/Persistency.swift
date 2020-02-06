@@ -14,20 +14,20 @@ class Persistency: NSObject {
   
   private static let shared = Persistency()
   
-  static var allBeansSum: Double {
+  static var allBeansSum: Decimal {
     let expression = NSExpressionDescription()
     expression.expression = NSExpression(forFunction: "sum:", arguments:[NSExpression(forKeyPath: "value")])
     expression.name = "sum"
-    expression.expressionResultType = .doubleAttributeType
+    expression.expressionResultType = .decimalAttributeType
 
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Bean")
     fetchRequest.returnsObjectsAsFaults = false
     fetchRequest.propertiesToFetch = [expression]
     fetchRequest.resultType = .dictionaryResultType
     
-    let res = try! Persistency.viewContext.fetch(fetchRequest)[0] as? [String: Double]
+    let res = try! Persistency.viewContext.fetch(fetchRequest)[0] as? [String: NSDecimalNumber]
     
-    return res?["sum"] ?? 0
+    return (res?["sum"] ?? 0).decimalValue
   }
   
   static var viewContext: NSManagedObjectContext {
@@ -51,7 +51,7 @@ class Persistency: NSObject {
     }
   }
   
-  static func createBean(name: String, value: Decimal) -> NSError? {
+  static func createBean(name: String, value: Decimal) throws {
     let bean = Bean(context: Persistency.viewContext)
     bean.name = name
     bean.value = NSDecimalNumber(decimal: value)
@@ -59,17 +59,20 @@ class Persistency: NSObject {
     
     do {
       try Persistency.saveContext()
-      return nil
     } catch {
       Persistency.viewContext.delete(bean)
-      let error = error as NSError
-      return error
+      Persistency.log(error)
+      throw error
     }
   }
   
   static func deleteBean(bean: Bean) throws {
     Persistency.viewContext.delete(bean)
     try saveContext()
+  }
+  
+  static func log(_ error: Error) {
+    Log.error("💾 Database error: \(error.localizedDescription)")
   }
   
 }
