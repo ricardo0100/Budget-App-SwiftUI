@@ -12,7 +12,8 @@ import CoreData
 struct HomeView: View {
   
   @FetchRequest(fetchRequest: Bean.allBeansFetchRequest()) var beans: FetchedResults<Bean>
-  @State private var showAddBeanView: Bool = false
+  
+  @State private var isShowingAddBeanView: Bool = false
   
   var body: some View {
     NavigationView {
@@ -33,12 +34,12 @@ struct HomeView: View {
           Spacer()
           Text(Persistency.allBeansSum.toCurrency ?? "")
         }.padding()
-      }.sheet(isPresented: self.$showAddBeanView) {
-        AddBeanView(isPresenting: self.$showAddBeanView)
+      }.sheet(isPresented: self.$isShowingAddBeanView) {
+        AddBeanView(isShowing: self.$isShowingAddBeanView)
       }
       .navigationBarTitle("Everything")
       .navigationBarItems(trailing: Button(action: {
-        self.showAddBeanView.toggle()
+        self.isShowingAddBeanView.toggle()
       }) {
         Image(systemName: "plus")
       })

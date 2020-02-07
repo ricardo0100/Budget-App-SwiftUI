@@ -8,7 +8,11 @@
 
 import Foundation
 import CoreData
-import UIKit
+import Combine
+
+protocol Persistable {
+  static func createBean(name: String, value: Decimal) -> AnyPublisher<Void, Error>
+}
 
 class Persistency: NSObject {
   
@@ -44,25 +48,10 @@ class Persistency: NSObject {
       return container
   }()
   
-  static func saveContext() throws {
+  static private func saveContext() throws {
     let context = Persistency.viewContext
     if context.hasChanges {
       try context.save()
-    }
-  }
-  
-  static func createBean(name: String, value: Decimal) throws {
-    let bean = Bean(context: Persistency.viewContext)
-    bean.name = name
-    bean.value = NSDecimalNumber(decimal: value)
-    bean.creationTimestamp = Date()
-    
-    do {
-      try Persistency.saveContext()
-    } catch {
-      Persistency.viewContext.delete(bean)
-      Persistency.log(error)
-      throw error
     }
   }
   
@@ -71,8 +60,24 @@ class Persistency: NSObject {
     try saveContext()
   }
   
-  static func log(_ error: Error) {
-    Log.error("💾 Database error: \(error.localizedDescription)")
+}
+
+extension Persistency: Persistable {
+  
+  static func createBean(name: String, value: Decimal) -> AnyPublisher<Void, Error> {
+    Future<Void, Error> { promise in
+      let bean = Bean(context: Persistency.viewContext)
+      bean.name = name
+      bean.value = NSDecimalNumber(decimal: value)
+      bean.creationTimestamp = Date()
+      do {
+        try Persistency.saveContext()
+        promise(.success(()))
+      } catch {
+        Persistency.viewContext.delete(bean)
+        promise(.failure(error))
+      }
+    }.eraseToAnyPublisher()
   }
   
 }

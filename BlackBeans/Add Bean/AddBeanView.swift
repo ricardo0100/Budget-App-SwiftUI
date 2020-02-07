@@ -9,41 +9,35 @@
 import SwiftUI
 
 struct AddBeanView: View {
-    
-  @ObservedObject var viewModel: AddBeanViewModel = AddBeanViewModel()
   
-  @Binding var isPresenting: Bool
+  @State var viewModel: AddBeanViewModel = AddBeanViewModel()
+  
+  @Binding var isShowing: Bool
   
   var body: some View {
-    
     let nameField = TextField("Name", text: $viewModel.name)
       .textFieldStyle(RoundedBorderTextFieldStyle())
     
     let valueField = CurrencyTextField(decimalValue: $viewModel.value)
     
-    let leadingNavigationItem = Button("Cancel") {
-      self.isPresenting.toggle()
-    }
+    let spacer = Spacer().layoutPriority(1)
     
-    let trailingNavigationItem = Button("Save") {
-      self.viewModel.save()
+    let trailingItem = Button(action: viewModel.save) {
+      Text("Save")
     }
-    
-    let isAlertPresented = Binding<Bool>(
-      get: { self.viewModel.errorMessage != nil },
-      set: { _ in self.viewModel.errorMessage = nil }
-    )
     
     return NavigationView {
       VStack {
         nameField
         valueField
-        Spacer().layoutPriority(1)
-      }.padding()
+        spacer
+        Text(viewModel.value.toCurrency ?? "")
+      }
+      .padding()
       .navigationBarTitle("New Bean")
-      .navigationBarItems(leading: leadingNavigationItem, trailing: trailingNavigationItem)
-      .alert(isPresented: isAlertPresented) {
-        Alert(title: Text(viewModel.errorMessage ?? .empty))
+      .navigationBarItems(trailing: trailingItem)
+      .alert(isPresented: $viewModel.showAlert) {
+        Alert(title: Text("Hey!"), message: Text(viewModel.alertMessage))
       }
     }
   }

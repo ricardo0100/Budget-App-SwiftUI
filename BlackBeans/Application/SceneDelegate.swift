@@ -18,15 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let contentView = HomeView().environment(\.managedObjectContext, context)
 
     if let windowScene = scene as? UIWindowScene {
-        let window = UIWindow(windowScene: windowScene)
+      let window = UIWindow(windowScene: windowScene)
       window.rootViewController = UIHostingController(rootView: contentView)
-        self.window = window
-        window.makeKeyAndVisible()
+      self.window = window
+      window.makeKeyAndVisible()
     }
-  }
-
-  func sceneDidEnterBackground(_ scene: UIScene) {
-    try! Persistency.saveContext()
   }
 
 }
