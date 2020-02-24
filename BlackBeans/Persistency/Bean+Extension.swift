@@ -9,12 +9,10 @@
 import Foundation
 import CoreData
 
-extension Bean {
+extension Bean: Identifiable {
   
-  static func allBeansFetchRequest() -> NSFetchRequest<Bean> {
-    let fetch = NSFetchRequest<Bean>(entityName: "Bean")
-    fetch.sortDescriptors = [NSSortDescriptor(key: "value", ascending: true)]
-    return fetch
+  var toCurrency: String {
+    return self.value?.decimalValue.toCurrency ?? ""
   }
   
 }

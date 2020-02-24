@@ -11,15 +11,18 @@
 		59047E5523EAE21A00EC0388 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4923D3601F00E13D90 /* StringFormatter.swift */; };
 		59047E5623EAE29800EC0388 /* Decimal+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */; };
 		59047E5723EAE29800EC0388 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A49B6023E70CC8005221C9 /* String+Extension.swift */; };
+		590B7A6D2402E9DD0038A058 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B7A6C2402E9DD0038A058 /* AlertMessage.swift */; };
 		5930E11C23D6411D008E8B27 /* BeanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5930E11B23D6411D008E8B27 /* BeanCell.swift */; };
 		59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59446D7C23CB4FD000BC8176 /* Persistency.swift */; };
 		5947E6F223D1FD590012997E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947E6F123D1FD590012997E /* HomeView.swift */; };
-		5947E6F423D1FD6A0012997E /* AddBeanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947E6F323D1FD6A0012997E /* AddBeanView.swift */; };
+		5947E6F423D1FD6A0012997E /* EditBeanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947E6F323D1FD6A0012997E /* EditBeanView.swift */; };
 		5950765723DDFC6A00A5446A /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5950765623DDFC6A00A5446A /* Log.swift */; };
 		59600E4723D35F6D00E13D90 /* Decimal+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */; };
 		59600E4A23D3601F00E13D90 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4923D3601F00E13D90 /* StringFormatter.swift */; };
-		59639ADF23D6430D00DD18DC /* AddBeanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639ADE23D6430D00DD18DC /* AddBeanViewModel.swift */; };
+		59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639ADE23D6430D00DD18DC /* EditBeanViewModel.swift */; };
 		59639AE123D643C100DD18DC /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639AE023D643C100DD18DC /* CurrencyTextField.swift */; };
+		5975416624042347001BD684 /* BeanDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5975416524042347001BD684 /* BeanDetailsView.swift */; };
+		59754168240423B2001BD684 /* BeanDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59754167240423B2001BD684 /* BeanDetailsViewModel.swift */; };
 		59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A49B6023E70CC8005221C9 /* String+Extension.swift */; };
 		59C780C423C2723A000EFB5B /* Bean+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C780C323C2723A000EFB5B /* Bean+Extension.swift */; };
 		59F2C4AD23C226610040077D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4AC23C226610040077D /* AppDelegate.swift */; };
@@ -41,17 +44,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		590B7A6C2402E9DD0038A058 /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		5930E11B23D6411D008E8B27 /* BeanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanCell.swift; sourceTree = "<group>"; };
 		59446D7C23CB4FD000BC8176 /* Persistency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistency.swift; sourceTree = "<group>"; };
 		5947E6F123D1FD590012997E /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		5947E6F323D1FD6A0012997E /* AddBeanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeanView.swift; sourceTree = "<group>"; };
+		5947E6F323D1FD6A0012997E /* EditBeanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeanView.swift; sourceTree = "<group>"; };
 		5950764A23DDF92A00A5446A /* BlackBeansTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackBeansTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5950764E23DDF92A00A5446A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5950765623DDFC6A00A5446A /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extension.swift"; sourceTree = "<group>"; };
 		59600E4923D3601F00E13D90 /* StringFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
-		59639ADE23D6430D00DD18DC /* AddBeanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBeanViewModel.swift; sourceTree = "<group>"; };
+		59639ADE23D6430D00DD18DC /* EditBeanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeanViewModel.swift; sourceTree = "<group>"; };
 		59639AE023D643C100DD18DC /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
+		5975416524042347001BD684 /* BeanDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanDetailsView.swift; sourceTree = "<group>"; };
+		59754167240423B2001BD684 /* BeanDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanDetailsViewModel.swift; sourceTree = "<group>"; };
 		59A49B6023E70CC8005221C9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		59C780C323C2723A000EFB5B /* Bean+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bean+Extension.swift"; sourceTree = "<group>"; };
 		59F2C4A923C226610040077D /* BlackBeans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackBeans.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5931BEE82404217900250CCF /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				59639AE023D643C100DD18DC /* CurrencyTextField.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
 		5950764B23DDF92A00A5446A /* BlackBeansTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,10 +117,29 @@
 			isa = PBXGroup;
 			children = (
 				59600E4923D3601F00E13D90 /* StringFormatter.swift */,
-				59639AE023D643C100DD18DC /* CurrencyTextField.swift */,
 				5950765623DDFC6A00A5446A /* Log.swift */,
+				590B7A6C2402E9DD0038A058 /* AlertMessage.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		597541612404230E001BD684 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				59FF74C123EB52EE0066C3A5 /* Home */,
+				59FF74C023EB52DD0066C3A5 /* Edit Bean */,
+				5975416224042314001BD684 /* Bean Details */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		5975416224042314001BD684 /* Bean Details */ = {
+			isa = PBXGroup;
+			children = (
+				5975416524042347001BD684 /* BeanDetailsView.swift */,
+				59754167240423B2001BD684 /* BeanDetailsViewModel.swift */,
+			);
+			path = "Bean Details";
 			sourceTree = "<group>";
 		};
 		59A621C523D1F8B7006C7750 /* Application */ = {
@@ -153,11 +186,11 @@
 		59F2C4AB23C226610040077D /* BlackBeans */ = {
 			isa = PBXGroup;
 			children = (
-				59FF74C123EB52EE0066C3A5 /* Home */,
-				59FF74C023EB52DD0066C3A5 /* Add Bean */,
+				597541612404230E001BD684 /* Modules */,
 				59A621C623D1F8D4006C7750 /* Persistency */,
 				59A621C523D1F8B7006C7750 /* Application */,
 				59600E4523D35F5C00E13D90 /* Extensions */,
+				5931BEE82404217900250CCF /* Custom Views */,
 				59600E4823D3601300E13D90 /* Utils */,
 			);
 			path = BlackBeans;
@@ -171,13 +204,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		59FF74C023EB52DD0066C3A5 /* Add Bean */ = {
+		59FF74C023EB52DD0066C3A5 /* Edit Bean */ = {
 			isa = PBXGroup;
 			children = (
-				5947E6F323D1FD6A0012997E /* AddBeanView.swift */,
-				59639ADE23D6430D00DD18DC /* AddBeanViewModel.swift */,
+				5947E6F323D1FD6A0012997E /* EditBeanView.swift */,
+				59639ADE23D6430D00DD18DC /* EditBeanViewModel.swift */,
 			);
-			path = "Add Bean";
+			path = "Edit Bean";
 			sourceTree = "<group>";
 		};
 		59FF74C123EB52EE0066C3A5 /* Home */ = {
@@ -308,13 +341,16 @@
 				59600E4723D35F6D00E13D90 /* Decimal+Extension.swift in Sources */,
 				59600E4A23D3601F00E13D90 /* StringFormatter.swift in Sources */,
 				59639AE123D643C100DD18DC /* CurrencyTextField.swift in Sources */,
+				5975416624042347001BD684 /* BeanDetailsView.swift in Sources */,
 				5950765723DDFC6A00A5446A /* Log.swift in Sources */,
 				59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */,
-				59639ADF23D6430D00DD18DC /* AddBeanViewModel.swift in Sources */,
+				59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */,
+				590B7A6D2402E9DD0038A058 /* AlertMessage.swift in Sources */,
 				59F2C4B223C226610040077D /* BlackBeans.xcdatamodeld in Sources */,
 				59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */,
 				59C780C423C2723A000EFB5B /* Bean+Extension.swift in Sources */,
-				5947E6F423D1FD6A0012997E /* AddBeanView.swift in Sources */,
+				5947E6F423D1FD6A0012997E /* EditBeanView.swift in Sources */,
+				59754168240423B2001BD684 /* BeanDetailsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

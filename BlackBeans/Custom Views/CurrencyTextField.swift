@@ -20,6 +20,7 @@ public struct CurrencyTextField: UIViewRepresentable {
     textField.borderStyle = .roundedRect
     delegate.currencyTextField = self
     textField.delegate = delegate
+    textField.keyboardType = .decimalPad
     return textField
   }
   
@@ -39,10 +40,13 @@ public struct CurrencyTextField: UIViewRepresentable {
       let nsString = textField.text as NSString?
       var newString = nsString?.replacingCharacters(in: range, with: string) ?? .empty
       
+//      print(newString)
+      
       if let int = Int(newString.removeNonNumbers()) {
         let decimal = Decimal(int) / 100
         currencyTextField?.decimalValue = decimal
         textField.text = decimal.toCurrency
+        currencyTextField?.makeCoordinator()
       }
       
       return false

@@ -14,8 +14,8 @@ struct Log {
     print("✔️ \(message)")
   }
   
-  static func error(_ message: String) {
-    print("❗️ \(message)")
+  static func error(_ error: Error) {
+    print("❗️ \(error.localizedDescription)")
   }
   
 }
