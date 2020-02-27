@@ -12,15 +12,11 @@ import Combine
 
 struct HomeView: View {
   
-  @FetchRequest(fetchRequest: Persistency.allBeansFetchRequest)
+  @FetchRequest(fetchRequest: Persistency.shared.allBeansFetchRequest)
   private var beans: FetchedResults<Bean>
   
   @State var isEditingBeanPresented: Bool = false
   @State var isBeanDetailsPresented: Bool = false
-  
-  init() {
-    Log.debug("HomeView init")
-  }
   
   var body: some View {
     let list = List {
@@ -34,7 +30,8 @@ struct HomeView: View {
     let sum = HStack {
       Text("Total")
       Spacer()
-      Text(Persistency.allBeansSum.toCurrency ?? "")
+      Text(Persistency.shared.allBeansSum.toCurrency ?? "")
+        .foregroundColor(Persistency.shared.allBeansSum > 0 ? Color.green : Color.red)
     }.padding()
     
     let editButton = Button(action: {
@@ -60,7 +57,7 @@ struct HomeView: View {
   private func deleteBeans(in indexSet: IndexSet) {
     for index in indexSet {
       let bean = self.beans[index]
-      try? Persistency.deleteBean(bean: bean)
+      try? Persistency.shared.deleteBean(bean: bean)
     }
   }
 }

@@ -15,7 +15,6 @@ struct EditBeanView: View {
   @Binding var isPresented: Bool
   
   var body: some View {
-    Log.debug("EditBeanView body")
     let nameField = TextField("Name", text: $editBeanViewModel.name)
       .textFieldStyle(RoundedBorderTextFieldStyle())
     
@@ -36,6 +35,9 @@ struct EditBeanView: View {
         VStack {
           nameField
           valueField
+          Toggle(isOn: self.$editBeanViewModel.isCredit) {
+            Text("Credit")
+          }
           spacer
         }
         .alert(isPresented: self.$editBeanViewModel.showAlert) {

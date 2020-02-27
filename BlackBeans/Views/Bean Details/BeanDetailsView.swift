@@ -14,7 +14,6 @@ struct BeanDetailsView: View {
   @State var isEditPresented = false
   
   var body: some View {
-    Log.debug("BeanDetailsView body")
     let editViewModel = EditBeanViewModel()
     editViewModel.editingBean = viewModel.bean
     let destination = EditBeanView(editBeanViewModel: editViewModel, isPresented: self.$isEditPresented)
@@ -25,7 +24,7 @@ struct BeanDetailsView: View {
     }
     
     return VStack {
-      Text(viewModel.bean.name ?? "")
+      Text(viewModel.bean.name)
       Text(viewModel.bean.toCurrency)
     }
     .sheet(isPresented: self.$isEditPresented, content: {

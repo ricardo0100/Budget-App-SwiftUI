@@ -13,12 +13,14 @@ class EditBeanViewModel: ObservableObject, Identifiable {
   
   @Published var name: String = ""
   @Published var value: Decimal = 0
+  @Published var isCredit: Bool = false
   @Published var alertMessage: String = ""
   @Published var showAlert: Bool = false
   @Published var editingBean: Bean? = nil {
     didSet {
       name = editingBean?.name ?? ""
-      value = editingBean?.value?.decimalValue ?? 0
+      value = editingBean?.value.decimalValue ?? 0
+      isCredit = editingBean?.isCredit ?? false
     }
   }
   
@@ -31,9 +33,9 @@ class EditBeanViewModel: ObservableObject, Identifiable {
     
     do {
       if let bean = editingBean {
-        try Persistency.updateBean(bean: bean, name: name, value: value)
+        try Persistency.shared.updateBean(bean: bean, name: name, value: value, isCredit: isCredit)
       } else {
-        try Persistency.createBean(name: name, value: value)
+        try Persistency.shared.createBean(name: name, value: value, isCredit: isCredit)
       }
       return true
     } catch {
