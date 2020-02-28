@@ -13,10 +13,10 @@ struct BeanCell: View {
   @State var bean: Bean
   
   var body: some View {
-    let value = Text(bean.toCurrency)
+    let value = Text(bean.value?.decimalValue.toCurrency ?? "")
       .foregroundColor(bean.isCredit ? Color.green : Color.red)
     return HStack {
-      Text(bean.name)
+      Text(bean.name ?? "")
       Spacer()
       value
     }

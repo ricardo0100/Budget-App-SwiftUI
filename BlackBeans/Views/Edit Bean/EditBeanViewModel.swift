@@ -19,7 +19,7 @@ class EditBeanViewModel: ObservableObject, Identifiable {
   @Published var editingBean: Bean? = nil {
     didSet {
       name = editingBean?.name ?? ""
-      value = editingBean?.value.decimalValue ?? 0
+      value = editingBean?.value?.decimalValue ?? 0
       isCredit = editingBean?.isCredit ?? false
     }
   }

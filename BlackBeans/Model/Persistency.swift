@@ -11,20 +11,57 @@ import CoreData
 
 class Persistency: NSObject, Persistable {
   
-  static let shared = Persistency()
+  static private let modelName = "BlackBeans"
+  
+  static let shared = Persistency(type: NSSQLiteStoreType)
+  
+  private static var model: NSManagedObjectModel = {
+    guard let modelURL = Bundle.main.url(forResource: Persistency.modelName, withExtension: "momd"),
+      let model = NSManagedObjectModel(contentsOf: modelURL)else {
+        fatalError()
+    }
+    return model
+  }()
+  
+  private var persistentContainer: NSPersistentContainer!
   
   var context: NSManagedObjectContext {
     return persistentContainer.viewContext
   }
   
-  private lazy var persistentContainer: NSPersistentContainer = {
-      let container = NSPersistentContainer(name: "BlackBeans")
-      container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-          if let error = error as NSError? {
-              fatalError("Unresolved error \(error), \(error.userInfo)")
-          }
-      })
-      return container
-  }()
-
+  init(type: String) {
+    super.init()
+    if type == NSSQLiteStoreType {
+      loadSQLiteStore()
+    } else {
+      loadInMemoryStore()
+    }
+  }
+  
+  private func loadSQLiteStore() {
+    persistentContainer = createContainer()
+    persistentContainer.loadPersistentStores { description, error in
+      precondition(description.type == NSSQLiteStoreType)
+      if let error = error {
+        Log.error(error)
+        fatalError()
+      }
+    }
+  }
+  
+  private func loadInMemoryStore() {
+    persistentContainer = createContainer()
+    let description = NSPersistentStoreDescription()
+    description.type = NSInMemoryStoreType
+    description.shouldAddStoreAsynchronously = false
+    persistentContainer.persistentStoreDescriptions = [description]
+    persistentContainer.loadPersistentStores { (description, error) in
+      precondition(description.type == NSInMemoryStoreType)
+    }
+  }
+  
+  private func createContainer() -> NSPersistentContainer {
+    NSPersistentContainer.init(name: Persistency.modelName, managedObjectModel: Persistency.model)
+  }
+  
 }

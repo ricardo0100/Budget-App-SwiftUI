@@ -9,23 +9,25 @@
 import XCTest
 import CoreData
 
+@testable import BlackBeans
+
 class PersistencyTests: XCTestCase {
   
   var persistency: Persistable!
   
   override func setUp() {
-    persistency = PersistencyMock()
+    persistency = Persistency(type: NSInMemoryStoreType)
   }
   
   func testNoBeans() {
-//    let result = try? persistency.context.fetch(persistency.allBeansFetchRequest)
-//    XCTAssertEqual(result?.count, 0)
+    let result = try? persistency.context.fetch(persistency.allBeansFetchRequest)
+    XCTAssertEqual(result?.count, 0)
   }
   
   func testCreateBean() {
-//    try? persistency.createBean(name: "Hey", value: 1.99, isCredit: false)
-//    let result = try? persistency.context.fetch(persistency.allBeansFetchRequest)
-//    XCTAssertEqual(result?.first?.name, "Hey")
+    try! persistency.createBean(name: "Hey", value: 1.99, isCredit: false)
+    let result = try? persistency.context.fetch(persistency.allBeansFetchRequest)
+    XCTAssertEqual(result?.first?.name, "Hey")
   }
   
 }

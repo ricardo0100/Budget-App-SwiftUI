@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		59047E5423EAE09200EC0388 /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639AE023D643C100DD18DC /* CurrencyTextField.swift */; };
-		59047E5523EAE21A00EC0388 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4923D3601F00E13D90 /* StringFormatter.swift */; };
-		59047E5623EAE29800EC0388 /* Decimal+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */; };
-		59047E5723EAE29800EC0388 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A49B6023E70CC8005221C9 /* String+Extension.swift */; };
 		590B7A6D2402E9DD0038A058 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B7A6C2402E9DD0038A058 /* AlertMessage.swift */; };
 		5930E11C23D6411D008E8B27 /* BeanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5930E11B23D6411D008E8B27 /* BeanCell.swift */; };
 		59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59446D7C23CB4FD000BC8176 /* Persistency.swift */; };
@@ -24,14 +20,9 @@
 		5975416624042347001BD684 /* BeanDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5975416524042347001BD684 /* BeanDetailsView.swift */; };
 		59754168240423B2001BD684 /* BeanDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59754167240423B2001BD684 /* BeanDetailsViewModel.swift */; };
 		59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A49B6023E70CC8005221C9 /* String+Extension.swift */; };
-		59B39D7D24069C27002B2221 /* PersistencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B39D7C24069C27002B2221 /* PersistencyTests.swift */; };
 		59B39D8024069CEE002B2221 /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B39D7F24069CEE002B2221 /* Persistable.swift */; };
-		59B39D8324069DE8002B2221 /* PersistencyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B39D8224069DE8002B2221 /* PersistencyMock.swift */; };
 		59B5289324070925001F6AC0 /* BlackBeans.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4B023C226610040077D /* BlackBeans.xcdatamodeld */; };
-		59B52895240709D6001F6AC0 /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B39D7F24069CEE002B2221 /* Persistable.swift */; };
-		59B52896240709DE001F6AC0 /* BlackBeans.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4B023C226610040077D /* BlackBeans.xcdatamodeld */; };
-		59B528992407CC38001F6AC0 /* Bean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C780C323C2723A000EFB5B /* Bean.swift */; };
-		59C780C423C2723A000EFB5B /* Bean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C780C323C2723A000EFB5B /* Bean.swift */; };
+		59DBA82B24086A290061B56D /* PersistencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DBA82924086A280061B56D /* PersistencyTests.swift */; };
 		59F2C4AD23C226610040077D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4AC23C226610040077D /* AppDelegate.swift */; };
 		59F2C4AF23C226610040077D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4AE23C226610040077D /* SceneDelegate.swift */; };
 		59F2C4B623C226660040077D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59F2C4B523C226660040077D /* Assets.xcassets */; };
@@ -40,7 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5950764F23DDF92A00A5446A /* PBXContainerItemProxy */ = {
+		59DBA824240869D70061B56D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 59F2C4A123C226610040077D /* Project object */;
 			proxyType = 1;
@@ -55,8 +46,6 @@
 		59446D7C23CB4FD000BC8176 /* Persistency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistency.swift; sourceTree = "<group>"; };
 		5947E6F123D1FD590012997E /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5947E6F323D1FD6A0012997E /* EditBeanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeanView.swift; sourceTree = "<group>"; };
-		5950764A23DDF92A00A5446A /* BlackBeansTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackBeansTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5950764E23DDF92A00A5446A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5950765623DDFC6A00A5446A /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extension.swift"; sourceTree = "<group>"; };
 		59600E4923D3601F00E13D90 /* StringFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
@@ -65,10 +54,10 @@
 		5975416524042347001BD684 /* BeanDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanDetailsView.swift; sourceTree = "<group>"; };
 		59754167240423B2001BD684 /* BeanDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanDetailsViewModel.swift; sourceTree = "<group>"; };
 		59A49B6023E70CC8005221C9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		59B39D7C24069C27002B2221 /* PersistencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistencyTests.swift; sourceTree = "<group>"; };
 		59B39D7F24069CEE002B2221 /* Persistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistable.swift; sourceTree = "<group>"; };
-		59B39D8224069DE8002B2221 /* PersistencyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistencyMock.swift; sourceTree = "<group>"; };
-		59C780C323C2723A000EFB5B /* Bean.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bean.swift; sourceTree = "<group>"; };
+		59DBA81F240869D70061B56D /* BlackBeansTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackBeansTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		59DBA823240869D70061B56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59DBA82924086A280061B56D /* PersistencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyTests.swift; sourceTree = "<group>"; };
 		59F2C4A923C226610040077D /* BlackBeans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackBeans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F2C4AC23C226610040077D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59F2C4AE23C226610040077D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,7 +69,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5950764723DDF92A00A5446A /* Frameworks */ = {
+		59DBA81C240869D70061B56D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -103,16 +92,6 @@
 				59639AE023D643C100DD18DC /* CurrencyTextField.swift */,
 			);
 			path = "Shared Views";
-			sourceTree = "<group>";
-		};
-		5950764B23DDF92A00A5446A /* BlackBeansTests */ = {
-			isa = PBXGroup;
-			children = (
-				5950764E23DDF92A00A5446A /* Info.plist */,
-				59B39D7C24069C27002B2221 /* PersistencyTests.swift */,
-				59B39D8224069DE8002B2221 /* PersistencyMock.swift */,
-			);
-			path = BlackBeansTests;
 			sourceTree = "<group>";
 		};
 		59600E4523D35F5C00E13D90 /* Extensions */ = {
@@ -169,7 +148,6 @@
 		59A621C623D1F8D4006C7750 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				59B528982407CB29001F6AC0 /* Entities */,
 				59B39D7F24069CEE002B2221 /* Persistable.swift */,
 				59446D7C23CB4FD000BC8176 /* Persistency.swift */,
 				59F2C4B023C226610040077D /* BlackBeans.xcdatamodeld */,
@@ -177,19 +155,20 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		59B528982407CB29001F6AC0 /* Entities */ = {
+		59DBA820240869D70061B56D /* BlackBeansTests */ = {
 			isa = PBXGroup;
 			children = (
-				59C780C323C2723A000EFB5B /* Bean.swift */,
+				59DBA82924086A280061B56D /* PersistencyTests.swift */,
+				59DBA823240869D70061B56D /* Info.plist */,
 			);
-			path = Entities;
+			path = BlackBeansTests;
 			sourceTree = "<group>";
 		};
 		59F2C4A023C226610040077D = {
 			isa = PBXGroup;
 			children = (
 				59F2C4AB23C226610040077D /* BlackBeans */,
-				5950764B23DDF92A00A5446A /* BlackBeansTests */,
+				59DBA820240869D70061B56D /* BlackBeansTests */,
 				59F2C4AA23C226610040077D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -198,7 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				59F2C4A923C226610040077D /* BlackBeans.app */,
-				5950764A23DDF92A00A5446A /* BlackBeansTests.xctest */,
+				59DBA81F240869D70061B56D /* BlackBeansTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -245,22 +224,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5950764923DDF92A00A5446A /* BlackBeansTests */ = {
+		59DBA81E240869D70061B56D /* BlackBeansTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5950765323DDF92A00A5446A /* Build configuration list for PBXNativeTarget "BlackBeansTests" */;
+			buildConfigurationList = 59DBA826240869D70061B56D /* Build configuration list for PBXNativeTarget "BlackBeansTests" */;
 			buildPhases = (
-				5950764623DDF92A00A5446A /* Sources */,
-				5950764723DDF92A00A5446A /* Frameworks */,
-				5950764823DDF92A00A5446A /* Resources */,
+				59DBA81B240869D70061B56D /* Sources */,
+				59DBA81C240869D70061B56D /* Frameworks */,
+				59DBA81D240869D70061B56D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5950765023DDF92A00A5446A /* PBXTargetDependency */,
+				59DBA825240869D70061B56D /* PBXTargetDependency */,
 			);
 			name = BlackBeansTests;
 			productName = BlackBeansTests;
-			productReference = 5950764A23DDF92A00A5446A /* BlackBeansTests.xctest */;
+			productReference = 59DBA81F240869D70061B56D /* BlackBeansTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		59F2C4A823C226610040077D /* BlackBeans */ = {
@@ -290,8 +269,9 @@
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Ricardo Gehrke Filho";
 				TargetAttributes = {
-					5950764923DDF92A00A5446A = {
+					59DBA81E240869D70061B56D = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
 						TestTargetID = 59F2C4A823C226610040077D;
 					};
 					59F2C4A823C226610040077D = {
@@ -313,13 +293,13 @@
 			projectRoot = "";
 			targets = (
 				59F2C4A823C226610040077D /* BlackBeans */,
-				5950764923DDF92A00A5446A /* BlackBeansTests */,
+				59DBA81E240869D70061B56D /* BlackBeansTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5950764823DDF92A00A5446A /* Resources */ = {
+		59DBA81D240869D70061B56D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -339,19 +319,11 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5950764623DDF92A00A5446A /* Sources */ = {
+		59DBA81B240869D70061B56D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59B528992407CC38001F6AC0 /* Bean.swift in Sources */,
-				59047E5423EAE09200EC0388 /* CurrencyTextField.swift in Sources */,
-				59047E5623EAE29800EC0388 /* Decimal+Extension.swift in Sources */,
-				59B52895240709D6001F6AC0 /* Persistable.swift in Sources */,
-				59B39D8324069DE8002B2221 /* PersistencyMock.swift in Sources */,
-				59047E5523EAE21A00EC0388 /* StringFormatter.swift in Sources */,
-				59B52896240709DE001F6AC0 /* BlackBeans.xcdatamodeld in Sources */,
-				59B39D7D24069C27002B2221 /* PersistencyTests.swift in Sources */,
-				59047E5723EAE29800EC0388 /* String+Extension.swift in Sources */,
+				59DBA82B24086A290061B56D /* PersistencyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,7 +346,6 @@
 				59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */,
 				590B7A6D2402E9DD0038A058 /* AlertMessage.swift in Sources */,
 				59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */,
-				59C780C423C2723A000EFB5B /* Bean.swift in Sources */,
 				5947E6F423D1FD6A0012997E /* EditBeanView.swift in Sources */,
 				59754168240423B2001BD684 /* BeanDetailsViewModel.swift in Sources */,
 			);
@@ -383,10 +354,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5950765023DDF92A00A5446A /* PBXTargetDependency */ = {
+		59DBA825240869D70061B56D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 59F2C4A823C226610040077D /* BlackBeans */;
-			targetProxy = 5950764F23DDF92A00A5446A /* PBXContainerItemProxy */;
+			targetProxy = 59DBA824240869D70061B56D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -402,10 +373,11 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		5950765123DDF92A00A5446A /* Debug */ = {
+		59DBA827240869D70061B56D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2T9EKFYB5P;
 				INFOPLIST_FILE = BlackBeansTests/Info.plist;
@@ -416,16 +388,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rrghkf.BlackBeansTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlackBeans.app/BlackBeans";
 			};
 			name = Debug;
 		};
-		5950765223DDF92A00A5446A /* Release */ = {
+		59DBA828240869D70061B56D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2T9EKFYB5P;
 				INFOPLIST_FILE = BlackBeansTests/Info.plist;
@@ -599,11 +573,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5950765323DDF92A00A5446A /* Build configuration list for PBXNativeTarget "BlackBeansTests" */ = {
+		59DBA826240869D70061B56D /* Build configuration list for PBXNativeTarget "BlackBeansTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5950765123DDF92A00A5446A /* Debug */,
-				5950765223DDF92A00A5446A /* Release */,
+				59DBA827240869D70061B56D /* Debug */,
+				59DBA828240869D70061B56D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
