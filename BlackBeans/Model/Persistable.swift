@@ -23,7 +23,7 @@ protocol Persistable {
   /// Returns the sum of all debit beans values
   var debitBeansSum: Decimal { get }
   
-  /// Returns a Fetch Request with all beans ordered by name
+  /// Returns a Fetch Request with all beans ordered by creation date
   var allBeansFetchRequest: NSFetchRequest<Bean> { get }
   
   /// Create a new bean
@@ -53,10 +53,14 @@ extension Persistable {
     fetchRequest.returnsObjectsAsFaults = false
     fetchRequest.propertiesToFetch = [expression]
     fetchRequest.resultType = .dictionaryResultType
-    
-    let res = try! context.fetch(fetchRequest)[0] as? [String: NSDecimalNumber]
-    let creditSum = (res?["sum"] ?? 0).decimalValue
-    return creditSum
+    do {
+      let res = try context.fetch(fetchRequest).first as? [String: NSDecimalNumber]
+      let creditSum = (res?["sum"] ?? 0).decimalValue
+      return creditSum
+    } catch {
+      Log.error(error)
+      fatalError()
+    }
   }
   
   var debitBeansSum: Decimal {
@@ -78,7 +82,7 @@ extension Persistable {
   
   var allBeansFetchRequest: NSFetchRequest<Bean> {
     let fetch = NSFetchRequest<Bean>(entityName: "Bean")
-    fetch.sortDescriptors = [NSSortDescriptor(key: "value", ascending: true)]
+    fetch.sortDescriptors = [NSSortDescriptor(key: "creationTimestamp", ascending: true)]
     return fetch
   }
   

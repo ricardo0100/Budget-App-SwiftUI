@@ -16,7 +16,7 @@ class PersistencyTests: XCTestCase {
   var persistency: Persistable!
   
   override func setUp() {
-    persistency = Persistency(type: NSInMemoryStoreType)
+    persistency = Persistency(isTestEnvironment: true)
   }
   
   func testNoBeans() {
@@ -25,9 +25,55 @@ class PersistencyTests: XCTestCase {
   }
   
   func testCreateBean() {
-    try! persistency.createBean(name: "Hey", value: 1.99, isCredit: false)
+    try! persistency.createBean(name: "test", value: 1.99, isCredit: false)
     let result = try? persistency.context.fetch(persistency.allBeansFetchRequest)
-    XCTAssertEqual(result?.first?.name, "Hey")
+    XCTAssertEqual(result?.first?.name, "test")
+  }
+  
+  func testCreate2Beans() {
+    try! persistency.createBean(name: "test1", value: 1.99, isCredit: false)
+    try! persistency.createBean(name: "test2", value: 1.99, isCredit: false)
+    let result = try? persistency.context.fetch(persistency.allBeansFetchRequest)
+    XCTAssertEqual(result?.count, 2)
+  }
+  
+  func testFetchOrderedByCreationDate() {
+    try! persistency.createBean(name: "test1", value: 1.99, isCredit: false)
+    try! persistency.createBean(name: "test2", value: 1.98, isCredit: false)
+    try! persistency.createBean(name: "test3", value: 1.97, isCredit: false)
+    let result = try? persistency.context.fetch(persistency.allBeansFetchRequest)
+    XCTAssertEqual(result?[0].name, "test1")
+    XCTAssertEqual(result?[1].name, "test2")
+    XCTAssertEqual(result?[2].name, "test3")
+  }
+  
+  func testDeleteBean() {
+    try! persistency.createBean(name: "test1", value: 1.99, isCredit: false)
+    let bean = try? persistency.context.fetch(persistency.allBeansFetchRequest).first
+    try! persistency.deleteBean(bean: bean)
+    let result = try? persistency.context.fetch(persistency.allBeansFetchRequest)
+    XCTAssertEqual(result?.count, 0)
+  }
+  
+  func testCreditSum() {
+    try! persistency.createBean(name: "test1", value: 1.00, isCredit: true)
+    try! persistency.createBean(name: "test2", value: 1.00, isCredit: true)
+    try! persistency.createBean(name: "test2", value: 1.00, isCredit: false)
+    XCTAssertEqual(persistency.creditBeansSum, 2.00)
+  }
+  
+  func testDebitSum() {
+    try! persistency.createBean(name: "test1", value: 1.00, isCredit: true)
+    try! persistency.createBean(name: "test2", value: 1.00, isCredit: false)
+    try! persistency.createBean(name: "test2", value: 1.00, isCredit: false)
+    XCTAssertEqual(persistency.debitBeansSum, 2.00)
+  }
+  
+  func testAllBeansSum() {
+    try! persistency.createBean(name: "test1", value: 1.00, isCredit: true)
+    try! persistency.createBean(name: "test2", value: 1.00, isCredit: false)
+    try! persistency.createBean(name: "test2", value: 1.00, isCredit: false)
+    XCTAssertEqual(persistency.allBeansSum, -1.00)
   }
   
 }

@@ -13,7 +13,7 @@ class Persistency: NSObject, Persistable {
   
   static private let modelName = "BlackBeans"
   
-  static let shared = Persistency(type: NSSQLiteStoreType)
+  static let shared = Persistency()
   
   private static var model: NSManagedObjectModel = {
     guard let modelURL = Bundle.main.url(forResource: Persistency.modelName, withExtension: "momd"),
@@ -29,12 +29,12 @@ class Persistency: NSObject, Persistable {
     return persistentContainer.viewContext
   }
   
-  init(type: String) {
+  init(isTestEnvironment isTest: Bool = false) {
     super.init()
-    if type == NSSQLiteStoreType {
-      loadSQLiteStore()
+    if isTest {
+      loadTestStore()
     } else {
-      loadInMemoryStore()
+      loadSQLiteStore()
     }
   }
   
@@ -49,14 +49,15 @@ class Persistency: NSObject, Persistable {
     }
   }
   
-  private func loadInMemoryStore() {
+  private func loadTestStore() {
     persistentContainer = createContainer()
     let description = NSPersistentStoreDescription()
-    description.type = NSInMemoryStoreType
+    description.type = NSSQLiteStoreType
     description.shouldAddStoreAsynchronously = false
+    description.url = URL(fileURLWithPath: "/dev/null")
     persistentContainer.persistentStoreDescriptions = [description]
     persistentContainer.loadPersistentStores { (description, error) in
-      precondition(description.type == NSInMemoryStoreType)
+      precondition(description.type == NSSQLiteStoreType)
     }
   }
   
