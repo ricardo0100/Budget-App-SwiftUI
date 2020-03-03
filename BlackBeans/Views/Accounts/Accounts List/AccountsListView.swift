@@ -13,6 +13,8 @@ struct AccountsListView: View {
   @FetchRequest(fetchRequest: Persistency.shared.allAccountsFetchRequest)
   private var accounts: FetchedResults<Account>
   
+  @ObservedObject var viewModel = AccountsListViewModel()
+  
   @State var isEditAccountPresented: Bool = false
   
   var body: some View {
@@ -21,6 +23,10 @@ struct AccountsListView: View {
         NavigationLink(destination: AccountDetailsView(account: account)) {
           Text(account.name ?? "")
         }
+      }.onDelete {
+        guard let index = $0.first  else { return }
+        let account = self.accounts[index]
+        self.viewModel.deleteAccount(account: account)
       }
     }
     
@@ -30,14 +36,25 @@ struct AccountsListView: View {
       Image(systemName: "plus")
     }
     
+    let primaryButton = Alert.Button.destructive(Text("Yes, delete everything"),
+                                                 action: self.viewModel.confirmDeletion)
+    
+    let deleteAlert = Alert(title: Text("⚠️\nAre you sure you want to delete this account?"),
+                            message: Text("All related Beans will be deleted!!!"),
+                            primaryButton: primaryButton,
+                            secondaryButton: .cancel())
+    
     return NavigationView {
       list
         .navigationBarItems(trailing: trailing)
         .navigationBarTitle("Accounts")
-        .sheet(isPresented: self.$isEditAccountPresented) {
+        .alert(isPresented: self.$viewModel.isDeleteAlertPresented) {
+          deleteAlert
+        }.sheet(isPresented: self.$isEditAccountPresented) {
           EditAccountView(viewModel: EditAccountViewModel(), isPresented: self.$isEditAccountPresented)
         }
     }
   }
+  
 }
 

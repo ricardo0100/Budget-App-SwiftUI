@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18G3020" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="beans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bean" inverseName="account" inverseEntity="Bean"/>
+        <relationship name="beans" toMany="YES" deletionRule="Cascade" destinationEntity="Bean" inverseName="account" inverseEntity="Bean"/>
     </entity>
     <entity name="Bean" representedClassName="Bean" syncable="YES" codeGenerationType="class">
         <attribute name="creationTimestamp" attributeType="Date" usesScalarValueType="NO"/>
@@ -13,7 +13,7 @@
         <relationship name="account" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="beans" inverseEntity="Account"/>
     </entity>
     <elements>
-        <element name="Bean" positionX="-63" positionY="-18" width="128" height="133"/>
         <element name="Account" positionX="-63" positionY="18" width="128" height="73"/>
+        <element name="Bean" positionX="-63" positionY="-18" width="128" height="133"/>
     </elements>
 </model>

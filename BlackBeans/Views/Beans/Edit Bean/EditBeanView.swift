@@ -28,7 +28,7 @@ struct EditBeanView: View {
     let spacer = Spacer().layoutPriority(1)
     
     let destination = AccountSelectionView(selectedAccount: self.$editBeanViewModel.account,
-                                           isPresented: self.$isAccountsListPresented)
+      isPresented: self.$isAccountsListPresented).environment(\.managedObjectContext, Persistency.shared.context)
     
     let accountField = HStack {
       Image(systemName: "creditcard")

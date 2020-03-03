@@ -47,6 +47,9 @@ protocol Persistable {
   
   /// Update existing Account
   func updateAccount(account: Account, name: String) throws
+  
+  /// Delete an account
+  func deleteAccount(account: Account?) throws
 }
 
 extension Persistable {
@@ -143,6 +146,12 @@ extension Persistable {
   
   func updateAccount(account: Account, name: String) throws {
     account.name = name
+    try context.save()
+  }
+  
+  func deleteAccount(account: Account?) throws {
+    guard let account = account else { return }
+    context.delete(account)
     try context.save()
   }
 }
