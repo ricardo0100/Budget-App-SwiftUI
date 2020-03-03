@@ -16,10 +16,12 @@ class EditBeanViewModel: ObservableObject, Identifiable {
   @Published var isCredit: Bool = false
   @Published var alertMessage: String = ""
   @Published var showAlert: Bool = false
+  @Published var account: Account? = nil
   @Published var editingBean: Bean? = nil {
     didSet {
       name = editingBean?.name ?? ""
       value = editingBean?.value?.decimalValue ?? 0
+      account = editingBean?.account
       isCredit = editingBean?.isCredit ?? false
     }
   }
@@ -31,16 +33,23 @@ class EditBeanViewModel: ObservableObject, Identifiable {
       return false
     }
     
+    guard let account = account else {
+      alertMessage = "Select an account."
+      showAlert = true
+      return false
+    }
+    
     do {
       if let bean = editingBean {
-        try Persistency.shared.updateBean(bean: bean, name: name, value: value, isCredit: isCredit)
+        try Persistency.shared.updateBean(bean: bean, name: name, value: value, isCredit: isCredit, account: account)
       } else {
-        try Persistency.shared.createBean(name: name, value: value, isCredit: isCredit)
+        try Persistency.shared.createBean(name: name, value: value, isCredit: isCredit, account: account)
       }
-      return true
     } catch {
       Log.error(error)
       fatalError()
     }
+    
+    return true
   }
 }

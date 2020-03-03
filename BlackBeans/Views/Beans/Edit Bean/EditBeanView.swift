@@ -12,6 +12,7 @@ import Combine
 struct EditBeanView: View {
   
   @ObservedObject var editBeanViewModel: EditBeanViewModel
+  @State var isAccountsListPresented: Bool = false
   @Binding var isPresented: Bool
   
   var body: some View {
@@ -20,7 +21,26 @@ struct EditBeanView: View {
     
     let valueField = CurrencyTextField(decimalValue: $editBeanViewModel.value)
     
+    let isCreditField = Toggle(isOn: self.$editBeanViewModel.isCredit) {
+      Text("Credit")
+    }
+    
     let spacer = Spacer().layoutPriority(1)
+    
+    let destination = AccountSelectionView(selectedAccount: self.$editBeanViewModel.account,
+                                           isPresented: self.$isAccountsListPresented)
+    
+    let accountField = HStack {
+      Image(systemName: "creditcard")
+      Text(self.editBeanViewModel.account?.name ?? "No account")
+        .foregroundColor(self.editBeanViewModel.account == nil ? Color.gray : Color.black)
+      Spacer()
+      NavigationLink(destination: destination,
+                     isActive: self.$isAccountsListPresented) {
+                      Image(systemName: "square.and.pencil")
+                      .padding(.trailing, 16)
+      }
+    }
     
     let trailingItem = Button(action: {
       self.isPresented = !self.editBeanViewModel.save()
@@ -35,9 +55,8 @@ struct EditBeanView: View {
         VStack {
           nameField
           valueField
-          Toggle(isOn: self.$editBeanViewModel.isCredit) {
-            Text("Credit")
-          }
+          isCreditField
+          accountField
           spacer
         }
         .alert(isPresented: self.$editBeanViewModel.showAlert) {

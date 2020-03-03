@@ -14,6 +14,8 @@ protocol Persistable {
   /// Default Context
   var context: NSManagedObjectContext { get }
   
+  // MARK: Beans
+  
   /// Returns the sum of all credit - debit beans values
   var allBeansSum: Decimal { get }
   
@@ -27,16 +29,29 @@ protocol Persistable {
   var allBeansFetchRequest: NSFetchRequest<Bean> { get }
   
   /// Create a new bean
-  func createBean(name: String, value: Decimal, isCredit: Bool) throws
+  func createBean(name: String, value: Decimal, isCredit: Bool, account: Account) throws
   
   /// Deletes a bean
   func deleteBean(bean: Bean?) throws
   
   /// Update existing bean
-  func updateBean(bean: Bean, name: String, value: Decimal, isCredit: Bool) throws
+  func updateBean(bean: Bean, name: String, value: Decimal, isCredit: Bool, account: Account) throws
+  
+  // MARK: Accounts
+  
+  /// Returns a Fetch Request with all accounts ordered by name
+  var allAccountsFetchRequest: NSFetchRequest<Account> { get }
+  
+  /// Create a new Account
+  func createAccount(name: String) throws
+  
+  /// Update existing Account
+  func updateAccount(account: Account, name: String) throws
 }
 
 extension Persistable {
+  
+  // MARK: Beans
   
   var allBeansSum: Decimal {
     return creditBeansSum - debitBeansSum
@@ -86,11 +101,12 @@ extension Persistable {
     return fetch
   }
   
-  func createBean(name: String, value: Decimal, isCredit: Bool) throws {
+  func createBean(name: String, value: Decimal, isCredit: Bool, account: Account) throws {
     let bean = Bean(context: context)
     bean.creationTimestamp = Date()
     bean.updateTimestamp = Date()
     bean.name = name
+    bean.account = account
     bean.value = NSDecimalNumber(decimal: value)
     bean.isCredit = isCredit
     try context.save()
@@ -102,11 +118,31 @@ extension Persistable {
     try context.save()
   }
   
-  func updateBean(bean: Bean, name: String, value: Decimal, isCredit: Bool) throws {
+  func updateBean(bean: Bean, name: String, value: Decimal, isCredit: Bool, account: Account) throws {
     bean.name = name
     bean.value = NSDecimalNumber(decimal: value)
     bean.updateTimestamp = Date()
     bean.isCredit = isCredit
+    bean.account = account
+    try context.save()
+  }
+  
+  // MARK: Accounts
+  
+  var allAccountsFetchRequest: NSFetchRequest<Account> {
+    let fetch = NSFetchRequest<Account>(entityName: "Account")
+    fetch.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+    return fetch
+  }
+  
+  func createAccount(name: String) throws {
+    let account = Account(context: context)
+    account.name = name
+    try context.save()
+  }
+  
+  func updateAccount(account: Account, name: String) throws {
+    account.name = name
     try context.save()
   }
 }

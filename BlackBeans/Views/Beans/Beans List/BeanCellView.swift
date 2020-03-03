@@ -1,5 +1,5 @@
 //
-//  BeanCell.swift
+//  BeanCellView.swift
 //  BlackBeans
 //
 //  Created by Ricardo Gehrke on 20/01/20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct BeanCell: View {
+struct BeanCellView: View {
   
   @State var bean: Bean
   
