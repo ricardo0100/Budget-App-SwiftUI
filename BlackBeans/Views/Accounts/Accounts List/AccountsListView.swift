@@ -21,7 +21,7 @@ struct AccountsListView: View {
     let list = List {
       ForEach(accounts, id: \.self) { account in
         NavigationLink(destination: AccountDetailsView(account: account)) {
-          Text(account.name ?? "")
+          Text(account.name ?? .empty)
         }
       }.onDelete {
         guard let index = $0.first  else { return }

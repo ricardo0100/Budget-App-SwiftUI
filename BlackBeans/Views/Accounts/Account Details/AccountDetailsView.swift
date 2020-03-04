@@ -10,16 +10,21 @@ import SwiftUI
 
 struct AccountDetailsView: View {
 
+  
+  
   @State var account: Account
   @State var isEditAccountPresented: Bool = false
   
   var body: some View {
+    
     let trailing = Button(action: {
       self.isEditAccountPresented = true
     }) {
       Text("Edit")
     }
-    return Text(account.name ?? "")
+    
+    return Text(account.name ?? .empty)
+      .navigationBarTitle(account.name ?? .empty)
       .navigationBarItems(trailing: trailing)
       .sheet(isPresented: self.$isEditAccountPresented) {
         return EditAccountView(viewModel: EditAccountViewModel(account: self.account),

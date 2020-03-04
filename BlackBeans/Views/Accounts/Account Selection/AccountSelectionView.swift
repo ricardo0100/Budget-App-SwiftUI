@@ -24,7 +24,7 @@ struct AccountSelectionView: View {
           self.selectedAccount = account
           self.isPresented = false
         }) {
-          Text(account.name ?? "")
+          Text(account.name ?? .empty)
         }
       }
     }

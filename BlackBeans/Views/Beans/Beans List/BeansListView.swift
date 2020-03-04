@@ -30,7 +30,7 @@ struct BeansListView: View {
     let sum = HStack {
       Text("Total")
       Spacer()
-      Text(Persistency.shared.allBeansSum.toCurrency ?? "")
+      Text(Persistency.shared.allBeansSum.toCurrency ?? .empty)
         .foregroundColor(Persistency.shared.allBeansSum > 0 ? Color.green : Color.red)
     }.padding()
     
@@ -46,7 +46,7 @@ struct BeansListView: View {
         Spacer()
         sum
       }
-      .navigationBarTitle("Everything")
+      .navigationBarTitle("Transactions")
       .navigationBarItems(trailing: editButton)
     }
     .sheet(isPresented: self.$isEditingBeanPresented) { () -> EditBeanView in

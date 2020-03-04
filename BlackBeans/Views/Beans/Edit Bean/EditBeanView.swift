@@ -33,7 +33,8 @@ struct EditBeanView: View {
     let accountField = HStack {
       Image(systemName: "creditcard")
       Text(self.editBeanViewModel.account?.name ?? "No account")
-        .foregroundColor(self.editBeanViewModel.account == nil ? Color.gray : Color.black)
+        .foregroundColor(Color.primary)
+        .opacity(self.editBeanViewModel.account == nil ? 0.5 : 1)
       Spacer()
       NavigationLink(destination: destination,
                      isActive: self.$isAccountsListPresented) {

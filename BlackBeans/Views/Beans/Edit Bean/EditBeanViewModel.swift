@@ -11,15 +11,15 @@ import Combine
 
 class EditBeanViewModel: ObservableObject, Identifiable {
   
-  @Published var name: String = ""
+  @Published var name: String = .empty
   @Published var value: Decimal = 0
   @Published var isCredit: Bool = false
-  @Published var alertMessage: String = ""
+  @Published var alertMessage: String = .empty
   @Published var showAlert: Bool = false
   @Published var account: Account? = nil
   @Published var editingBean: Bean? = nil {
     didSet {
-      name = editingBean?.name ?? ""
+      name = editingBean?.name ?? .empty
       value = editingBean?.value?.decimalValue ?? 0
       account = editingBean?.account
       isCredit = editingBean?.isCredit ?? false

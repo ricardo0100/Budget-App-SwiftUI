@@ -13,12 +13,17 @@ struct BeanCellView: View {
   @State var bean: Bean
   
   var body: some View {
-    let value = Text(bean.value?.decimalValue.toCurrency ?? "")
-      .foregroundColor(bean.isCredit ? Color.green : Color.red)
-    return HStack {
-      Text(bean.name ?? "")
+    HStack {
+      VStack(alignment: .leading) {
+        Text(bean.name ?? .empty)
+        Text(bean.account?.name ?? .empty).font(.footnote)
+      }
       Spacer()
-      value
+      VStack(alignment: .trailing) {
+        Text(bean.value?.decimalValue.toCurrency ?? .empty)
+          .foregroundColor(bean.isCredit ? Color.green : Color.red)
+        Text(bean.creationTimestamp?.relativeDay ?? .empty).font(.footnote)
+      }
     }
   }
   

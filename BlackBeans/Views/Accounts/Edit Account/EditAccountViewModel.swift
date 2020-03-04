@@ -11,12 +11,12 @@ import Combine
 
 class EditAccountViewModel: ObservableObject, Identifiable {
   
-  @Published var name: String = ""
+  @Published var name: String = .empty
   @Published var isAlertPresented: Bool = false
-  @Published var alertMessage: String = ""
+  @Published var alertMessage: String = .empty
   @Published var editingAccount: Account? {
     didSet {
-      name = editingAccount?.name ?? ""
+      name = editingAccount?.name ?? .empty
     }
   }
   

@@ -24,8 +24,8 @@ struct BeanDetailsView: View {
     }
     
     return VStack {
-      Text(viewModel.bean.name ?? "")
-      Text(viewModel.bean.value?.decimalValue.toCurrency ?? "")
+      Text(viewModel.bean.name ?? .empty)
+      Text(viewModel.bean.value?.decimalValue.toCurrency ?? .empty)
     }
     .sheet(isPresented: self.$isEditPresented, content: {
       destination
