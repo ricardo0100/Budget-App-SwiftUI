@@ -26,5 +26,4 @@ struct BeanCellView: View {
       }
     }
   }
-  
 }

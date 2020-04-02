@@ -11,6 +11,7 @@ import Combine
 
 class EditAccountViewModel: ObservableObject, Identifiable {
   
+  @Published var title: String = ""
   @Published var name: String = .empty
   @Published var isAlertPresented: Bool = false
   @Published var alertMessage: String = .empty
@@ -22,6 +23,7 @@ class EditAccountViewModel: ObservableObject, Identifiable {
   
   init(account: Account? = nil) {
     editingAccount = account
+    title = account == nil ? "New Account" : "Edit Account"
   }
   
   func save() -> Bool {

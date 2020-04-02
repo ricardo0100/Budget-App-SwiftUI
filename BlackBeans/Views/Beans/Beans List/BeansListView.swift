@@ -12,45 +12,20 @@ import Combine
 
 struct BeansListView: View {
   
-  @FetchRequest(fetchRequest: Persistency.shared.allBeansFetchRequest)
-  private var beans: FetchedResults<Bean>
+  private var beansRequest: FetchRequest<Bean>
+  private var beans: FetchedResults<Bean> { beansRequest.wrappedValue }
   
-  @State var isEditingBeanPresented: Bool = false
-  @State var isBeanDetailsPresented: Bool = false
+  init(type: BeansListType) {
+    self.beansRequest = FetchRequest(fetchRequest: Persistency.shared.beansFetchRequest(type: type))
+  }
   
   var body: some View {
-    let list = List {
+    List {
       ForEach(beans, id: \.self) { bean in
         NavigationLink(destination: BeanDetailsView(viewModel: BeanDetailsViewModel(bean: bean))) {
           BeanCellView(bean: bean)
         }
       }.onDelete { self.deleteBeans(in: $0) }
-    }
-    
-    let sum = HStack {
-      Text("Total")
-      Spacer()
-      Text(Persistency.shared.allBeansSum.toCurrency ?? .empty)
-        .foregroundColor(Persistency.shared.allBeansSum > 0 ? Color.green : Color.red)
-    }.padding()
-    
-    let editButton = Button(action: {
-      self.isEditingBeanPresented = true
-    }) {
-      Image(systemName: "plus")
-    }
-    
-    return NavigationView {
-      VStack {
-        list
-        Spacer()
-        sum
-      }
-      .navigationBarTitle("Transactions")
-      .navigationBarItems(trailing: editButton)
-    }
-    .sheet(isPresented: self.$isEditingBeanPresented) { () -> EditBeanView in
-      EditBeanView(editBeanViewModel: EditBeanViewModel(), isPresented: self.$isEditingBeanPresented)
     }
   }
   

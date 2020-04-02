@@ -25,8 +25,8 @@ protocol Persistable {
   /// Returns the sum of all debit beans values
   var debitBeansSum: Decimal { get }
   
-  /// Returns a Fetch Request with all beans ordered by creation date
-  var allBeansFetchRequest: NSFetchRequest<Bean> { get }
+  /// Returns a Fetch Request  with all beans for the specified type ordered by creation date
+  func beansFetchRequest(type: BeansListType) -> NSFetchRequest<Bean>
   
   /// Create a new bean
   func createBean(name: String, value: Decimal, isCredit: Bool, account: Account) throws
@@ -36,6 +36,12 @@ protocol Persistable {
   
   /// Update existing bean
   func updateBean(bean: Bean, name: String, value: Decimal, isCredit: Bool, account: Account) throws
+  
+  /// Returns the sim of all credit beans of the account
+  func creditBeansSum(for account: Account) -> Decimal
+  
+  /// Returns the sim of all credit beans of the account
+  func debitBeansSum(for account: Account) -> Decimal
   
   // MARK: Accounts
   
@@ -61,46 +67,22 @@ extension Persistable {
   }
   
   var creditBeansSum: Decimal {
-    let expression = NSExpressionDescription()
-    expression.expression = NSExpression(forFunction: "sum:", arguments:[NSExpression(forKeyPath: "value")])
-    expression.name = "sum"
-    expression.expressionResultType = .decimalAttributeType
-
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Bean")
-    fetchRequest.predicate = NSPredicate(format: "isCredit == %@", NSNumber(true))
-    fetchRequest.returnsObjectsAsFaults = false
-    fetchRequest.propertiesToFetch = [expression]
-    fetchRequest.resultType = .dictionaryResultType
-    do {
-      let res = try context.fetch(fetchRequest).first as? [String: NSDecimalNumber]
-      let creditSum = (res?["sum"] ?? 0).decimalValue
-      return creditSum
-    } catch {
-      Log.error(error)
-      fatalError()
-    }
+    return sumOfBeans(account: nil, isCredit: true)
   }
   
   var debitBeansSum: Decimal {
-    let expression = NSExpressionDescription()
-    expression.expression = NSExpression(forFunction: "sum:", arguments:[NSExpression(forKeyPath: "value")])
-    expression.name = "sum"
-    expression.expressionResultType = .decimalAttributeType
-
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Bean")
-    fetchRequest.predicate = NSPredicate(format: "isCredit == %@", NSNumber(false))
-    fetchRequest.returnsObjectsAsFaults = false
-    fetchRequest.propertiesToFetch = [expression]
-    fetchRequest.resultType = .dictionaryResultType
-    
-    let res = try! context.fetch(fetchRequest)[0] as? [String: NSDecimalNumber]
-    let creditSum = (res?["sum"] ?? 0).decimalValue
-    return creditSum
+    return sumOfBeans(account: nil, isCredit: false)
   }
   
-  var allBeansFetchRequest: NSFetchRequest<Bean> {
+  func beansFetchRequest(type: BeansListType) -> NSFetchRequest<Bean> {
     let fetch = NSFetchRequest<Bean>(entityName: "Bean")
     fetch.sortDescriptors = [NSSortDescriptor(key: "creationTimestamp", ascending: true)]
+    switch type {
+    case .all:
+      break
+    case .forAccount(let account):
+      fetch.predicate = NSPredicate(format: "%K == %@", #keyPath(Bean.account), account)
+    }
     return fetch
   }
   
@@ -130,6 +112,14 @@ extension Persistable {
     try context.save()
   }
   
+  func creditBeansSum(for account: Account) -> Decimal {
+    return sumOfBeans(account: account, isCredit: true)
+  }
+  
+  func debitBeansSum(for account: Account) -> Decimal {
+    return sumOfBeans(account: account, isCredit: false)
+  }
+  
   // MARK: Accounts
   
   var allAccountsFetchRequest: NSFetchRequest<Account> {
@@ -153,5 +143,34 @@ extension Persistable {
     guard let account = account else { return }
     context.delete(account)
     try context.save()
+  }
+  
+  // MARK: Private Methods
+  
+  private func sumOfBeans(account: Account?, isCredit: Bool) -> Decimal {
+    let expression = NSExpressionDescription()
+    expression.expression = NSExpression(forFunction: "sum:", arguments:[NSExpression(forKeyPath: "value")])
+    expression.name = "sum"
+    expression.expressionResultType = .decimalAttributeType
+
+    var predicates = [NSPredicate(format: "isCredit == %@", NSNumber(value: isCredit))]
+    if let account = account {
+      predicates.append(NSPredicate(format: "account == %@", account))
+    }
+    let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+    
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Bean")
+    fetchRequest.predicate = predicate
+    fetchRequest.returnsObjectsAsFaults = false
+    fetchRequest.propertiesToFetch = [expression]
+    fetchRequest.resultType = .dictionaryResultType
+    do {
+      let res = try context.fetch(fetchRequest).first as? [String: NSDecimalNumber]
+      let creditSum = (res?["sum"] ?? 0).decimalValue
+      return creditSum
+    } catch {
+      Log.error(error)
+      fatalError()
+    }
   }
 }

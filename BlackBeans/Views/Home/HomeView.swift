@@ -11,7 +11,7 @@ import SwiftUI
 struct HomeView: View {
   var body: some View {
     TabView {
-      BeansListView()
+      BeansHome()
         .environment(\.managedObjectContext, Persistency.shared.context)
         .tabItem {
           Image(systemName: "cart")
@@ -22,6 +22,11 @@ struct HomeView: View {
         .tabItem {
           Image(systemName: "creditcard")
           Text("Accounts")
+      }
+      CategoriesList()
+        .tabItem {
+          Image(systemName: "tray.full")
+          Text("Categories")
       }
     }
   }

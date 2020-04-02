@@ -26,7 +26,7 @@ struct EditAccountView: View {
         Spacer()
       }
       .padding()
-      .navigationBarTitle("New account")
+      .navigationBarTitle(self.viewModel.title)
       .navigationBarItems(trailing: trailing)
     }
   }
