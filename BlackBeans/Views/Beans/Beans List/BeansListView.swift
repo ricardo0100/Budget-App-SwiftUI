@@ -15,14 +15,14 @@ struct BeansListView: View {
   private var beansRequest: FetchRequest<Bean>
   private var beans: FetchedResults<Bean> { beansRequest.wrappedValue }
   
-  init(type: BeansListType) {
-    self.beansRequest = FetchRequest(fetchRequest: Persistency.shared.beansFetchRequest(type: type))
+  init(type: BeansRequestType) {
+    self.beansRequest = FetchRequest(fetchRequest: Persistency.shared.beansFetchRequest(for: type))
   }
   
   var body: some View {
     List {
       ForEach(beans, id: \.self) { bean in
-        NavigationLink(destination: BeanDetailsView(viewModel: BeanDetailsViewModel(bean: bean))) {
+        NavigationLink(destination: BeanDetailsView(bean: bean)) {
           BeanCellView(bean: bean)
         }
       }.onDelete { self.deleteBeans(in: $0) }

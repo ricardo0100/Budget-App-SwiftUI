@@ -11,7 +11,7 @@ import SwiftUI
 struct HomeView: View {
   var body: some View {
     TabView {
-      BeansHome()
+      BeansHomeView()
         .environment(\.managedObjectContext, Persistency.shared.context)
         .tabItem {
           Image(systemName: "cart")

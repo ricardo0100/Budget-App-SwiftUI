@@ -1,5 +1,5 @@
 //
-//  BeansHome.swift
+//  BeansHomeView.swift
 //  BlackBeans
 //
 //  Created by Ricardo Gehrke on 02/04/20.
@@ -8,19 +8,12 @@
 
 import SwiftUI
 
-struct BeansHome: View {
+struct BeansHomeView: View {
   
   @State private var isEditingBeanPresented: Bool = false
   @State private var isBeanDetailsPresented: Bool = false
   
   var body: some View {
-    let sum = HStack {
-      Text("Total")
-      Spacer()
-      Text(Persistency.shared.allBeansSum.toCurrency ?? .empty)
-        .foregroundColor(Persistency.shared.allBeansSum > 0 ? Color.green : Color.red)
-    }.padding()
-    
     let editButton = Button(action: {
       self.isEditingBeanPresented = true
     }) {
@@ -28,10 +21,13 @@ struct BeansHome: View {
     }
     
     return NavigationView {
-      VStack {
+      VStack(spacing: 0) {
         BeansListView(type: .all)
-        Spacer()
-        sum
+        Rectangle()
+          .frame(height: 1)
+          .foregroundColor(Color.gray.opacity(0.5))
+        BeansSumView(type: .all)
+          .background(Color.gray.opacity(0.1))
       }
       .navigationBarTitle("Transactions")
       .navigationBarItems(trailing: editButton)

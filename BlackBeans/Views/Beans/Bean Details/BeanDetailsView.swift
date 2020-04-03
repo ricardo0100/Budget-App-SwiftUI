@@ -10,12 +10,12 @@ import SwiftUI
 
 struct BeanDetailsView: View {
   
-  @ObservedObject var viewModel: BeanDetailsViewModel
+  @State var bean: Bean
   @State var isEditPresented = false
   
   var body: some View {
     let editViewModel = EditBeanViewModel()
-    editViewModel.editingBean = viewModel.bean
+    editViewModel.editingBean = bean
     let destination = EditBeanView(editBeanViewModel: editViewModel, isPresented: self.$isEditPresented)
     let trailingButton = Button(action: {
       self.isEditPresented = true
@@ -24,8 +24,8 @@ struct BeanDetailsView: View {
     }
     
     return VStack {
-      Text(viewModel.bean.name ?? .empty)
-      Text(viewModel.bean.value?.decimalValue.toCurrency ?? .empty)
+      Text(bean.name ?? .empty)
+      Text(bean.value?.decimalValue.toCurrency ?? .empty)
     }
     .sheet(isPresented: self.$isEditPresented, content: {
       destination

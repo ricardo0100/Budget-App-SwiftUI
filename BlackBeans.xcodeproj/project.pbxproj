@@ -20,7 +20,6 @@
 		59735AD5240F18150011823E /* AccountsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59735AD4240F18150011823E /* AccountsListViewModel.swift */; };
 		59735AD7240F42350011823E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59735AD6240F42350011823E /* Date+Extension.swift */; };
 		5975416624042347001BD684 /* BeanDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5975416524042347001BD684 /* BeanDetailsView.swift */; };
-		59754168240423B2001BD684 /* BeanDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59754167240423B2001BD684 /* BeanDetailsViewModel.swift */; };
 		5977F69D240DA89900FE53D2 /* AccountsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5977F69C240DA89900FE53D2 /* AccountsListView.swift */; };
 		5977F6A0240DB84100FE53D2 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5977F69F240DB84100FE53D2 /* EditAccountView.swift */; };
 		5977F6A2240DCB7800FE53D2 /* EditAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5977F6A1240DCB7800FE53D2 /* EditAccountViewModel.swift */; };
@@ -32,8 +31,9 @@
 		59B5289324070925001F6AC0 /* BlackBeans.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4B023C226610040077D /* BlackBeans.xcdatamodeld */; };
 		59DBA82B24086A290061B56D /* PersistencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DBA82924086A280061B56D /* PersistencyTests.swift */; };
 		59DC028E2436A32900FB8A36 /* CategoriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DC028D2436A32900FB8A36 /* CategoriesList.swift */; };
-		59DC02912436A4CD00FB8A36 /* BeansListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DC02902436A4CD00FB8A36 /* BeansListType.swift */; };
-		59DC02932436A65400FB8A36 /* BeansHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DC02922436A65400FB8A36 /* BeansHome.swift */; };
+		59DC02912436A4CD00FB8A36 /* BeansRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DC02902436A4CD00FB8A36 /* BeansRequestType.swift */; };
+		59DC02932436A65400FB8A36 /* BeansHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DC02922436A65400FB8A36 /* BeansHomeView.swift */; };
+		59DC02972436AECC00FB8A36 /* BeansSumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DC02962436AECC00FB8A36 /* BeansSumView.swift */; };
 		59F2C4AD23C226610040077D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4AC23C226610040077D /* AppDelegate.swift */; };
 		59F2C4AF23C226610040077D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4AE23C226610040077D /* SceneDelegate.swift */; };
 		59F2C4B623C226660040077D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59F2C4B523C226660040077D /* Assets.xcassets */; };
@@ -65,7 +65,6 @@
 		59735AD4240F18150011823E /* AccountsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListViewModel.swift; sourceTree = "<group>"; };
 		59735AD6240F42350011823E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		5975416524042347001BD684 /* BeanDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanDetailsView.swift; sourceTree = "<group>"; };
-		59754167240423B2001BD684 /* BeanDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanDetailsViewModel.swift; sourceTree = "<group>"; };
 		5977F69C240DA89900FE53D2 /* AccountsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListView.swift; sourceTree = "<group>"; };
 		5977F69F240DB84100FE53D2 /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
 		5977F6A1240DCB7800FE53D2 /* EditAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountViewModel.swift; sourceTree = "<group>"; };
@@ -78,8 +77,9 @@
 		59DBA823240869D70061B56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59DBA82924086A280061B56D /* PersistencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyTests.swift; sourceTree = "<group>"; };
 		59DC028D2436A32900FB8A36 /* CategoriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesList.swift; sourceTree = "<group>"; };
-		59DC02902436A4CD00FB8A36 /* BeansListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansListType.swift; sourceTree = "<group>"; };
-		59DC02922436A65400FB8A36 /* BeansHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansHome.swift; sourceTree = "<group>"; };
+		59DC02902436A4CD00FB8A36 /* BeansRequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansRequestType.swift; sourceTree = "<group>"; };
+		59DC02922436A65400FB8A36 /* BeansHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansHomeView.swift; sourceTree = "<group>"; };
+		59DC02962436AECC00FB8A36 /* BeansSumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansSumView.swift; sourceTree = "<group>"; };
 		59F2C4A923C226610040077D /* BlackBeans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackBeans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F2C4AC23C226610040077D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59F2C4AE23C226610040077D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,10 +139,10 @@
 		597541612404230E001BD684 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				59DC028C2436A30B00FB8A36 /* Categories */,
 				5977F6AD240E70F600FE53D2 /* Home */,
-				5977F6A4240E618200FE53D2 /* Accounts */,
 				5977F6A3240E617900FE53D2 /* Beans */,
+				5977F6A4240E618200FE53D2 /* Accounts */,
+				59DC028C2436A30B00FB8A36 /* Categories */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -151,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				5975416524042347001BD684 /* BeanDetailsView.swift */,
-				59754167240423B2001BD684 /* BeanDetailsViewModel.swift */,
 			);
 			path = "Bean Details";
 			sourceTree = "<group>";
@@ -178,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				59DC02942436AC3200FB8A36 /* Beans Home */,
+				59DC02952436AEBB00FB8A36 /* Beans Sum */,
 				59FF74C123EB52EE0066C3A5 /* Beans List */,
 				59FF74C023EB52DD0066C3A5 /* Edit Bean */,
 				5975416224042314001BD684 /* Bean Details */,
@@ -236,6 +236,7 @@
 		59A621C623D1F8D4006C7750 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				59DC02902436A4CD00FB8A36 /* BeansRequestType.swift */,
 				59B39D7F24069CEE002B2221 /* Persistable.swift */,
 				59446D7C23CB4FD000BC8176 /* Persistency.swift */,
 				59F2C4B023C226610040077D /* BlackBeans.xcdatamodeld */,
@@ -271,9 +272,17 @@
 		59DC02942436AC3200FB8A36 /* Beans Home */ = {
 			isa = PBXGroup;
 			children = (
-				59DC02922436A65400FB8A36 /* BeansHome.swift */,
+				59DC02922436A65400FB8A36 /* BeansHomeView.swift */,
 			);
 			path = "Beans Home";
+			sourceTree = "<group>";
+		};
+		59DC02952436AEBB00FB8A36 /* Beans Sum */ = {
+			isa = PBXGroup;
+			children = (
+				59DC02962436AECC00FB8A36 /* BeansSumView.swift */,
+			);
+			path = "Beans Sum";
 			sourceTree = "<group>";
 		};
 		59F2C4A023C226610040077D = {
@@ -299,10 +308,10 @@
 			children = (
 				597541612404230E001BD684 /* Views */,
 				59A621C623D1F8D4006C7750 /* Model */,
-				59A621C523D1F8B7006C7750 /* Application */,
 				59600E4523D35F5C00E13D90 /* Extensions */,
 				5931BEE82404217900250CCF /* Shared Views */,
 				59600E4823D3601300E13D90 /* Utils */,
+				59A621C523D1F8B7006C7750 /* Application */,
 			);
 			path = BlackBeans;
 			sourceTree = "<group>";
@@ -327,7 +336,6 @@
 		59FF74C123EB52EE0066C3A5 /* Beans List */ = {
 			isa = PBXGroup;
 			children = (
-				59DC02902436A4CD00FB8A36 /* BeansListType.swift */,
 				5947E6F123D1FD590012997E /* BeansListView.swift */,
 				5930E11B23D6411D008E8B27 /* BeanCellView.swift */,
 			);
@@ -444,7 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59DC02932436A65400FB8A36 /* BeansHome.swift in Sources */,
+				59DC02932436A65400FB8A36 /* BeansHomeView.swift in Sources */,
 				59735AD7240F42350011823E /* Date+Extension.swift in Sources */,
 				59DC028E2436A32900FB8A36 /* CategoriesList.swift in Sources */,
 				5977F6A2240DCB7800FE53D2 /* EditAccountViewModel.swift in Sources */,
@@ -461,13 +469,13 @@
 				5950765723DDFC6A00A5446A /* Log.swift in Sources */,
 				59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */,
 				59B5289324070925001F6AC0 /* BlackBeans.xcdatamodeld in Sources */,
+				59DC02972436AECC00FB8A36 /* BeansSumView.swift in Sources */,
 				5977F69D240DA89900FE53D2 /* AccountsListView.swift in Sources */,
-				59DC02912436A4CD00FB8A36 /* BeansListType.swift in Sources */,
+				59DC02912436A4CD00FB8A36 /* BeansRequestType.swift in Sources */,
 				59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */,
 				590B7A6D2402E9DD0038A058 /* AlertMessage.swift in Sources */,
 				59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */,
 				5947E6F423D1FD6A0012997E /* EditBeanView.swift in Sources */,
-				59754168240423B2001BD684 /* BeanDetailsViewModel.swift in Sources */,
 				5977F6A7240E67A900FE53D2 /* AccountDetailsView.swift in Sources */,
 				5977F6AF240E710300FE53D2 /* HomeView.swift in Sources */,
 				59735AD5240F18150011823E /* AccountsListViewModel.swift in Sources */,

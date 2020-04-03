@@ -20,48 +20,25 @@ struct AccountDetailsView: View {
   }
   
   var body: some View {
-    
-    let list = BeansListView(type: .forAccount(account: account))
-    
-    let debits: Decimal = Persistency.shared.debitBeansSum(for: account)
-    let credits: Decimal = Persistency.shared.creditBeansSum(for: account)
-    let sum = credits - debits
-    
-    let total = VStack(alignment: .leading, spacing: 10) {
-      HStack {
-        Text("Debits:")
-        Spacer()
-        Text(debits.toCurrency ?? "").foregroundColor(.red)
-      }
-      HStack {
-        Text("Credits:")
-        Spacer()
-        Text(credits.toCurrency ?? "").foregroundColor(.green)
-      }
-      HStack {
-        Text("Total:").bold()
-        Spacer()
-        Text(sum.toCurrency ?? .empty)
-          .bold()
-          .foregroundColor(sum > 0 ? Color.green : Color.red)
-      }
-    }.padding()
-    
     let trailing = Button(action: {
       self.isEditAccountPresented = true
     }) {
       Text("Edit")
     }
     
-    return VStack {
-      list
-      total
+    return VStack(spacing: 0) {
+      BeansListView(type: .forAccount(account: account))
+      Rectangle()
+        .frame(height: 1)
+        .foregroundColor(Color.gray.opacity(0.5))
+      BeansSumView(type: .forAccount(account: account))
+        .background(Color.gray.opacity(0.1))
     }
     .navigationBarTitle(account.name ?? .empty)
-      .navigationBarItems(trailing: trailing)
-      .sheet(isPresented: self.$isEditAccountPresented) {
-        return EditAccountView(viewModel: EditAccountViewModel(account: self.account),
-                               isPresented: self.$isEditAccountPresented)
+    .navigationBarItems(trailing: trailing)
+    .sheet(isPresented: self.$isEditAccountPresented) {
+      return EditAccountView(viewModel: EditAccountViewModel(account: self.account),
+                             isPresented: self.$isEditAccountPresented)
     }
   }
 }

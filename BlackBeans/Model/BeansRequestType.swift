@@ -1,5 +1,5 @@
 //
-//  BeansListType.swift
+//  BeansRequestType.swift
 //  BlackBeans
 //
 //  Created by Ricardo Gehrke on 02/04/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum BeansListType {
+enum BeansRequestType {
   case all
   case forAccount(account: Account)
 }

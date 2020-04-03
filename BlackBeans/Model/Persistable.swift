@@ -25,8 +25,8 @@ protocol Persistable {
   /// Returns the sum of all debit beans values
   var debitBeansSum: Decimal { get }
   
-  /// Returns a Fetch Request  with all beans for the specified type ordered by creation date
-  func beansFetchRequest(type: BeansListType) -> NSFetchRequest<Bean>
+  /// Returns a Fetch Request  with all beans for the specified request type ordered by creation date
+  func beansFetchRequest(for requestType: BeansRequestType) -> NSFetchRequest<Bean>
   
   /// Create a new bean
   func createBean(name: String, value: Decimal, isCredit: Bool, account: Account) throws
@@ -37,11 +37,11 @@ protocol Persistable {
   /// Update existing bean
   func updateBean(bean: Bean, name: String, value: Decimal, isCredit: Bool, account: Account) throws
   
-  /// Returns the sim of all credit beans of the account
-  func creditBeansSum(for account: Account) -> Decimal
+  /// Returns the sum of all credit beans according to the request type
+  func creditBeansSum(for requestType: BeansRequestType) -> Decimal
   
-  /// Returns the sim of all credit beans of the account
-  func debitBeansSum(for account: Account) -> Decimal
+  /// Returns the sum of all credit beans according to the request type
+  func debitBeansSum(for requestType: BeansRequestType) -> Decimal
   
   // MARK: Accounts
   
@@ -74,10 +74,10 @@ extension Persistable {
     return sumOfBeans(account: nil, isCredit: false)
   }
   
-  func beansFetchRequest(type: BeansListType) -> NSFetchRequest<Bean> {
+  func beansFetchRequest(for requestType: BeansRequestType) -> NSFetchRequest<Bean> {
     let fetch = NSFetchRequest<Bean>(entityName: "Bean")
     fetch.sortDescriptors = [NSSortDescriptor(key: "creationTimestamp", ascending: true)]
-    switch type {
+    switch requestType {
     case .all:
       break
     case .forAccount(let account):
@@ -112,12 +112,22 @@ extension Persistable {
     try context.save()
   }
   
-  func creditBeansSum(for account: Account) -> Decimal {
-    return sumOfBeans(account: account, isCredit: true)
+  func creditBeansSum(for requestType: BeansRequestType) -> Decimal {
+    switch requestType {
+    case .all:
+      return sumOfBeans(account: nil, isCredit: true)
+    case .forAccount(let account):
+      return sumOfBeans(account: account, isCredit: true)
+    }
   }
   
-  func debitBeansSum(for account: Account) -> Decimal {
-    return sumOfBeans(account: account, isCredit: false)
+  func debitBeansSum(for requestType: BeansRequestType) -> Decimal {
+    switch requestType {
+    case .all:
+      return sumOfBeans(account: nil, isCredit: false)
+    case .forAccount(let account):
+      return sumOfBeans(account: account, isCredit: false)
+    }
   }
   
   // MARK: Accounts
