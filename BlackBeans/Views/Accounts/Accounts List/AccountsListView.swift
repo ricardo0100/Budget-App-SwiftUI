@@ -13,9 +13,8 @@ struct AccountsListView: View {
   @FetchRequest(fetchRequest: Persistency.shared.allAccountsFetchRequest)
   private var accounts: FetchedResults<Account>
   
-  @ObservedObject var viewModel = AccountsListViewModel()
-  
-  @State var isEditAccountPresented: Bool = false
+  @State private var isEditAccountPresented: Bool = false
+  @State private var deletingAccount: Account?
   
   var body: some View {
     let list = List {
@@ -26,7 +25,7 @@ struct AccountsListView: View {
       }.onDelete {
         guard let index = $0.first  else { return }
         let account = self.accounts[index]
-        self.viewModel.deleteAccount(account: account)
+        self.deleteAccount(account: account)
       }
     }
     
@@ -37,24 +36,47 @@ struct AccountsListView: View {
     }
     
     let primaryButton = Alert.Button.destructive(Text("Yes, delete everything"),
-                                                 action: self.viewModel.confirmDeletion)
+                                                 action: confirmDeletion)
     
     let deleteAlert = Alert(title: Text("⚠️\nAre you sure you want to delete this account?"),
                             message: Text("All related Beans will be deleted!!!"),
                             primaryButton: primaryButton,
                             secondaryButton: .cancel())
     
+    let editAccount = EditAccountView(viewModel: EditAccountViewModel(),
+                                      isPresented: self.$isEditAccountPresented)
+    
     return NavigationView {
       list
         .navigationBarItems(trailing: trailing)
         .navigationBarTitle("Accounts")
-        .alert(isPresented: self.$viewModel.isDeleteAlertPresented) {
+        .alert(item: self.$deletingAccount) { _ in
           deleteAlert
         }.sheet(isPresented: self.$isEditAccountPresented) {
-          EditAccountView(viewModel: EditAccountViewModel(), isPresented: self.$isEditAccountPresented)
+          editAccount
         }
     }
   }
   
+  private func deleteAccount(account: Account) {
+    guard account.beans?.count == 0 else {
+      deletingAccount = account
+      return
+    }
+    do {
+      try Persistency.shared.deleteAccount(account: account)
+    } catch {
+      Log.error("Error deleting acount: \(error.localizedDescription)")
+    }
+  }
+  
+  private func confirmDeletion() {
+    guard let account = deletingAccount else { return }
+    do {
+      try Persistency.shared.deleteAccount(account: account)
+    } catch {
+      Log.error("Error deleting acount: \(error.localizedDescription)")
+    }
+  }
 }
 
