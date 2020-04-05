@@ -24,6 +24,7 @@ struct HomeView: View {
           Text("Accounts")
       }
       CategoriesList()
+        .environment(\.managedObjectContext, Persistency.shared.context)
         .tabItem {
           Image(systemName: "tray.full")
           Text("Categories")

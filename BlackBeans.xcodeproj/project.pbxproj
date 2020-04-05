@@ -14,6 +14,10 @@
 		5947E6F423D1FD6A0012997E /* EditBeanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947E6F323D1FD6A0012997E /* EditBeanView.swift */; };
 		5950765723DDFC6A00A5446A /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5950765623DDFC6A00A5446A /* Log.swift */; };
 		5951CDB0243789D600DDFDB9 /* Account+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951CDAF243789D600DDFDB9 /* Account+Extension.swift */; };
+		5951CDB22438CB5E00DDFDB9 /* Persistable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951CDB12438CB5E00DDFDB9 /* Persistable+Extension.swift */; };
+		5951CDB62438CD8500DDFDB9 /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951CDB52438CD8500DDFDB9 /* EditCategoryView.swift */; };
+		5951CDB82439EE0B00DDFDB9 /* EditCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951CDB72439EE0B00DDFDB9 /* EditCategoryViewModel.swift */; };
+		5951CDBB2439F58300DDFDB9 /* CategoryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951CDBA2439F58300DDFDB9 /* CategoryDetailsView.swift */; };
 		59600E4723D35F6D00E13D90 /* Decimal+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */; };
 		59600E4A23D3601F00E13D90 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4923D3601F00E13D90 /* StringFormatter.swift */; };
 		59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639ADE23D6430D00DD18DC /* EditBeanViewModel.swift */; };
@@ -59,6 +63,10 @@
 		5947E6F323D1FD6A0012997E /* EditBeanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeanView.swift; sourceTree = "<group>"; };
 		5950765623DDFC6A00A5446A /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		5951CDAF243789D600DDFDB9 /* Account+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Account+Extension.swift"; sourceTree = "<group>"; };
+		5951CDB12438CB5E00DDFDB9 /* Persistable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Persistable+Extension.swift"; sourceTree = "<group>"; };
+		5951CDB52438CD8500DDFDB9 /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
+		5951CDB72439EE0B00DDFDB9 /* EditCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryViewModel.swift; sourceTree = "<group>"; };
+		5951CDBA2439F58300DDFDB9 /* CategoryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsView.swift; sourceTree = "<group>"; };
 		59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extension.swift"; sourceTree = "<group>"; };
 		59600E4923D3601F00E13D90 /* StringFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
 		59639ADE23D6430D00DD18DC /* EditBeanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeanViewModel.swift; sourceTree = "<group>"; };
@@ -114,6 +122,23 @@
 				59639AE023D643C100DD18DC /* CurrencyTextField.swift */,
 			);
 			path = "Shared Views";
+			sourceTree = "<group>";
+		};
+		5951CDB42438CD5C00DDFDB9 /* Edit Category */ = {
+			isa = PBXGroup;
+			children = (
+				5951CDB52438CD8500DDFDB9 /* EditCategoryView.swift */,
+				5951CDB72439EE0B00DDFDB9 /* EditCategoryViewModel.swift */,
+			);
+			path = "Edit Category";
+			sourceTree = "<group>";
+		};
+		5951CDB92439F4BB00DDFDB9 /* Category Details */ = {
+			isa = PBXGroup;
+			children = (
+				5951CDBA2439F58300DDFDB9 /* CategoryDetailsView.swift */,
+			);
+			path = "Category Details";
 			sourceTree = "<group>";
 		};
 		59600E4523D35F5C00E13D90 /* Extensions */ = {
@@ -235,9 +260,10 @@
 		59A621C623D1F8D4006C7750 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				59DC02902436A4CD00FB8A36 /* BeansRequestType.swift */,
 				59B39D7F24069CEE002B2221 /* Persistable.swift */,
+				5951CDB12438CB5E00DDFDB9 /* Persistable+Extension.swift */,
 				59446D7C23CB4FD000BC8176 /* Persistency.swift */,
+				59DC02902436A4CD00FB8A36 /* BeansRequestType.swift */,
 				59F2C4B023C226610040077D /* BlackBeans.xcdatamodeld */,
 				5951CDAF243789D600DDFDB9 /* Account+Extension.swift */,
 			);
@@ -256,6 +282,8 @@
 		59DC028C2436A30B00FB8A36 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				5951CDB92439F4BB00DDFDB9 /* Category Details */,
+				5951CDB42438CD5C00DDFDB9 /* Edit Category */,
 				59DC028F2436A33400FB8A36 /* Categories List */,
 			);
 			path = Categories;
@@ -457,6 +485,7 @@
 				59DC028E2436A32900FB8A36 /* CategoriesList.swift in Sources */,
 				5977F6A2240DCB7800FE53D2 /* EditAccountViewModel.swift in Sources */,
 				59B39D8024069CEE002B2221 /* Persistable.swift in Sources */,
+				5951CDB82439EE0B00DDFDB9 /* EditCategoryViewModel.swift in Sources */,
 				5977F6A0240DB84100FE53D2 /* EditAccountView.swift in Sources */,
 				59F2C4AD23C226610040077D /* AppDelegate.swift in Sources */,
 				59F2C4AF23C226610040077D /* SceneDelegate.swift in Sources */,
@@ -469,7 +498,10 @@
 				5950765723DDFC6A00A5446A /* Log.swift in Sources */,
 				59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */,
 				59B5289324070925001F6AC0 /* BlackBeans.xcdatamodeld in Sources */,
+				5951CDB62438CD8500DDFDB9 /* EditCategoryView.swift in Sources */,
+				5951CDBB2439F58300DDFDB9 /* CategoryDetailsView.swift in Sources */,
 				59DC02972436AECC00FB8A36 /* BeansSumView.swift in Sources */,
+				5951CDB22438CB5E00DDFDB9 /* Persistable+Extension.swift in Sources */,
 				5977F69D240DA89900FE53D2 /* AccountsListView.swift in Sources */,
 				59DC02912436A4CD00FB8A36 /* BeansRequestType.swift in Sources */,
 				59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */,

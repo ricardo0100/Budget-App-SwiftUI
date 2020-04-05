@@ -25,3 +25,10 @@ extension String {
       .joined()
   }
 }
+
+extension String: Identifiable {
+  
+  public var id: ObjectIdentifier {
+    return ObjectIdentifier(NSString(string: self))
+  }
+}
