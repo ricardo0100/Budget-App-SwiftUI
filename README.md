@@ -1,13 +1,14 @@
-# BlackBeans
+# BlackBeans 💰
 
-## 100% SwiftUI and Combine finances app 💰 with Core Data integration.
+_100% SwiftUI and Combine finances app with Core Data integration._
 
 ### Features
 
-- Accounts
-- Categories
-- Beans (Financial transactions)
-- 
+- Accounts (CRUD)
+- Categories (CRUD)
+- Beans* (CRUD)
+
+**Beans are financial transactions*
 
 
 ### For The Future
