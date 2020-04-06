@@ -13,6 +13,7 @@ struct EditBeanView: View {
   
   @ObservedObject var editBeanViewModel: EditBeanViewModel
   @State var isAccountsListPresented: Bool = false
+  @State var isCategoriesListPresented: Bool = false
   @Binding var isPresented: Bool
   
   var body: some View {
@@ -27,8 +28,8 @@ struct EditBeanView: View {
     
     let spacer = Spacer().layoutPriority(1)
     
-    let destination = AccountSelectionView(selectedAccount: self.$editBeanViewModel.account,
-                                           isPresented: self.$isAccountsListPresented
+    let accountSelection = AccountSelectionView(selectedAccount: self.$editBeanViewModel.account,
+                                                isPresented: self.$isAccountsListPresented
     ).environment(\.managedObjectContext, Persistency.shared.context)
       .navigationBarTitle("Select Account")
     
@@ -41,7 +42,26 @@ struct EditBeanView: View {
       
       Spacer()
       
-      NavigationLink(destination: destination, isActive: self.$isAccountsListPresented) {
+      NavigationLink(destination: accountSelection, isActive: self.$isAccountsListPresented) {
+        Image(systemName: "square.and.pencil").padding(.trailing, 16)
+      }
+    }
+    
+    let categorySelection = CategorySelectionView(selectedCategory: self.$editBeanViewModel.category,
+                                                  isPresented: self.$isCategoriesListPresented
+    ).environment(\.managedObjectContext, Persistency.shared.context)
+      .navigationBarTitle("Select Category")
+    
+    let categoryField = HStack {
+      Image(systemName: "tray.full")
+      
+      Text(self.editBeanViewModel.category?.name ?? "No category")
+        .foregroundColor(Color.primary)
+        .opacity(self.editBeanViewModel.category == nil ? 0.5 : 1)
+      
+      Spacer()
+      
+      NavigationLink(destination: categorySelection, isActive: self.$isCategoriesListPresented) {
         Image(systemName: "square.and.pencil").padding(.trailing, 16)
       }
     }
@@ -61,6 +81,7 @@ struct EditBeanView: View {
           valueField
           isCreditField
           accountField
+          categoryField
           spacer
         }
         .alert(isPresented: self.$editBeanViewModel.showAlert) {

@@ -17,11 +17,13 @@ class EditBeanViewModel: ObservableObject, Identifiable {
   @Published var alertMessage: String = .empty
   @Published var showAlert: Bool = false
   @Published var account: Account? = nil
+  @Published var category: Category? = nil
   @Published var editingBean: Bean? = nil {
     didSet {
       name = editingBean?.name ?? .empty
       value = editingBean?.value?.decimalValue ?? 0
       account = editingBean?.account
+      category = editingBean?.category
       isCredit = editingBean?.isCredit ?? false
     }
   }

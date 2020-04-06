@@ -19,6 +19,7 @@
 		5951CDB82439EE0B00DDFDB9 /* EditCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951CDB72439EE0B00DDFDB9 /* EditCategoryViewModel.swift */; };
 		5951CDBB2439F58300DDFDB9 /* CategoryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951CDBA2439F58300DDFDB9 /* CategoryDetailsView.swift */; };
 		5951CDBE243AABC600DDFDB9 /* AccountSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951CDBD243AABC600DDFDB9 /* AccountSelectionView.swift */; };
+		5951CDC1243B5D6C00DDFDB9 /* CategorySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951CDC0243B5D6C00DDFDB9 /* CategorySelectionView.swift */; };
 		59600E4723D35F6D00E13D90 /* Decimal+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */; };
 		59600E4A23D3601F00E13D90 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4923D3601F00E13D90 /* StringFormatter.swift */; };
 		59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639ADE23D6430D00DD18DC /* EditBeanViewModel.swift */; };
@@ -68,6 +69,7 @@
 		5951CDB72439EE0B00DDFDB9 /* EditCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryViewModel.swift; sourceTree = "<group>"; };
 		5951CDBA2439F58300DDFDB9 /* CategoryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsView.swift; sourceTree = "<group>"; };
 		5951CDBD243AABC600DDFDB9 /* AccountSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSelectionView.swift; sourceTree = "<group>"; };
+		5951CDC0243B5D6C00DDFDB9 /* CategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionView.swift; sourceTree = "<group>"; };
 		59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extension.swift"; sourceTree = "<group>"; };
 		59600E4923D3601F00E13D90 /* StringFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
 		59639ADE23D6430D00DD18DC /* EditBeanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeanViewModel.swift; sourceTree = "<group>"; };
@@ -147,6 +149,14 @@
 				5951CDBD243AABC600DDFDB9 /* AccountSelectionView.swift */,
 			);
 			path = "Account Selection";
+			sourceTree = "<group>";
+		};
+		5951CDBF243B5D4E00DDFDB9 /* Category Selection */ = {
+			isa = PBXGroup;
+			children = (
+				5951CDC0243B5D6C00DDFDB9 /* CategorySelectionView.swift */,
+			);
+			path = "Category Selection";
 			sourceTree = "<group>";
 		};
 		59600E4523D35F5C00E13D90 /* Extensions */ = {
@@ -282,9 +292,10 @@
 		59DC028C2436A30B00FB8A36 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				5951CDB92439F4BB00DDFDB9 /* Category Details */,
-				5951CDB42438CD5C00DDFDB9 /* Edit Category */,
+				5951CDBF243B5D4E00DDFDB9 /* Category Selection */,
 				59DC028F2436A33400FB8A36 /* Categories List */,
+				5951CDB42438CD5C00DDFDB9 /* Edit Category */,
+				5951CDB92439F4BB00DDFDB9 /* Category Details */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -488,6 +499,7 @@
 				59B39D8024069CEE002B2221 /* Persistable.swift in Sources */,
 				5951CDB82439EE0B00DDFDB9 /* EditCategoryViewModel.swift in Sources */,
 				5977F6A0240DB84100FE53D2 /* EditAccountView.swift in Sources */,
+				5951CDC1243B5D6C00DDFDB9 /* CategorySelectionView.swift in Sources */,
 				59F2C4AD23C226610040077D /* AppDelegate.swift in Sources */,
 				59F2C4AF23C226610040077D /* SceneDelegate.swift in Sources */,
 				5947E6F223D1FD590012997E /* BeansListView.swift in Sources */,

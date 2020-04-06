@@ -10,17 +10,13 @@ import Foundation
 
 class EditCategoryViewModel: ObservableObject, Identifiable {
   
-  @Published var title: String = .empty
+  @Published var title: String = "New Category"
   @Published var name: String = .empty
   @Published var alertMessage: String?
   @Published var category: Category? {
     didSet {
-      guard let category = category else {
-        title = "New Category"
-        return
-      }
       title = "Edit Category"
-      name = category.name ?? .empty
+      name = category?.name ?? .empty
     }
   }
   
