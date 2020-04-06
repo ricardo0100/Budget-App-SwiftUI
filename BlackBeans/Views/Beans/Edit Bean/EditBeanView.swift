@@ -28,18 +28,21 @@ struct EditBeanView: View {
     let spacer = Spacer().layoutPriority(1)
     
     let destination = AccountSelectionView(selectedAccount: self.$editBeanViewModel.account,
-      isPresented: self.$isAccountsListPresented).environment(\.managedObjectContext, Persistency.shared.context)
+                                           isPresented: self.$isAccountsListPresented
+    ).environment(\.managedObjectContext, Persistency.shared.context)
+      .navigationBarTitle("Select Account")
     
     let accountField = HStack {
       Image(systemName: "creditcard")
+      
       Text(self.editBeanViewModel.account?.name ?? "No account")
         .foregroundColor(Color.primary)
         .opacity(self.editBeanViewModel.account == nil ? 0.5 : 1)
+      
       Spacer()
-      NavigationLink(destination: destination,
-                     isActive: self.$isAccountsListPresented) {
-                      Image(systemName: "square.and.pencil")
-                      .padding(.trailing, 16)
+      
+      NavigationLink(destination: destination, isActive: self.$isAccountsListPresented) {
+        Image(systemName: "square.and.pencil").padding(.trailing, 16)
       }
     }
     

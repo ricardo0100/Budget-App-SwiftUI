@@ -17,6 +17,7 @@ struct AccountsListView: View {
   @State private var deletingAccount: Account?
   
   var body: some View {
+    
     let list = List {
       ForEach(accounts, id: \.self) { account in
         NavigationLink(destination: AccountDetailsView(account: account)) {
@@ -46,15 +47,16 @@ struct AccountsListView: View {
     let editAccount = EditAccountView(viewModel: EditAccountViewModel(),
                                       isPresented: self.$isEditAccountPresented)
     
-    return NavigationView {
-      list
-        .navigationBarItems(trailing: trailing)
-        .navigationBarTitle("Accounts")
-        .alert(item: self.$deletingAccount) { _ in
-          deleteAlert
-        }.sheet(isPresented: self.$isEditAccountPresented) {
-          editAccount
-        }
+    return
+      NavigationView {
+        list
+          .navigationBarItems(trailing: trailing)
+          .navigationBarTitle("Accounts")
+          .alert(item: self.$deletingAccount) { _ in
+            deleteAlert
+          }.sheet(isPresented: self.$isEditAccountPresented) {
+            editAccount
+          }
     }
   }
   
@@ -79,4 +81,3 @@ struct AccountsListView: View {
     }
   }
 }
-
