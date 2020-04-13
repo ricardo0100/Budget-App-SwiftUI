@@ -31,6 +31,11 @@
 		5977F6A2240DCB7800FE53D2 /* EditAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5977F6A1240DCB7800FE53D2 /* EditAccountViewModel.swift */; };
 		5977F6A7240E67A900FE53D2 /* AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5977F6A6240E67A900FE53D2 /* AccountDetailsView.swift */; };
 		5977F6AF240E710300FE53D2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5977F6AE240E710300FE53D2 /* HomeView.swift */; };
+		598C19E92444AE0A00001139 /* APIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C19E82444AE0A00001139 /* APIRequests.swift */; };
+		598C19EB2444B06F00001139 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C19EA2444B06F00001139 /* APIManager.swift */; };
+		598C19F02444B29300001139 /* APIAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C19EF2444B29300001139 /* APIAccount.swift */; };
+		598C19F22444B5A200001139 /* Synchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C19F12444B5A200001139 /* Synchronizer.swift */; };
+		598C19F42444BC6F00001139 /* AtomicValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C19F32444BC6F00001139 /* AtomicValue.swift */; };
 		59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A49B6023E70CC8005221C9 /* String+Extension.swift */; };
 		59B39D8024069CEE002B2221 /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B39D7F24069CEE002B2221 /* Persistable.swift */; };
 		59B5289324070925001F6AC0 /* BlackBeans.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4B023C226610040077D /* BlackBeans.xcdatamodeld */; };
@@ -81,6 +86,11 @@
 		5977F6A1240DCB7800FE53D2 /* EditAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountViewModel.swift; sourceTree = "<group>"; };
 		5977F6A6240E67A900FE53D2 /* AccountDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsView.swift; sourceTree = "<group>"; };
 		5977F6AE240E710300FE53D2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		598C19E82444AE0A00001139 /* APIRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequests.swift; sourceTree = "<group>"; };
+		598C19EA2444B06F00001139 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		598C19EF2444B29300001139 /* APIAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccount.swift; sourceTree = "<group>"; };
+		598C19F12444B5A200001139 /* Synchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizer.swift; sourceTree = "<group>"; };
+		598C19F32444BC6F00001139 /* AtomicValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicValue.swift; sourceTree = "<group>"; };
 		59A49B6023E70CC8005221C9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		59B39D7F24069CEE002B2221 /* Persistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistable.swift; sourceTree = "<group>"; };
 		59DBA81F240869D70061B56D /* BlackBeansTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackBeansTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +185,7 @@
 				59600E4923D3601F00E13D90 /* StringFormatter.swift */,
 				5950765623DDFC6A00A5446A /* Log.swift */,
 				590B7A6C2402E9DD0038A058 /* AlertMessage.swift */,
+				598C19F32444BC6F00001139 /* AtomicValue.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -254,6 +265,52 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		598C19E42444ADD100001139 /* Persistency */ = {
+			isa = PBXGroup;
+			children = (
+				59B39D7F24069CEE002B2221 /* Persistable.swift */,
+				5951CDB12438CB5E00DDFDB9 /* Persistable+Extension.swift */,
+				59446D7C23CB4FD000BC8176 /* Persistency.swift */,
+				59DC02902436A4CD00FB8A36 /* BeansRequestType.swift */,
+				59F2C4B023C226610040077D /* BlackBeans.xcdatamodeld */,
+			);
+			path = Persistency;
+			sourceTree = "<group>";
+		};
+		598C19E52444ADD900001139 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				598C19EE2444B28600001139 /* Structs */,
+				598C19E82444AE0A00001139 /* APIRequests.swift */,
+				598C19EA2444B06F00001139 /* APIManager.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		598C19E62444ADDE00001139 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				5951CDAF243789D600DDFDB9 /* Account+Extension.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		598C19E72444ADED00001139 /* Synchronizer */ = {
+			isa = PBXGroup;
+			children = (
+				598C19F12444B5A200001139 /* Synchronizer.swift */,
+			);
+			path = Synchronizer;
+			sourceTree = "<group>";
+		};
+		598C19EE2444B28600001139 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				598C19EF2444B29300001139 /* APIAccount.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
 		59A621C523D1F8B7006C7750 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,12 +327,10 @@
 		59A621C623D1F8D4006C7750 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				59B39D7F24069CEE002B2221 /* Persistable.swift */,
-				5951CDB12438CB5E00DDFDB9 /* Persistable+Extension.swift */,
-				59446D7C23CB4FD000BC8176 /* Persistency.swift */,
-				59DC02902436A4CD00FB8A36 /* BeansRequestType.swift */,
-				59F2C4B023C226610040077D /* BlackBeans.xcdatamodeld */,
-				5951CDAF243789D600DDFDB9 /* Account+Extension.swift */,
+				598C19E62444ADDE00001139 /* Entities */,
+				598C19E42444ADD100001139 /* Persistency */,
+				598C19E52444ADD900001139 /* API */,
+				598C19E72444ADED00001139 /* Synchronizer */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -503,20 +558,25 @@
 				59F2C4AD23C226610040077D /* AppDelegate.swift in Sources */,
 				59F2C4AF23C226610040077D /* SceneDelegate.swift in Sources */,
 				5947E6F223D1FD590012997E /* BeansListView.swift in Sources */,
+				598C19F02444B29300001139 /* APIAccount.swift in Sources */,
 				5930E11C23D6411D008E8B27 /* BeanCellView.swift in Sources */,
 				59600E4723D35F6D00E13D90 /* Decimal+Extension.swift in Sources */,
 				59600E4A23D3601F00E13D90 /* StringFormatter.swift in Sources */,
 				59639AE123D643C100DD18DC /* CurrencyTextField.swift in Sources */,
+				598C19F22444B5A200001139 /* Synchronizer.swift in Sources */,
 				5975416624042347001BD684 /* BeanDetailsView.swift in Sources */,
 				5950765723DDFC6A00A5446A /* Log.swift in Sources */,
+				598C19F42444BC6F00001139 /* AtomicValue.swift in Sources */,
 				59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */,
 				59B5289324070925001F6AC0 /* BlackBeans.xcdatamodeld in Sources */,
 				5951CDB62438CD8500DDFDB9 /* EditCategoryView.swift in Sources */,
 				5951CDBB2439F58300DDFDB9 /* CategoryDetailsView.swift in Sources */,
+				598C19E92444AE0A00001139 /* APIRequests.swift in Sources */,
 				59DC02972436AECC00FB8A36 /* BeansSumView.swift in Sources */,
 				5951CDB22438CB5E00DDFDB9 /* Persistable+Extension.swift in Sources */,
 				5977F69D240DA89900FE53D2 /* AccountsListView.swift in Sources */,
 				59DC02912436A4CD00FB8A36 /* BeansRequestType.swift in Sources */,
+				598C19EB2444B06F00001139 /* APIManager.swift in Sources */,
 				59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */,
 				590B7A6D2402E9DD0038A058 /* AlertMessage.swift in Sources */,
 				59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */,

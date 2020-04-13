@@ -11,7 +11,7 @@ import Foundation
 struct Log {
   
   static func debug(_ message: String) {
-    print("✔️ \(message)")
+    print("⚠️ \(message)")
   }
   
   static func error(_ error: Error) {
