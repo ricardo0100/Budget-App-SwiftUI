@@ -43,9 +43,18 @@ class EditBeanViewModel: ObservableObject, Identifiable {
     
     do {
       if let bean = editingBean {
-        try Persistency.shared.updateBean(bean: bean, name: name, value: value, isCredit: isCredit, account: account)
+        try Persistency.shared.updateBean(bean: bean,
+                                          name: name,
+                                          value: value,
+                                          isCredit: isCredit,
+                                          account: account,
+                                          category: category)
       } else {
-        try Persistency.shared.createBean(name: name, value: value, isCredit: isCredit, account: account)
+        _ = try Persistency.shared.createBean(name: name,
+                                              value: value,
+                                              isCredit: isCredit,
+                                              account: account,
+                                              category: category)
       }
     } catch {
       Log.error(error)

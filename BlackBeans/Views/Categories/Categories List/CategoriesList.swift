@@ -23,7 +23,7 @@ struct CategoriesList: View {
         }
       }.onDelete {
         guard let index = $0.first  else { return }
-        let category = self.categories[index]
+        _ = self.categories[index]
 //        self.deleteAccount(account: account)
       }
     }

@@ -10,12 +10,22 @@ import Foundation
 
 struct Log {
   
-  static func debug(_ message: String) {
-    print("⚠️ \(message)")
+  enum Info {
+    case currentThread
+  }
+  
+  static func debug(_ message: String, infos: [Info] = []) {
+    let infos = infos.map { info -> String in
+      switch info {
+      case .currentThread:
+        return "[Thread: " + (OperationQueue.current?.name ?? "") + "]"
+      }
+    }
+    print("⚠️ \(message) \(infos.joined(separator: " "))")
   }
   
   static func error(_ error: Error) {
-    print("❗️ \(error.localizedDescription)")
+    print("❗️ \(error.self) - \(error.localizedDescription)")
   }
   
   static func error(_ message: String) {

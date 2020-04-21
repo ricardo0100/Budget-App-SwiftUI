@@ -26,7 +26,8 @@ class EditCategoryViewModel: ObservableObject, Identifiable {
       return
     }
     do {
-      try Persistency.shared.createCategory(name: name)
+      _ = try Persistency.shared.createCategory(name: name,
+                                                remoteId: nil)
     } catch {
       Log.error(error)
     }

@@ -30,6 +30,14 @@ struct HomeView: View {
           Image(systemName: "tray.full")
           Text("Categories")
       }
+      Button(action: {
+        Synchronizer.synchronize()
+      }) {
+        Text("SYNC")
+      }.tabItem {
+        Image(systemName: "creditcard")
+        Text("Sync")
+      }
     }
   }
 }

@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18G4032" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="beans" toMany="YES" deletionRule="Cascade" destinationEntity="Bean" inverseName="account" inverseEntity="Bean"/>
     </entity>
     <entity name="Bean" representedClassName="Bean" syncable="YES" codeGenerationType="class">
         <attribute name="creationTimestamp" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isCredit" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="updateTimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="value" attributeType="Decimal" minValueString="0" defaultValueString="0"/>
         <relationship name="account" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="beans" inverseEntity="Account"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="beans" inverseEntity="Category"/>
     </entity>
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
-        <attribute name="color" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="beans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="beans" inverseEntity="Category"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="beans" toMany="YES" deletionRule="Nullify" destinationEntity="Bean" inverseName="category" inverseEntity="Bean"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-63" positionY="18" width="128" height="73"/>
-        <element name="Bean" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Account" positionX="-63" positionY="18" width="128" height="88"/>
+        <element name="Bean" positionX="-63" positionY="-18" width="128" height="163"/>
         <element name="Category" positionX="-54" positionY="36" width="128" height="88"/>
     </elements>
 </model>
