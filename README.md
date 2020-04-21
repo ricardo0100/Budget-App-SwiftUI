@@ -1,6 +1,8 @@
 # BlackBeans 💰
 
-_100% SwiftUI and Combine finances app with Core Data integration._
+_100% SwiftUI and Combine **finances app** with Core Data integration._
+
+Python API in https://github.com/ricardo0100/BlackBeansAPI
 
 ### Features
 
