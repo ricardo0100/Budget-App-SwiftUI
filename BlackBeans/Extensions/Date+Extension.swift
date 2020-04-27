@@ -14,5 +14,4 @@ extension Date {
     let formatter = RelativeDateTimeFormatter()
     return formatter.string(for: self) ?? .empty
   }
-  
 }

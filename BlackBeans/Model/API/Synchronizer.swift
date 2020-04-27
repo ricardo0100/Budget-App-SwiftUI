@@ -12,7 +12,7 @@ import Combine
 class Synchronizer {
   
   enum SyncError: Error {
-    case network, server, decoder, database, unknown
+    case server, decoder, database, unknown
   }
   
   enum SyncStatus {
@@ -24,7 +24,7 @@ class Synchronizer {
   private static var cancelables = [AnyCancellable]()
   
   static func synchronize() {
-    Log.debug("New Sync Requested")
+    Log.debug("New Synchronization Requested")
     cancelables.removeAll()
     status.send(.running)
     createSyncPublisher()
@@ -32,12 +32,13 @@ class Synchronizer {
       .sink(receiveCompletion: { completion in
         switch completion {
         case .failure(let syncError):
-          Log.error("Sync error: \(syncError)")
+          Log.error("Synchronization error: \(syncError)")
           status.send(.error)
         case .finished:
-          Log.debug("Sync Completed")
+          Log.info("Synchronization Completed")
           status.send(.completed)
         }
+        status.send(.idle)
       }) { _ in }
     .store(in: &cancelables)
   }
@@ -56,7 +57,7 @@ class Synchronizer {
   private static func syncAccounts() -> AnyPublisher<[Account], Error> {
     return API.getAccounts()
       .tryMap {
-        try $0.map {
+        let accounts: [Account] = try $0.map {
           if let account = try Persistency.shared.account(with: $0.id) {
             try Persistency.shared.updateAccount(account: account,
                                                  name: $0.name,
@@ -67,13 +68,15 @@ class Synchronizer {
                                                         remoteID: $0.id)
           }
         }
+        Log.info("\(accounts.count) accounts synchronized")
+        return accounts
     }.eraseToAnyPublisher()
   }
   
   private static func syncCategories() -> AnyPublisher<[Category], Error> {
     return API.getCategories()
       .tryMap {
-        try $0.map {
+        let categories: [Category] = try $0.map {
           if let category = try Persistency.shared.category(with: $0.id) {
             try Persistency.shared.updateCategory(category: category,
                                                   name: $0.name,
@@ -84,13 +87,15 @@ class Synchronizer {
                                                          remoteID: $0.id)
           }
         }
+        Log.info("\(categories.count) categories synchronized")
+        return categories
     }.eraseToAnyPublisher()
   }
   
   private static func syncBeans() -> AnyPublisher<[Bean], Error> {
     return API.getBeans()
       .tryMap {
-        try $0.map {
+        let beans: [Bean] = try $0.map {
           guard let account = try Persistency.shared.account(with: $0.accountID) else {
             throw SyncError.database
           }
@@ -114,6 +119,8 @@ class Synchronizer {
                                                      category: category)
           }
         }
+        Log.info("\(beans.count) beans synchronized")
+        return beans
     }.eraseToAnyPublisher()
   }
 }

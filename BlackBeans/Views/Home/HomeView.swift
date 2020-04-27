@@ -17,13 +17,14 @@ struct HomeView: View {
     ZStack(alignment: .top) {
       if self.toastText != nil {
         Text(self.toastText ?? .empty)
-          .padding()
+          .font(.caption)
+          .padding(6)
           .foregroundColor(Color.white)
           .background(Color(.darkText).opacity(0.8))
-          .cornerRadius(16)
+          .cornerRadius(8)
           .zIndex(1)
           .animation(.spring())
-          .onReceive(Timer.publish(every: 2, on: .main, in: .common).autoconnect()) { _ in
+          .onReceive(Timer.publish(every: 1.5, on: .main, in: .common).autoconnect()) { _ in
             withAnimation {
               self.toastText = nil
             }
@@ -62,9 +63,9 @@ struct HomeView: View {
       withAnimation {
         switch syncStatus {
         case .running:
-          self.toastText = "Sync ON"
+          self.toastText = "Synchronizing"
         case .completed:
-          self.toastText = "Sync DONE"
+          self.toastText = "Synchronization complete!"
         default:
           break
         }

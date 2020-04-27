@@ -14,6 +14,14 @@ struct Log {
     case currentThread
   }
   
+  static func info(_ message: String) {
+    print("✅ \(message)")
+  }
+  
+  static func debug(_ object: Any, infos: [Info] = []) {
+    return debug("\(object)", infos: infos)
+  }
+  
   static func debug(_ message: String, infos: [Info] = []) {
     let infos = infos.map { info -> String in
       switch info {

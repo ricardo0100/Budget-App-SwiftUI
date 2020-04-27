@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		590B7A6D2402E9DD0038A058 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B7A6C2402E9DD0038A058 /* AlertMessage.swift */; };
 		5930E11C23D6411D008E8B27 /* BeanCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5930E11B23D6411D008E8B27 /* BeanCellView.swift */; };
 		59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59446D7C23CB4FD000BC8176 /* Persistency.swift */; };
 		5947E6F223D1FD590012997E /* BeansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947E6F123D1FD590012997E /* BeansListView.swift */; };
@@ -33,7 +32,6 @@
 		598C19E92444AE0A00001139 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C19E82444AE0A00001139 /* API.swift */; };
 		598C19F02444B29300001139 /* APIAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C19EF2444B29300001139 /* APIAccount.swift */; };
 		598C19F22444B5A200001139 /* Synchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C19F12444B5A200001139 /* Synchronizer.swift */; };
-		598C19F42444BC6F00001139 /* AtomicValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C19F32444BC6F00001139 /* AtomicValue.swift */; };
 		598C19F624478B0800001139 /* APICategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598C19F524478B0800001139 /* APICategory.swift */; };
 		59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A49B6023E70CC8005221C9 /* String+Extension.swift */; };
 		59B5289324070925001F6AC0 /* BlackBeans.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59F2C4B023C226610040077D /* BlackBeans.xcdatamodeld */; };
@@ -60,7 +58,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		590B7A6C2402E9DD0038A058 /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		5930E11B23D6411D008E8B27 /* BeanCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanCellView.swift; sourceTree = "<group>"; };
 		59446D7C23CB4FD000BC8176 /* Persistency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistency.swift; sourceTree = "<group>"; };
 		5947E6F123D1FD590012997E /* BeansListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeansListView.swift; sourceTree = "<group>"; };
@@ -86,7 +83,6 @@
 		598C19E82444AE0A00001139 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		598C19EF2444B29300001139 /* APIAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccount.swift; sourceTree = "<group>"; };
 		598C19F12444B5A200001139 /* Synchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizer.swift; sourceTree = "<group>"; };
-		598C19F32444BC6F00001139 /* AtomicValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicValue.swift; sourceTree = "<group>"; };
 		598C19F524478B0800001139 /* APICategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICategory.swift; sourceTree = "<group>"; };
 		59A49B6023E70CC8005221C9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		59DBA81F240869D70061B56D /* BlackBeansTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackBeansTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,8 +176,6 @@
 			children = (
 				59600E4923D3601F00E13D90 /* StringFormatter.swift */,
 				5950765623DDFC6A00A5446A /* Log.swift */,
-				590B7A6C2402E9DD0038A058 /* AlertMessage.swift */,
-				598C19F32444BC6F00001139 /* AtomicValue.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -553,7 +547,6 @@
 				598C19F22444B5A200001139 /* Synchronizer.swift in Sources */,
 				5975416624042347001BD684 /* BeanDetailsView.swift in Sources */,
 				5950765723DDFC6A00A5446A /* Log.swift in Sources */,
-				598C19F42444BC6F00001139 /* AtomicValue.swift in Sources */,
 				59A49B6123E70CC8005221C9 /* String+Extension.swift in Sources */,
 				59B5289324070925001F6AC0 /* BlackBeans.xcdatamodeld in Sources */,
 				5951CDB62438CD8500DDFDB9 /* EditCategoryView.swift in Sources */,
@@ -562,7 +555,6 @@
 				59DC02972436AECC00FB8A36 /* BeansSumView.swift in Sources */,
 				5977F69D240DA89900FE53D2 /* AccountsListView.swift in Sources */,
 				59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */,
-				590B7A6D2402E9DD0038A058 /* AlertMessage.swift in Sources */,
 				59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */,
 				5951CDB0243789D600DDFDB9 /* Account+Extension.swift in Sources */,
 				5947E6F423D1FD6A0012997E /* EditBeanView.swift in Sources */,
