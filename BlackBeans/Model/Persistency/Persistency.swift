@@ -96,7 +96,7 @@ class Persistency: NSObject {
     return fetch
   }
   
-  func createBean(name: String, value: Decimal, isCredit: Bool, account: Account, category: Category?) throws -> Bean {
+  func createBean(name: String, value: Decimal, isCredit: Bool, remoteID: Int?, account: Account, category: Category?) throws -> Bean {
     let bean = Bean(context: context)
     bean.creationTimestamp = Date()
     bean.updateTimestamp = Date()
@@ -105,6 +105,9 @@ class Persistency: NSObject {
     bean.value = NSDecimalNumber(decimal: value)
     bean.isCredit = isCredit
     bean.category = category
+    if let id = remoteID {
+      bean.remoteID = Int64(id)
+    }
     try context.save()
     return bean
   }
@@ -115,19 +118,22 @@ class Persistency: NSObject {
     try context.save()
   }
   
-  func updateBean(bean: Bean, name: String, value: Decimal, isCredit: Bool, account: Account, category: Category?) throws {
+  func updateBean(bean: Bean, name: String, value: Decimal, isCredit: Bool, remoteID: Int?, account: Account, category: Category?) throws {
     bean.name = name
     bean.value = NSDecimalNumber(decimal: value)
     bean.updateTimestamp = Date()
     bean.isCredit = isCredit
     bean.account = account
     bean.category = category
+    if let id = remoteID {
+      bean.remoteID = Int64(id)
+    }
     try context.save()
   }
   
-  func bean(with remoteId: Int) throws -> Bean?  {
+  func bean(with remoteID: Int) throws -> Bean?  {
     let fetch = NSFetchRequest<Bean>(entityName: "Bean")
-    fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Bean.remoteID), Int64(remoteId))
+    fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Bean.remoteID), Int64(remoteID))
     fetch.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
     return try context.fetch(fetch).first
   }
@@ -158,26 +164,26 @@ class Persistency: NSObject {
     return fetch
   }
   
-  func account(with remoteId: Int) throws -> Account? {
+  func account(with remoteID: Int) throws -> Account? {
     let fetch = NSFetchRequest<Account>(entityName: "Account")
-    fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Account.remoteID), Int64(remoteId))
+    fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Account.remoteID), Int64(remoteID))
     fetch.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
     return try context.fetch(fetch).first
   }
   
-  func createAccount(name: String, remoteId: Int?) throws -> Account {
+  func createAccount(name: String, remoteID: Int?) throws -> Account {
     let account = Account(context: context)
     account.name = name
-    if let id = remoteId {
+    if let id = remoteID {
       account.remoteID = Int64(id)
     }
     try context.save()
     return account
   }
   
-  func updateAccount(account: Account, name: String, remoteId: Int?) throws {
+  func updateAccount(account: Account, name: String, remoteID: Int?) throws {
     account.name = name
-    if let id = remoteId {
+    if let id = remoteID {
       account.remoteID = Int64(id)
     }
     try context.save()
@@ -197,26 +203,26 @@ class Persistency: NSObject {
     return fetch
   }
   
-  func createCategory(name: String, remoteId: Int?) throws -> Category {
+  func createCategory(name: String, remoteID: Int?) throws -> Category {
     let category = Category(context: context)
     category.name = name
-    if let id = remoteId {
+    if let id = remoteID {
       category.remoteID = Int64(id)
     }
     try context.save()
     return category
   }
   
-  func category(with remoteId: Int) throws -> Category? {
+  func category(with remoteID: Int) throws -> Category? {
     let fetch = NSFetchRequest<Category>(entityName: "Category")
-    fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Category.remoteID), Int64(remoteId))
+    fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Category.remoteID), Int64(remoteID))
     fetch.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
     return try context.fetch(fetch).first
   }
   
-  func updateCategory(category: Category, name: String, remoteId: Int?) throws {
+  func updateCategory(category: Category, name: String, remoteID: Int?) throws {
     category.name = name
-    if let id = remoteId {
+    if let id = remoteID {
       category.remoteID = Int64(id)
     }
     try context.save()

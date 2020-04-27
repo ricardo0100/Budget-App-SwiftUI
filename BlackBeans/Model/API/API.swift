@@ -11,8 +11,9 @@ import Network
 import Combine
 
 enum APIError: Error {
-  case request(description: String, statusCode: Int)
-  case decode(description: String)
+  case noInternet
+  case request(statusCode: Int)
+  case decode
 }
 
 protocol APICodable: Codable { }
@@ -60,12 +61,12 @@ struct API {
       .tryMap { data, response in
         let httpResponse = response as! HTTPURLResponse
         guard (200...299).contains(httpResponse.statusCode) else {
-          throw APIError.request(description: "Invalid response", statusCode: httpResponse.statusCode)
+          throw APIError.request(statusCode: httpResponse.statusCode)
         }
         do {
           return try JSONDecoder().decode([T].self, from: data)
         } catch {
-          throw APIError.decode(description: error.localizedDescription)
+          throw APIError.decode
         }
     }.eraseToAnyPublisher()
   }

@@ -47,12 +47,14 @@ class EditBeanViewModel: ObservableObject, Identifiable {
                                           name: name,
                                           value: value,
                                           isCredit: isCredit,
+                                          remoteID: Int(bean.remoteID),
                                           account: account,
                                           category: category)
       } else {
         _ = try Persistency.shared.createBean(name: name,
                                               value: value,
                                               isCredit: isCredit,
+                                              remoteID: nil,
                                               account: account,
                                               category: category)
       }

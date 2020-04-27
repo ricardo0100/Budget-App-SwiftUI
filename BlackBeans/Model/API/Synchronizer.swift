@@ -16,7 +16,7 @@ class Synchronizer {
   }
   
   enum SyncStatus {
-    case idle, running, completed
+    case idle, running, completed, error
   }
   
   static let status = CurrentValueSubject<SyncStatus, Never>(.idle)
@@ -26,13 +26,17 @@ class Synchronizer {
   static func synchronize() {
     Log.debug("New Sync Requested")
     cancelables.removeAll()
+    status.send(.running)
     createSyncPublisher()
+      .receive(on: OperationQueue.main)
       .sink(receiveCompletion: { completion in
         switch completion {
         case .failure(let syncError):
           Log.error("Sync error: \(syncError)")
+          status.send(.error)
         case .finished:
           Log.debug("Sync Completed")
+          status.send(.completed)
         }
       }) { _ in }
     .store(in: &cancelables)
@@ -56,11 +60,11 @@ class Synchronizer {
           if let account = try Persistency.shared.account(with: $0.id) {
             try Persistency.shared.updateAccount(account: account,
                                                  name: $0.name,
-                                                 remoteId: nil)
+                                                 remoteID: nil)
             return account
           } else {
             return try Persistency.shared.createAccount(name: $0.name,
-                                                        remoteId: $0.id)
+                                                        remoteID: $0.id)
           }
         }
     }.eraseToAnyPublisher()
@@ -73,11 +77,11 @@ class Synchronizer {
           if let category = try Persistency.shared.category(with: $0.id) {
             try Persistency.shared.updateCategory(category: category,
                                                   name: $0.name,
-                                                  remoteId: nil)
+                                                  remoteID: nil)
             return category
           } else {
             return try Persistency.shared.createCategory(name: $0.name,
-                                                         remoteId: $0.id)
+                                                         remoteID: $0.id)
           }
         }
     }.eraseToAnyPublisher()
@@ -97,6 +101,7 @@ class Synchronizer {
                                               name: $0.name,
                                               value: $0.value,
                                               isCredit: $0.isCredit,
+                                              remoteID: $0.id,
                                               account: account,
                                               category: category)
             return bean
@@ -104,6 +109,7 @@ class Synchronizer {
             return try Persistency.shared.createBean(name: $0.name,
                                                      value: $0.value,
                                                      isCredit: $0.isCredit,
+                                                     remoteID: $0.id,
                                                      account: account,
                                                      category: category)
           }
