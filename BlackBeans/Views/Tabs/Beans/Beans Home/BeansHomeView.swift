@@ -34,6 +34,9 @@ struct BeansHomeView: View {
     }
     .sheet(isPresented: self.$isEditingBeanPresented) { () -> EditBeanView in
       EditBeanView(editBeanViewModel: EditBeanViewModel(), isPresented: self.$isEditingBeanPresented)
+    }.tabItem {
+        Image(systemName: "cart")
+        Text("Beans")
     }
   }
 }

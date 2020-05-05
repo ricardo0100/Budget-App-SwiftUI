@@ -44,19 +44,38 @@ struct API {
     return URLRequest(url: url)
   }
   
+  static func sendResource<T>(resource: T) -> AnyPublisher<T, Error> where T: APICodable {
+    var request = urlRequest(for: T.self)
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.httpBody = try? JSONEncoder().encode(resource)
+    return URLSession.DataTaskPublisher(request: request, session: .shared)
+      .tryMap { data, response in
+        let httpResponse = response as! HTTPURLResponse
+        guard (200...299).contains(httpResponse.statusCode) else {
+          throw APIError.request(statusCode: httpResponse.statusCode)
+        }
+        do {
+          return try JSONDecoder().decode(T.self, from: data)
+        } catch {
+          throw APIError.decode
+      }
+    }.eraseToAnyPublisher()
+  }
+  
   static func getAccounts() -> AnyPublisher<[APIAccount], Error> {
-    return getResource()
+    return getResources()
   }
   
   static func getCategories() -> AnyPublisher<[APICategory], Error> {
-    return getResource()
+    return getResources()
   }
   
   static func getBeans() -> AnyPublisher<[APIBean], Error> {
-    return getResource()
+    return getResources()
   }
   
-  private static func getResource<T>() -> AnyPublisher<[T], Error> where T: APICodable {
+  private static func getResources<T>() -> AnyPublisher<[T], Error> where T: APICodable {
     return URLSession.DataTaskPublisher(request: urlRequest(for: T.self), session: .shared)
       .tryMap { data, response in
         let httpResponse = response as! HTTPURLResponse

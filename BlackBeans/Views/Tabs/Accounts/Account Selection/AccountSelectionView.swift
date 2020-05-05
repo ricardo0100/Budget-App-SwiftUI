@@ -26,6 +26,6 @@ struct AccountSelectionView: View {
           Text(account.name ?? .empty)
         }
       }
-    }
+    }.navigationBarTitle("Select Account")
   }
 }

@@ -10,8 +10,15 @@ import Foundation
 
 extension Date {
   
-  var relativeDay: String {
+  var relativeDayString: String {
     let formatter = RelativeDateTimeFormatter()
     return formatter.string(for: self) ?? .empty
+  }
+  
+  var fullDateString: String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .full
+    formatter.timeStyle = .none
+    return formatter.string(from: self)
   }
 }

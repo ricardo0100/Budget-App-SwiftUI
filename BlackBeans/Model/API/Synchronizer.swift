@@ -19,6 +19,10 @@ class Synchronizer {
     case idle, running, completed, error
   }
   
+  enum SyncStep {
+    case sendNew, updateChanged
+  }
+  
   static let status = CurrentValueSubject<SyncStatus, Never>(.idle)
   
   private static var cancelables = [AnyCancellable]()
@@ -28,7 +32,6 @@ class Synchronizer {
     cancelables.removeAll()
     status.send(.running)
     createSyncPublisher()
-      .receive(on: OperationQueue.main)
       .sink(receiveCompletion: { completion in
         switch completion {
         case .failure(let syncError):
@@ -45,8 +48,8 @@ class Synchronizer {
   
   private static func createSyncPublisher() -> AnyPublisher<Void, SyncError> {
     return syncAccounts()
-      .flatMap { _ in self.syncCategories() }
-      .flatMap { _ in self.syncBeans() }
+//      .flatMap { _ in self.syncCategories() }
+//      .flatMap { _ in self.syncBeans() }
       .map { _ in }
       .mapError { error -> SyncError in
         Log.error(error)
@@ -54,22 +57,39 @@ class Synchronizer {
       }.eraseToAnyPublisher()
   }
   
-  private static func syncAccounts() -> AnyPublisher<[Account], Error> {
-    return API.getAccounts()
-      .tryMap {
-        let accounts: [Account] = try $0.map {
-          if let account = try Persistency.shared.account(with: $0.id) {
-            try Persistency.shared.updateAccount(account: account,
-                                                 name: $0.name,
-                                                 remoteID: nil)
-            return account
-          } else {
-            return try Persistency.shared.createAccount(name: $0.name,
-                                                        remoteID: $0.id)
-          }
-        }
-        Log.info("\(accounts.count) accounts synchronized")
-        return accounts
+  private static func syncAccounts() -> AnyPublisher<Void, Error> {
+    sendNewAccounts()
+      .flatMap { _ in
+        API.getAccounts()
+          .tryMap { try self.saveAccounts(accounts: $0) }
+      }.map { _ in }.eraseToAnyPublisher()
+  }
+  
+  private static func saveAccounts(accounts: [APIAccount]) throws {
+    try accounts.forEach {
+      if let account = try Persistency.shared.account(with: $0.id!) {
+        try Persistency.shared.updateAccount(account: account,
+                                             name: $0.name,
+                                             remoteID: nil)
+      } else {
+        _ = try Persistency.shared.createAccount(name: $0.name,
+                                                 remoteID: $0.id)
+      }
+    }
+  }
+  
+  private static func sendNewAccounts() -> AnyPublisher<[Account], Error> {
+    Future<[Account], Error> { promise in
+      Persistency.shared.newAccounts.forEach {
+        let apiAccount = APIAccount(id: nil, name: $0.name ?? "")
+        API.sendResource(resource: apiAccount)
+          .sink(receiveCompletion: { completion in
+            print(completion)
+          }) { apiAccount in
+            print(apiAccount)
+        }.store(in: &self.cancelables)
+      }
+      promise(.success([]))
     }.eraseToAnyPublisher()
   }
   

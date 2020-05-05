@@ -164,6 +164,16 @@ class Persistency: NSObject {
     return fetch
   }
   
+  var newAccounts: [Account] {
+    let request = allAccountsFetchRequest
+    request.predicate = NSPredicate(format: "remoteID == NULL")
+    do {
+      return try context.fetch(request)
+    } catch {
+      return []
+    }
+  }
+  
   func account(with remoteID: Int) throws -> Account? {
     let fetch = NSFetchRequest<Account>(entityName: "Account")
     fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Account.remoteID), Int64(remoteID))
@@ -173,6 +183,8 @@ class Persistency: NSObject {
   
   func createAccount(name: String, remoteID: Int?) throws -> Account {
     let account = Account(context: context)
+    account.creationTimestamp = Date()
+    account.updateTimestamp = Date()
     account.name = name
     if let id = remoteID {
       account.remoteID = Int64(id)
@@ -183,6 +195,7 @@ class Persistency: NSObject {
   
   func updateAccount(account: Account, name: String, remoteID: Int?) throws {
     account.name = name
+    account.updateTimestamp = Date()
     if let id = remoteID {
       account.remoteID = Int64(id)
     }

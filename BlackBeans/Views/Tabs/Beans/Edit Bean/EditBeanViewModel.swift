@@ -13,7 +13,7 @@ class EditBeanViewModel: ObservableObject, Identifiable {
   
   @Published var name: String = .empty
   @Published var value: Decimal = 0
-  @Published var isCredit: Bool = false
+  @Published var beanType: Int = 0
   @Published var alertMessage: String = .empty
   @Published var showAlert: Bool = false
   @Published var account: Account? = nil
@@ -24,7 +24,7 @@ class EditBeanViewModel: ObservableObject, Identifiable {
       value = editingBean?.value?.decimalValue ?? 0
       account = editingBean?.account
       category = editingBean?.category
-      isCredit = editingBean?.isCredit ?? false
+      beanType = (editingBean?.isCredit ?? false) ? 1 : 0
     }
   }
   
@@ -46,14 +46,14 @@ class EditBeanViewModel: ObservableObject, Identifiable {
         try Persistency.shared.updateBean(bean: bean,
                                           name: name,
                                           value: value,
-                                          isCredit: isCredit,
+                                          isCredit: beanType == 1,
                                           remoteID: Int(bean.remoteID),
                                           account: account,
                                           category: category)
       } else {
         _ = try Persistency.shared.createBean(name: name,
                                               value: value,
-                                              isCredit: isCredit,
+                                              isCredit: beanType == 1,
                                               remoteID: nil,
                                               account: account,
                                               category: category)

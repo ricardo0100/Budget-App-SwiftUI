@@ -57,6 +57,9 @@ struct AccountsListView: View {
           }.sheet(isPresented: self.$isEditAccountPresented) {
             editAccount
           }
+    }.tabItem {
+        Image(systemName: "creditcard")
+        Text("Accounts")
     }
   }
   

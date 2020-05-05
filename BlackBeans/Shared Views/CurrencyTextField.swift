@@ -17,7 +17,6 @@ public struct CurrencyTextField: UIViewRepresentable {
   private let delegate = Delegate()
   
   public func makeUIView(context: UIViewRepresentableContext<CurrencyTextField>) -> UITextField {
-    textField.borderStyle = .roundedRect
     delegate.currencyTextField = self
     textField.delegate = delegate
     textField.keyboardType = .decimalPad

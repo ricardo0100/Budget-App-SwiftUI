@@ -16,7 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     if let windowScene = scene as? UIWindowScene {
       let window = UIWindow(windowScene: windowScene)
-      window.rootViewController = UIHostingController(rootView: HomeView())
+      let view = HomeView().environment(\.managedObjectContext, Persistency.shared.context)
+      window.rootViewController = UIHostingController(rootView: view)
       self.window = window
       window.makeKeyAndVisible()
     }

@@ -9,6 +9,6 @@
 import Foundation
 
 struct APIAccount: APICodable {
-  let id: Int
+  let id: Int?
   let name: String
 }

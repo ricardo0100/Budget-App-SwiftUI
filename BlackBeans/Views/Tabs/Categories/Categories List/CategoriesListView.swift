@@ -1,5 +1,5 @@
 //
-//  CategoriesList.swift
+//  CategoriesListView.swift
 //  BlackBeans
 //
 //  Created by Ricardo Gehrke on 02/04/20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CategoriesList: View {
+struct CategoriesListView: View {
   
   @FetchRequest(fetchRequest: Persistency.shared.allCategoryFetchRequest)
   private var categories: FetchedResults<Category>
@@ -54,6 +54,9 @@ struct CategoriesList: View {
         .sheet(isPresented: self.$isEditCategoryPresented) {
           editCategory
         }
+    }.tabItem {
+        Image(systemName: "tray.full")
+        Text("Categories")
     }
   }
 }

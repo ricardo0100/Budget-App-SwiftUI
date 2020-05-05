@@ -11,65 +11,51 @@ import Combine
 
 struct HomeView: View {
   
-  @State private var toastText: String?
+  @State private var notificationText: String?
+  
+  private func notificationView() -> some View {
+    return Text(self.notificationText ?? .empty)
+      .font(.footnote)
+      .padding(6)
+      .foregroundColor(Color.white)
+      .background(Color(.darkText).opacity(0.8))
+      .cornerRadius(4)
+      .zIndex(1)
+      .animation(.spring())
+      .offset(y: 8)
+      .onReceive(Timer.publish(every: 1.5, on: .main, in: .common).autoconnect()) { _ in
+        withAnimation {
+          self.notificationText = nil
+        }
+    }
+  }
+  
+  private func handle(_ syncStatus: Synchronizer.SyncStatus) {
+    withAnimation {
+      switch syncStatus {
+      case .running:
+        self.notificationText = "Synchronizing"
+      case .completed:
+        self.notificationText = "Synchronization complete!"
+      default:
+        break
+      }
+    }
+  }
   
   var body: some View {
     ZStack(alignment: .top) {
-      if self.toastText != nil {
-        Text(self.toastText ?? .empty)
-          .font(.caption)
-          .padding(6)
-          .foregroundColor(Color.white)
-          .background(Color(.darkText).opacity(0.8))
-          .cornerRadius(8)
-          .zIndex(1)
-          .animation(.spring())
-          .onReceive(Timer.publish(every: 1.5, on: .main, in: .common).autoconnect()) { _ in
-            withAnimation {
-              self.toastText = nil
-            }
-          }
+      if self.notificationText != nil {
+        notificationView()
       }
-      
       TabView {
         BeansHomeView()
-          .environment(\.managedObjectContext, Persistency.shared.context)
-          .tabItem {
-            Image(systemName: "cart")
-            Text("Beans")
-        }
         AccountsListView()
-          .environment(\.managedObjectContext, Persistency.shared.context)
-          .tabItem {
-            Image(systemName: "creditcard")
-            Text("Accounts")
-        }
-        CategoriesList()
-          .environment(\.managedObjectContext, Persistency.shared.context)
-          .tabItem {
-            Image(systemName: "tray.full")
-            Text("Categories")
-        }
-        Button(action: {
-          Synchronizer.synchronize()
-        }) {
-          Text("Start Synchronization")
-        }.tabItem {
-            Image(systemName: "person")
-            Text("Profile")
-        }
+        CategoriesListView()
+        ProfileView()
       }
-    }.onReceive(Synchronizer.status) { syncStatus in
-      withAnimation {
-        switch syncStatus {
-        case .running:
-          self.toastText = "Synchronizing"
-        case .completed:
-          self.toastText = "Synchronization complete!"
-        default:
-          break
-        }
-      }
+    }.onReceive(Synchronizer.status.receive(on: OperationQueue.main)) { syncStatus in
+      self.handle(syncStatus)
     }
   }
 }
