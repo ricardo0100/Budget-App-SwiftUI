@@ -21,4 +21,11 @@ extension Date {
     formatter.timeStyle = .none
     return formatter.string(from: self)
   }
+  
+  var fullDateAndTimeString: String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .medium
+    return formatter.string(from: self)
+  }
 }

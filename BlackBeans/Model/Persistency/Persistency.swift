@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Combine
 
 enum BeansRequestType {
   case all
@@ -86,7 +87,7 @@ class Persistency: NSObject {
   
   func beansFetchRequest(for requestType: BeansRequestType) -> NSFetchRequest<Bean> {
     let fetch = NSFetchRequest<Bean>(entityName: "Bean")
-    fetch.sortDescriptors = [NSSortDescriptor(key: "creationTimestamp", ascending: true)]
+    fetch.sortDescriptors = [NSSortDescriptor(key: "creation", ascending: true)]
     switch requestType {
     case .all:
       break
@@ -98,8 +99,8 @@ class Persistency: NSObject {
   
   func createBean(name: String, value: Decimal, isCredit: Bool, remoteID: Int?, account: Account, category: Category?) throws -> Bean {
     let bean = Bean(context: context)
-    bean.creationTimestamp = Date()
-    bean.updateTimestamp = Date()
+    bean.creation = Date()
+    bean.update = Date()
     bean.name = name
     bean.account = account
     bean.value = NSDecimalNumber(decimal: value)
@@ -121,7 +122,7 @@ class Persistency: NSObject {
   func updateBean(bean: Bean, name: String, value: Decimal, isCredit: Bool, remoteID: Int?, account: Account, category: Category?) throws {
     bean.name = name
     bean.value = NSDecimalNumber(decimal: value)
-    bean.updateTimestamp = Date()
+    bean.update = Date()
     bean.isCredit = isCredit
     bean.account = account
     bean.category = category
@@ -158,54 +159,126 @@ class Persistency: NSObject {
   
   // MARK: Accounts
   
-  var allAccountsFetchRequest: NSFetchRequest<Account> {
+  func createAllAccountsFetchRequest() -> NSFetchRequest<Account> {
     let fetch = NSFetchRequest<Account>(entityName: "Account")
+    fetch.predicate = NSPredicate(format: "%K == YES",#keyPath(Account.isActive))
     fetch.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
     return fetch
   }
   
-  var newAccounts: [Account] {
-    let request = allAccountsFetchRequest
-    request.predicate = NSPredicate(format: "remoteID == NULL")
-    do {
-      return try context.fetch(request)
-    } catch {
-      return []
-    }
+  func changedAccounts() -> AnyPublisher<[Account], Error> {
+    Future<[Account], Error> { promise in
+      let request = self.createAllAccountsFetchRequest()
+      request.predicate = NSPredicate(format: "%K == YES", #keyPath(Account.shouldSync))
+      do {
+        let accounts = try self.context.fetch(request)
+        promise(.success(accounts))
+      } catch {
+        promise(.failure(error))
+      }
+    }.eraseToAnyPublisher()
   }
   
-  func account(with remoteID: Int) throws -> Account? {
+  func newAccounts() -> AnyPublisher<[Account], Error> {
+    Future<[Account], Error> { promise in
+      let request = self.createAllAccountsFetchRequest()
+      request.predicate = NSPredicate(format: "%K == NULL", #keyPath(Account.remoteID))
+      do {
+        let accounts = try self.context.fetch(request)
+        promise(.success(accounts))
+      } catch {
+        promise(.failure(error))
+      }
+    }.eraseToAnyPublisher()
+  }
+  
+  func account(with remoteID: Int64) throws -> Account? {
     let fetch = NSFetchRequest<Account>(entityName: "Account")
-    fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Account.remoteID), Int64(remoteID))
+    fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Account.remoteID), remoteID)
     fetch.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-    return try context.fetch(fetch).first
+    do {
+      return try context.fetch(fetch).first
+    } catch {
+      return nil
+    }
   }
   
-  func createAccount(name: String, remoteID: Int?) throws -> Account {
+  func createAccount(name: String) throws -> Account {
     let account = Account(context: context)
-    account.creationTimestamp = Date()
-    account.updateTimestamp = Date()
+    account.creation = Date()
+    account.update = Date()
+    account.shouldSync = true
     account.name = name
-    if let id = remoteID {
-      account.remoteID = Int64(id)
-    }
     try context.save()
     return account
   }
   
-  func updateAccount(account: Account, name: String, remoteID: Int?) throws {
+  func updateAccount(account: Account, name: String) throws {
     account.name = name
-    account.updateTimestamp = Date()
-    if let id = remoteID {
-      account.remoteID = Int64(id)
-    }
+    account.shouldSync = true
+    account.update = Date()
     try context.save()
   }
   
   func deleteAccount(account: Account?) throws {
     guard let account = account else { return }
-    context.delete(account)
+    account.isActive = false
+    account.shouldSync = true
+    account.update = Date()
     try context.save()
+  }
+  
+  func saveRemoteID(account: Account, remoteID: Int64) -> AnyPublisher<Void, Error> {
+    Future<Void, Error> { promise in
+      account.remoteID = remoteID
+      do {
+        try self.context.save()
+        promise(.success(()))
+      } catch {
+        promise(.failure(error))
+      }
+    }.eraseToAnyPublisher()
+  }
+  
+  func setSynchronized(accounts: [Account]) -> AnyPublisher<Void, Error> {
+    Future<Void, Error> { promise in
+      accounts.forEach {
+        $0.shouldSync = false
+      }
+      do {
+        try self.context.save()
+        promise(.success(()))
+      } catch {
+        promise(.failure(error))
+      }
+    }.eraseToAnyPublisher()
+  }
+  
+  func saveAPIAccounts(accounts: [APIAccount]) -> AnyPublisher<Void, Error> {
+    Future<Void, Error> { promise in
+      accounts.forEach {
+        do {
+          let account = try self.account(with: $0.id) ?? Account(context: self.context)
+          account.creation = Date(timeIntervalSince1970: $0.creation)
+          account.update = Date(timeIntervalSince1970: $0.update)
+          account.name = $0.name
+          account.shouldSync = false
+          account.remoteID = $0.id
+          account.isActive = $0.isActive
+          try self.context.save()
+        } catch {
+          promise(.failure(error))
+        }
+      }
+      promise(.success(()))
+    }.eraseToAnyPublisher()
+  }
+  
+  func deleteAllAccounts() {
+    let accounts = try! self.context.fetch(Persistency.shared.createAllAccountsFetchRequest())
+    accounts.forEach {
+      try! deleteAccount(account: $0)
+    }
   }
   
   // MARK: Category

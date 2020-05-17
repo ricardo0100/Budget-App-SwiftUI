@@ -9,6 +9,6 @@
 import Foundation
 
 struct APICategory: APICodable {
-  let id: Int
+  let id: Int64
   let name: String
 }

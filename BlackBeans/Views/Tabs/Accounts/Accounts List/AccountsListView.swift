@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AccountsListView: View {
   
-  @FetchRequest(fetchRequest: Persistency.shared.allAccountsFetchRequest)
+  @FetchRequest(fetchRequest: Persistency.shared.createAllAccountsFetchRequest())
   private var accounts: FetchedResults<Account>
   
   @State private var isEditAccountPresented: Bool = false
@@ -27,6 +27,19 @@ struct AccountsListView: View {
         guard let index = $0.first  else { return }
         let account = self.accounts[index]
         self.deleteAccount(account: account)
+      }
+    }
+    
+    let leading = HStack {
+      Button(action: {
+      _ = try! Persistency.shared.createAccount(name: "Account \(Int.random(in: (0...99)))")
+      }) {
+        Text("Create random")
+      }
+      Button(action: {
+        Persistency.shared.deleteAllAccounts()
+      }) {
+        Text("Delete ALL")
       }
     }
     
@@ -47,19 +60,18 @@ struct AccountsListView: View {
     let editAccount = EditAccountView(viewModel: EditAccountViewModel(),
                                       isPresented: self.$isEditAccountPresented)
     
-    return
-      NavigationView {
-        list
-          .navigationBarItems(trailing: trailing)
-          .navigationBarTitle("Accounts")
-          .alert(item: self.$deletingAccount) { _ in
-            deleteAlert
-          }.sheet(isPresented: self.$isEditAccountPresented) {
-            editAccount
-          }
+    return NavigationView {
+      list
+        .navigationBarItems(leading: leading, trailing: trailing)
+        .navigationBarTitle("Accounts")
+        .alert(item: self.$deletingAccount) { _ in
+          deleteAlert
+      }.sheet(isPresented: self.$isEditAccountPresented) {
+        editAccount
+      }
     }.tabItem {
-        Image(systemName: "creditcard")
-        Text("Accounts")
+      Image(systemName: "creditcard")
+      Text("Accounts")
     }
   }
   

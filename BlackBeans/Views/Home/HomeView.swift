@@ -49,9 +49,9 @@ struct HomeView: View {
         notificationView()
       }
       TabView {
-        BeansHomeView()
+//        BeansHomeView()
         AccountsListView()
-        CategoriesListView()
+//        CategoriesListView()
         ProfileView()
       }
     }.onReceive(Synchronizer.status.receive(on: OperationQueue.main)) { syncStatus in

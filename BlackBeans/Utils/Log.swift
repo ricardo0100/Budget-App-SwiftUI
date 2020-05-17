@@ -15,14 +15,18 @@ struct Log {
   }
   
   static func info(_ message: String) {
-    print("✅ \(message)")
+    print("📢 \(message)")
   }
   
-  static func debug(_ object: Any, infos: [Info] = []) {
-    return debug("\(object)", infos: infos)
+  static func info(_ object: Any?) {
+    print("📢 \(object ?? "nil")")
   }
   
-  static func debug(_ message: String, infos: [Info] = []) {
+  static func warn(_ object: Any, infos: [Info] = []) {
+    return warn("\(object)", infos: infos)
+  }
+  
+  static func warn(_ message: String, infos: [Info] = []) {
     let infos = infos.map { info -> String in
       switch info {
       case .currentThread:
@@ -33,11 +37,15 @@ struct Log {
   }
   
   static func error(_ error: Error) {
-    print("❗️ \(error.self) - \(error.localizedDescription)")
+    switch error {
+    case let apiError as APIError:
+      print("❗️ \(apiError.localizedDescription)")
+    default:
+      print("❗️ \(error.localizedDescription)")
+    }
   }
   
   static func error(_ message: String) {
     print("❗️ \(message)")
   }
-  
 }

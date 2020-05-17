@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct EditAccountView: View {
   
@@ -29,5 +30,12 @@ struct EditAccountView: View {
       .navigationBarTitle(self.viewModel.title)
       .navigationBarItems(trailing: trailing)
     }
+  }
+}
+
+struct EditAccountView_Previews: PreviewProvider {
+  static var previews: some View {
+    EditAccountView(viewModel: EditAccountViewModel(),
+                    isPresented: Binding.constant(true))
   }
 }

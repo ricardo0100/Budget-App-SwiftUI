@@ -9,6 +9,17 @@
 import Foundation
 
 struct APIAccount: APICodable {
-  let id: Int?
+  let id: Int64
   let name: String
+  let update: TimeInterval
+  let creation: TimeInterval
+  let isActive: Bool
+  
+  init(from account: Account) {
+    self.id = account.remoteID
+    self.name = account.name ?? ""
+    self.update = account.update?.timeIntervalSince1970 ?? 0
+    self.creation = account.creation?.timeIntervalSince1970 ?? 0
+    self.isActive = account.isActive
+  }
 }

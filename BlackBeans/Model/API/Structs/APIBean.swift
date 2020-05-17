@@ -9,7 +9,7 @@
 import Foundation
 
 struct APIBean: APICodable {
-  let id: Int
+  let id: Int64
   let name: String
   let value: Decimal
   let isCredit: Bool

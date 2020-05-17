@@ -35,9 +35,9 @@ class EditAccountViewModel: ObservableObject, Identifiable {
     
     do {
       if let account = editingAccount {
-        try Persistency.shared.updateAccount(account: account, name: name, remoteID: nil)
+        try Persistency.shared.updateAccount(account: account, name: name)
       } else {
-        _ = try Persistency.shared.createAccount(name: name, remoteID: nil)
+        _ = try Persistency.shared.createAccount(name: name)
       }
       return true
     } catch {
