@@ -107,7 +107,7 @@ class Persistency: NSObject {
     Future<Void, Error> { promise in
       accounts.forEach {
         do {
-          let account = try self.account(with: $0.id) ?? Account(context: self.context)
+          let account = try self.accountWith(remoteID: $0.id) ?? Account(context: self.context)
           account.createdTime = Date(timeIntervalSince1970: $0.createdTime)
           account.lastSavedTime = Date(timeIntervalSince1970: $0.lastSavedTime)
           account.name = $0.name
@@ -123,7 +123,7 @@ class Persistency: NSObject {
     }.eraseToAnyPublisher()
   }
   
-  func account(with remoteID: Int64) throws -> Account? {
+  func accountWith(remoteID: Int64) throws -> Account? {
     let fetch = NSFetchRequest<Account>(entityName: "Account")
     fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Account.remoteID), remoteID)
     fetch.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -168,7 +168,7 @@ class Persistency: NSObject {
     Future<Void, Error> { promise in
       categories.forEach {
         do {
-          let category = try self.category(with: $0.id) ?? Category(context: self.context)
+          let category = try self.categoryWith(remoteID: $0.id) ?? Category(context: self.context)
           category.createdTime = Date(timeIntervalSince1970: $0.createdTime)
           category.lastSavedTime = Date(timeIntervalSince1970: $0.lastSavedTime)
           category.name = $0.name
@@ -184,7 +184,7 @@ class Persistency: NSObject {
     }.eraseToAnyPublisher()
   }
   
-  func category(with remoteID: Int64) throws -> Category? {
+  func categoryWith(remoteID: Int64) throws -> Category? {
     let fetch = NSFetchRequest<Category>(entityName: "Category")
     fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Account.remoteID), remoteID)
     fetch.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -194,6 +194,7 @@ class Persistency: NSObject {
       return nil
     }
   }
+  
   
   // MARK: Beans
   
@@ -225,7 +226,7 @@ class Persistency: NSObject {
     let bean = Bean(context: context)
     bean.createdTime = Date()
     bean.lastSavedTime = Date()
-    bean.effectivation = Date()
+    bean.effectivationTime = Date()
     bean.name = name
     bean.account = account
     bean.value = NSDecimalNumber(decimal: value)
@@ -251,13 +252,13 @@ class Persistency: NSObject {
     bean.isCredit = isCredit
     bean.account = account
     bean.category = category
-    bean.effectivation = Date()
+    bean.effectivationTime = Date()
     try context.save()
   }
   
-  func bean(with remoteID: Int) throws -> Bean?  {
+  func beanWith(remoteID: Int64) throws -> Bean?  {
     let fetch = NSFetchRequest<Bean>(entityName: "Bean")
-    fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Bean.remoteID), Int64(remoteID))
+    fetch.predicate = NSPredicate(format: "%K == %d", #keyPath(Bean.remoteID), remoteID)
     fetch.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
     return try context.fetch(fetch).first
   }
@@ -278,6 +279,43 @@ class Persistency: NSObject {
     case .forAccount(let account):
       return sumOfBeans(account: account, isCredit: false)
     }
+  }
+  
+  func newBeans() -> AnyPublisher<[Bean], Error> {
+    newObjects()
+  }
+  
+  func changedBeans() -> AnyPublisher<[Bean], Error> {
+    changedObjects()
+  }
+  
+  func saveAPIBeans(beans: [APIBean]) -> AnyPublisher<Void, Error> {
+    Future<Void, Error> { promise in
+      beans.forEach {
+        do {
+          let bean = try self.beanWith(remoteID: $0.id) ?? Bean(context: self.context)
+          bean.createdTime = Date(timeIntervalSince1970: $0.createdTime)
+          bean.lastSavedTime = Date(timeIntervalSince1970: $0.lastSavedTime)
+          bean.name = $0.name
+          bean.shouldSync = false
+          bean.remoteID = $0.id
+          bean.isActive = $0.isActive
+          bean.value = NSDecimalNumber(decimal: $0.value)
+          bean.isCredit = $0.isCredit
+          bean.effectivationTime = Date(timeIntervalSince1970: $0.effectivationTime)
+          bean.account = try self.accountWith(remoteID: $0.accountID)
+          if let id = $0.categoryID {
+            bean.category = try self.categoryWith(remoteID: id)
+          } else {
+            bean.category = nil
+          }
+          try self.context.save()
+        } catch {
+          promise(.failure(error))
+        }
+      }
+      promise(.success(()))
+    }.eraseToAnyPublisher()
   }
   
   

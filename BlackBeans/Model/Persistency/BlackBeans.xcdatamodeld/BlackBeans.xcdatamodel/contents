@@ -12,7 +12,7 @@
         <attribute name="shouldSync" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
     </entity>
     <entity name="Bean" representedClassName="Bean" parentEntity="APIEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="effectivation" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="effectivationTime" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isCredit" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="value" attributeType="Decimal" minValueString="0" defaultValueString="0"/>

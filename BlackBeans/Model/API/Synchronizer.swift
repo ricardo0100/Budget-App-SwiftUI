@@ -29,8 +29,9 @@ class Synchronizer {
   
   static var lastSyncTimestamp: Date {
     get {
-      let timestamp: Double = UserDefaults.standard.value(forKey: "LAST_SYNC_TIMESTAMP") as? Double ?? 0
-      return Date(timeIntervalSince1970: timestamp)
+      return Date(timeIntervalSince1970: 0)
+//      let timestamp: Double = UserDefaults.standard.value(forKey: "LAST_SYNC_TIMESTAMP") as? Double ?? 0
+//      return Date(timeIntervalSince1970: timestamp)
     }
     set {
       UserDefaults.standard.set(newValue.timeIntervalSince1970, forKey: "LAST_SYNC_TIMESTAMP")
@@ -68,6 +69,7 @@ class Synchronizer {
   private static func createSyncPublisher() -> AnyPublisher<Void, Error> {
     return syncAccounts()
       .flatMap { syncCategory() }
+      .flatMap { syncBeans() }
       .eraseToAnyPublisher()
   }
   
@@ -88,6 +90,16 @@ class Synchronizer {
       .flatMap { API.put(categories: $0) }
       .flatMap { API.getCategories(updatedAfter: self.lastSyncTimestamp) }
       .flatMap { Persistency.shared.saveAPICategories(categories: $0) }
+      .eraseToAnyPublisher()
+  }
+  
+  private static func syncBeans() -> AnyPublisher<Void, Error> {
+    Persistency.shared.newBeans()
+      .flatMap { API.post(beans: $0) }
+      .flatMap { Persistency.shared.changedBeans() }
+      .flatMap { API.put(beans: $0) }
+      .flatMap { API.getBeans(updatedAfter: self.lastSyncTimestamp) }
+      .flatMap { Persistency.shared.saveAPIBeans(beans: $0) }
       .eraseToAnyPublisher()
   }
 }

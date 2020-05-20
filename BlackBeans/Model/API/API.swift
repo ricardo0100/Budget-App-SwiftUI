@@ -141,6 +141,25 @@ struct API {
     }.eraseToAnyPublisher()
   }
   
+  static func post(beans: [Bean]) -> AnyPublisher<Void, Error> {
+    if beans.isEmpty {
+      return Just(())
+        .mapError { _ in APIError.unknown }
+        .eraseToAnyPublisher()
+    }
+    return beans
+      .publisher
+      .mapError { _ in APIError.unknown }
+      .flatMap { bean -> AnyPublisher<Void, Error> in
+        API.postResource(resource: APIBean(from: bean))
+          .tryMap { apiBean in
+            bean.remoteID = apiBean.id
+            bean.shouldSync = false
+            try Persistency.shared.context.save()
+        }.eraseToAnyPublisher()
+    }.eraseToAnyPublisher()
+  }
+  
   static private func postResource<T>(resource: T) -> AnyPublisher<T, Error> where T: APICodable {
     let url = resourceURL(forType: T.self)
     var request = URLRequest(url: url)
@@ -203,6 +222,24 @@ struct API {
         API.putResource(resource: APICategory(from: category))
           .tryMap { _ in
             category.shouldSync = false
+            try Persistency.shared.context.save()
+        }.eraseToAnyPublisher()
+      }.eraseToAnyPublisher()
+  }
+  
+  static func put(beans: [Bean]) -> AnyPublisher<Void, Error> {
+    if beans.isEmpty {
+      return Just(())
+        .mapError { _ in APIError.unknown }
+        .eraseToAnyPublisher()
+    }
+    return beans
+      .publisher
+      .mapError { _ in APIError.unknown }
+      .flatMap { bean -> AnyPublisher<Void, Error> in
+        API.putResource(resource: APIBean(from: bean))
+          .tryMap { _ in
+            bean.shouldSync = false
             try Persistency.shared.context.save()
         }.eraseToAnyPublisher()
       }.eraseToAnyPublisher()
