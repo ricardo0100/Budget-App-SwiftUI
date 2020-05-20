@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AccountsListView: View {
   
-  @FetchRequest(fetchRequest: Persistency.shared.createAllAccountsFetchRequest())
+  @FetchRequest(fetchRequest: Persistency.shared.activeAccountsFetchRequest())
   private var accounts: FetchedResults<Account>
   
   @State private var isEditAccountPresented: Bool = false
@@ -27,19 +27,6 @@ struct AccountsListView: View {
         guard let index = $0.first  else { return }
         let account = self.accounts[index]
         self.deleteAccount(account: account)
-      }
-    }
-    
-    let leading = HStack {
-      Button(action: {
-      _ = try! Persistency.shared.createAccount(name: "Account \(Int.random(in: (0...99)))")
-      }) {
-        Text("Create random")
-      }
-      Button(action: {
-        Persistency.shared.deleteAllAccounts()
-      }) {
-        Text("Delete ALL")
       }
     }
     
@@ -62,7 +49,7 @@ struct AccountsListView: View {
     
     return NavigationView {
       list
-        .navigationBarItems(leading: leading, trailing: trailing)
+        .navigationBarItems(trailing: trailing)
         .navigationBarTitle("Accounts")
         .alert(item: self.$deletingAccount) { _ in
           deleteAlert
@@ -81,7 +68,7 @@ struct AccountsListView: View {
       return
     }
     do {
-      try Persistency.shared.deleteAccount(account: account)
+      try Persistency.shared.delete(object: account)
     } catch {
       Log.error("Error deleting acount: \(error.localizedDescription)")
     }
@@ -90,9 +77,15 @@ struct AccountsListView: View {
   private func confirmDeletion() {
     guard let account = deletingAccount else { return }
     do {
-      try Persistency.shared.deleteAccount(account: account)
+      try Persistency.shared.delete(object: account)
     } catch {
       Log.error("Error deleting acount: \(error.localizedDescription)")
     }
+  }
+}
+
+struct AccountsListView_Previews: PreviewProvider {
+  static var previews: some View {
+    AccountsListView()
   }
 }

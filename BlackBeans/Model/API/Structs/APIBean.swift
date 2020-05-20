@@ -15,4 +15,7 @@ struct APIBean: APICodable {
   let isCredit: Bool
   let accountID: Int
   let categoryID: Int
+  var createdTime: TimeInterval
+  var lastSavedTime: TimeInterval
+  var isActive: Bool
 }

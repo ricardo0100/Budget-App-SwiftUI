@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AccountSelectionView: View {
   
-  @FetchRequest(fetchRequest: Persistency.shared.createAllAccountsFetchRequest())
+  @FetchRequest(fetchRequest: Persistency.shared.activeAccountsFetchRequest())
   private var accounts: FetchedResults<Account>
   
   @Binding var selectedAccount: Account?

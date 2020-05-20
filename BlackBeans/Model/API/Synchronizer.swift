@@ -18,6 +18,12 @@ class Synchronizer {
   }
   
   private static var cancelables = [AnyCancellable]()
+  private static let operationQueue: OperationQueue = {
+    let queue = OperationQueue()
+    queue.qualityOfService = .userInitiated
+    queue.name = "Synchronizer Queue"
+    return queue
+  }()
   
   static var lastSyncPublisher = CurrentValueSubject<Date, Never>(lastSyncTimestamp)
   
@@ -28,15 +34,18 @@ class Synchronizer {
     }
     set {
       UserDefaults.standard.set(newValue.timeIntervalSince1970, forKey: "LAST_SYNC_TIMESTAMP")
-      lastSyncPublisher.send(newValue)
+      OperationQueue.main.addOperation {
+        lastSyncPublisher.send(newValue)
+      }
     }
   }
   
   static func synchronize() {
-    Log.info("New Synchronization Requested")
+    Log.info("New Synchronization Started")
     cancelables.removeAll()
     status.send(.running)
     createSyncPublisher()
+      .subscribe(on: operationQueue)
       .sink(receiveCompletion: { completion in
         switch completion {
         case .failure(let syncError):
@@ -58,21 +67,27 @@ class Synchronizer {
   
   private static func createSyncPublisher() -> AnyPublisher<Void, Error> {
     return syncAccounts()
+      .flatMap { syncCategory() }
       .eraseToAnyPublisher()
   }
-}
-
-// MARK: Accounts
-
-extension Synchronizer {
   
   private static func syncAccounts() -> AnyPublisher<Void, Error> {
     Persistency.shared.newAccounts()
-      .flatMap { API.postAccounts(accounts: $0) }
+      .flatMap { API.post(accounts: $0) }
       .flatMap { Persistency.shared.changedAccounts() }
-      .flatMap { API.putAccounts(accounts: $0) }
+      .flatMap { API.put(accounts: $0) }
       .flatMap { API.getAccounts(updatedAfter: self.lastSyncTimestamp) }
       .flatMap { Persistency.shared.saveAPIAccounts(accounts: $0) }
+      .eraseToAnyPublisher()
+  }
+  
+  private static func syncCategory() -> AnyPublisher<Void, Error> {
+    Persistency.shared.newCategories()
+      .flatMap { API.post(categories: $0) }
+      .flatMap { Persistency.shared.changedCategories() }
+      .flatMap { API.put(categories: $0) }
+      .flatMap { API.getCategories(updatedAfter: self.lastSyncTimestamp) }
+      .flatMap { Persistency.shared.saveAPICategories(categories: $0) }
       .eraseToAnyPublisher()
   }
 }

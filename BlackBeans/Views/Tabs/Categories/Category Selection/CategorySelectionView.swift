@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CategorySelectionView: View {
     
-  @FetchRequest(fetchRequest: Persistency.shared.allCategoryFetchRequest)
+  @FetchRequest(fetchRequest: Persistency.shared.activeCategoriesFetchRequest())
   private var categories: FetchedResults<Category>
   
   @Binding var selectedCategory: Category?

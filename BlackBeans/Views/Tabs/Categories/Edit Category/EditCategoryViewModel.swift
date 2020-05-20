@@ -20,14 +20,21 @@ class EditCategoryViewModel: ObservableObject, Identifiable {
     }
   }
   
+  init(category: Category? = nil) {
+    self.category = category
+  }
+  
   func save() {
     if name.isEmpty {
       alertMessage = "Name should not be empty."
       return
     }
     do {
-      _ = try Persistency.shared.createCategory(name: name,
-                                                remoteID: nil)
+      if let category = category {
+        try Persistency.shared.updateCategory(category: category, name: name)
+      } else {
+        _ = try Persistency.shared.createCategory(name: name)
+      }
     } catch {
       Log.error(error)
     }

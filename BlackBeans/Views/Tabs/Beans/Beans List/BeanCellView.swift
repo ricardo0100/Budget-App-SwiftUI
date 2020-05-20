@@ -22,7 +22,7 @@ struct BeanCellView: View {
       VStack(alignment: .trailing) {
         Text(bean.value?.decimalValue.toCurrency ?? .empty)
           .foregroundColor(bean.isCredit ? Color.green : Color.red)
-        Text(bean.creation?.fullDateString ?? .empty).font(.footnote)
+        Text(bean.createdTime?.fullDateString ?? .empty).font(.footnote)
       }
     }
   }
@@ -31,11 +31,10 @@ struct BeanCellView: View {
 struct BeanCellView_Previews: PreviewProvider {
   static var previews: some View {
     let account = try! Persistency.shared.createAccount(name: "Bank of Saint Denis")
-    let category = try! Persistency.shared.createCategory(name: "Restaurants", remoteID: nil)
+    let category = try! Persistency.shared.createCategory(name: "Restaurants")
     let bean = try! Persistency.shared.createBean(name: "Lunch",
                                            value: 10.99,
                                            isCredit: false,
-                                           remoteID: nil,
                                            account: account,
                                            category: category)
     return BeanCellView(bean: bean)

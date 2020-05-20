@@ -10,9 +10,10 @@ import SwiftUI
 
 struct CategoriesListView: View {
   
-  @FetchRequest(fetchRequest: Persistency.shared.allCategoryFetchRequest)
+  @FetchRequest(fetchRequest: Persistency.shared.activeCategoriesFetchRequest())
   private var categories: FetchedResults<Category>
   
+  @State private var deletingCategory: Category?
   @State private var isEditCategoryPresented: Bool = false
   
   var body: some View {
@@ -23,8 +24,7 @@ struct CategoriesListView: View {
         }
       }.onDelete {
         guard let index = $0.first  else { return }
-        _ = self.categories[index]
-//        self.deleteAccount(account: account)
+        self.delete(category: self.categories[index])
       }
     }
     
@@ -34,13 +34,8 @@ struct CategoriesListView: View {
       Image(systemName: "plus")
     }
     
-//    let primaryButton = Alert.Button.destructive(Text("Yes, delete everything"),
-//                                                 action: confirmDeletion)
-    
-//    let deleteAlert = Alert(title: Text("⚠️\nAre you sure you want to delete this account?"),
-//                            message: Text("All related Beans will be deleted!!!"),
-//                            primaryButton: primaryButton,
-//                            secondaryButton: .cancel())
+    let primaryButton = Alert.Button.destructive(Text("Yes, delete everything"),
+                                                 action: confirmDeletion)
     
     let editCategory = EditCategoryView(viewModel: EditCategoryViewModel())
     
@@ -48,9 +43,12 @@ struct CategoriesListView: View {
       list
         .navigationBarItems(trailing: trailing)
         .navigationBarTitle("Categories")
-//        .alert(item: self.$deletingAccount) { _ in
-//          deleteAlert
-//        }
+        .alert(item: self.$deletingCategory) {
+          Alert(title: Text("⚠️ Warnin!"),
+                message: Text("There are \($0.beans?.count ?? 0) beans related to \($0.name ?? .empty) category. Delete anyway?"),
+                primaryButton: primaryButton,
+                secondaryButton: .cancel())
+        }
         .sheet(isPresented: self.$isEditCategoryPresented) {
           editCategory
         }
@@ -58,5 +56,23 @@ struct CategoriesListView: View {
         Image(systemName: "tray.full")
         Text("Categories")
     }
+  }
+  
+  private func delete(category: Category?) {
+    if category?.beans?.count ?? 0 > 0 {
+      deletingCategory = category
+    } else {
+      try? Persistency.shared.delete(object: category)
+    }
+  }
+  
+  private func confirmDeletion() {
+    try? Persistency.shared.delete(object: deletingCategory)
+  }
+}
+
+struct CategoriesListView_Previews: PreviewProvider {
+  static var previews: some View {
+    CategoriesListView()
   }
 }

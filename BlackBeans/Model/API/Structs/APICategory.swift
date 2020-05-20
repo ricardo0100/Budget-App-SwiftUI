@@ -11,4 +11,15 @@ import Foundation
 struct APICategory: APICodable {
   let id: Int64
   let name: String
+  var lastSavedTime: TimeInterval
+  var createdTime: TimeInterval
+  var isActive: Bool
+  
+  init(from category: Category) {
+    self.id = category.remoteID
+    self.name = category.name ?? ""
+    self.lastSavedTime = category.lastSavedTime?.timeIntervalSince1970 ?? 0
+    self.createdTime = category.createdTime?.timeIntervalSince1970 ?? 0
+    self.isActive = category.isActive
+  }
 }
