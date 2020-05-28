@@ -22,6 +22,10 @@
 		59600E4A23D3601F00E13D90 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4923D3601F00E13D90 /* StringFormatter.swift */; };
 		59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639ADE23D6430D00DD18DC /* EditBeanViewModel.swift */; };
 		59639AE123D643C100DD18DC /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59639AE023D643C100DD18DC /* CurrencyTextField.swift */; };
+		596F5A35247E77A700AAC553 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F5A34247E77A700AAC553 /* LoginView.swift */; };
+		596F5A39247E8D9600AAC553 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F5A38247E8D9600AAC553 /* User.swift */; };
+		596F5A3B247E8F5000AAC553 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F5A3A247E8F5000AAC553 /* UserView.swift */; };
+		596F5A3E247FCA5700AAC553 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F5A3D247FCA5700AAC553 /* LoginViewModel.swift */; };
 		59735AD7240F42350011823E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59735AD6240F42350011823E /* Date+Extension.swift */; };
 		5975416624042347001BD684 /* BeanDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5975416524042347001BD684 /* BeanDetailsView.swift */; };
 		5977F69D240DA89900FE53D2 /* AccountsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5977F69C240DA89900FE53D2 /* AccountsListView.swift */; };
@@ -75,6 +79,10 @@
 		59600E4923D3601F00E13D90 /* StringFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
 		59639ADE23D6430D00DD18DC /* EditBeanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeanViewModel.swift; sourceTree = "<group>"; };
 		59639AE023D643C100DD18DC /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
+		596F5A34247E77A700AAC553 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		596F5A38247E8D9600AAC553 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		596F5A3A247E8F5000AAC553 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		596F5A3D247FCA5700AAC553 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		59735AD6240F42350011823E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		5975416524042347001BD684 /* BeanDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanDetailsView.swift; sourceTree = "<group>"; };
 		5977F69C240DA89900FE53D2 /* AccountsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListView.swift; sourceTree = "<group>"; };
@@ -184,6 +192,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		596F5A3C247FCA4B00AAC553 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				596F5A34247E77A700AAC553 /* LoginView.swift */,
+				596F5A3D247FCA5700AAC553 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		597541612404230E001BD684 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +298,7 @@
 			children = (
 				5951CDAF243789D600DDFDB9 /* Account+Extension.swift */,
 				59D32A7A2473F196005324D9 /* Category+Extension.swift */,
+				596F5A38247E8D9600AAC553 /* User.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -333,6 +351,8 @@
 			isa = PBXGroup;
 			children = (
 				59BE027C24570E3A00949366 /* ProfileView.swift */,
+				596F5A3C247FCA4B00AAC553 /* Login */,
+				596F5A3A247E8F5000AAC553 /* UserView.swift */,
 			);
 			path = Profiles;
 			sourceTree = "<group>";
@@ -561,6 +581,7 @@
 				598C19F624478B0800001139 /* APICategory.swift in Sources */,
 				59F2C4AF23C226610040077D /* SceneDelegate.swift in Sources */,
 				5947E6F223D1FD590012997E /* BeansListView.swift in Sources */,
+				596F5A35247E77A700AAC553 /* LoginView.swift in Sources */,
 				598C19F02444B29300001139 /* APIAccount.swift in Sources */,
 				5930E11C23D6411D008E8B27 /* BeanCellView.swift in Sources */,
 				59600E4723D35F6D00E13D90 /* Decimal+Extension.swift in Sources */,
@@ -573,6 +594,9 @@
 				59B5289324070925001F6AC0 /* BlackBeans.xcdatamodeld in Sources */,
 				5951CDB62438CD8500DDFDB9 /* EditCategoryView.swift in Sources */,
 				5951CDBB2439F58300DDFDB9 /* CategoryDetailsView.swift in Sources */,
+				596F5A39247E8D9600AAC553 /* User.swift in Sources */,
+				596F5A3B247E8F5000AAC553 /* UserView.swift in Sources */,
+				596F5A3E247FCA5700AAC553 /* LoginViewModel.swift in Sources */,
 				598C19E92444AE0A00001139 /* API.swift in Sources */,
 				59DC02972436AECC00FB8A36 /* BeansSumView.swift in Sources */,
 				5977F69D240DA89900FE53D2 /* AccountsListView.swift in Sources */,

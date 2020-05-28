@@ -9,28 +9,28 @@
 import SwiftUI
 
 struct ProfileView: View {
-  
-  @State var timestampString = Synchronizer.lastSyncPublisher.value
-  
-  var body: some View {
-    VStack {
-      Button(action: {
-        Synchronizer.synchronize()
-      }) {
-        Text("Start Synchronization")
-      }
-      Text(timestampString.fullDateAndTimeString)
-    }.tabItem {
-      Image(systemName: "person")
-      Text("Profile")
-    }.onReceive(Synchronizer.lastSyncPublisher) {
-      self.timestampString = $0
+    
+    @State var currentUser: User?
+    
+    var body: some View {
+        NavigationView {
+            if currentUser == nil {
+                LoginView()
+            } else {
+                UserView()
+            }
+        }.onReceive(Persistency.currentUserPublisher, perform: {
+            print($0)
+            self.currentUser = $0
+        }).tabItem {
+            Image(systemName: "person")
+            Text("Profile")
+        }
     }
-  }
 }
 
 struct ProfileView_Previews: PreviewProvider {
-  static var previews: some View {
-    ProfileView()
-  }
+    static var previews: some View {
+        ProfileView()
+    }
 }

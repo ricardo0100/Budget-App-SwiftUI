@@ -13,8 +13,6 @@ import Combine
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-  let synchronizer = Synchronizer()
-  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     return true
   }
