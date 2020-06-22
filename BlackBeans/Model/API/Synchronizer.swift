@@ -29,9 +29,8 @@ class Synchronizer {
   
   static var lastSyncTimestamp: Date {
     get {
-      return Date(timeIntervalSince1970: 0)
-//      let timestamp: Double = UserDefaults.standard.value(forKey: "LAST_SYNC_TIMESTAMP") as? Double ?? 0
-//      return Date(timeIntervalSince1970: timestamp)
+      let timestamp: Double = UserDefaults.standard.value(forKey: "LAST_SYNC_TIMESTAMP") as? Double ?? 0
+      return Date(timeIntervalSince1970: timestamp)
     }
     set {
       UserDefaults.standard.set(newValue.timeIntervalSince1970, forKey: "LAST_SYNC_TIMESTAMP")

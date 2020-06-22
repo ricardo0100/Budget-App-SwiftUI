@@ -12,8 +12,8 @@ import CryptoKit
 
 class LoginViewModel: ObservableObject, Identifiable {
     
-    @Published var email: String = .empty
-    @Published var password: String = .empty
+    @Published var email: String = "ricardo@ggg.hhh"
+    @Published var password: String = "123456"
     @Published var errorMessage: String?
     var cancellables: [AnyCancellable] = []
     

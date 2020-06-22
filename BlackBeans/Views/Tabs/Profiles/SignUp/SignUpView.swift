@@ -1,46 +1,47 @@
 //
-//  LoginView.swift
+//  SignUpView.swift
 //  BlackBeans
 //
-//  Created by Ricardo Gehrke on 27/05/20.
+//  Created by Ricardo Gehrke on 29/05/20.
 //  Copyright © 2020 Ricardo Gehrke Filho. All rights reserved.
 //
 
 import SwiftUI
 
-struct LoginView: View {
+struct SignUpView: View {
     
-    @ObservedObject var viewModel = LoginViewModel()
+    @ObservedObject var viewModel = SignUpViewModel()
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         let errorMessage = Text(viewModel.errorMessage ?? .empty)
             .font(.caption)
             .foregroundColor(.red)
+        
         return Form {
             Section(footer: errorMessage) {
+                TextField("Name", text: $viewModel.name)
                 TextField("E-mail", text: $viewModel.email)
                 SecureField("Password", text: $viewModel.password)
-                Button(action: viewModel.login) {
-                    Text("Login")
-                }
             }
             Section {
-                NavigationLink(destination: SignUpView()) {
-                    Text("Sign Up").foregroundColor(Color.blue)
+                Button(action: {
+                    self.viewModel.signUp()
+                }) {
+                    Text("Sign Up")
                 }
             }
-        }.navigationBarTitle("Login")
-            .onReceive(Persistency.currentUserPublisher) { user in
-                if user != nil {
+        }.navigationBarTitle("Sign Up")
+            .onReceive(viewModel.$dismiss) { shouldDismiss in
+                if shouldDismiss {
                     self.presentationMode.wrappedValue.dismiss()
                 }
         }
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        SignUpView()
     }
 }

@@ -19,13 +19,12 @@ struct ProfileView: View {
             } else {
                 UserView()
             }
-        }.onReceive(Persistency.currentUserPublisher, perform: {
-            print($0)
-            self.currentUser = $0
-        }).tabItem {
+        }.tabItem {
             Image(systemName: "person")
             Text("Profile")
-        }
+        }.onReceive(Persistency.currentUserPublisher, perform: {
+            self.currentUser = $0
+        })
     }
 }
 

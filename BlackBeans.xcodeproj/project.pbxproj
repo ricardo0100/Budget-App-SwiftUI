@@ -8,6 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		5930E11C23D6411D008E8B27 /* BeanCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5930E11B23D6411D008E8B27 /* BeanCellView.swift */; };
+		5937EAAF2481485000E0485F /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5937EAAE2481485000E0485F /* SignUpView.swift */; };
+		5937EAB1248149B900E0485F /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5937EAB0248149B900E0485F /* SignUpViewModel.swift */; };
+		5937EAB82485CEE100E0485F /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5937EAB62485CEE100E0485F /* Interface.storyboard */; };
+		5937EABA2485CEEA00E0485F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5937EAB92485CEEA00E0485F /* Assets.xcassets */; };
+		5937EAC12485CEEA00E0485F /* BlackBeansWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5937EAC02485CEEA00E0485F /* BlackBeansWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5937EAC62485CEEA00E0485F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5937EAC52485CEEA00E0485F /* ContentView.swift */; };
+		5937EAC82485CEEA00E0485F /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5937EAC72485CEEA00E0485F /* HostingController.swift */; };
+		5937EACA2485CEEA00E0485F /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5937EAC92485CEEA00E0485F /* ExtensionDelegate.swift */; };
+		5937EACC2485CEEC00E0485F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5937EACB2485CEEC00E0485F /* Assets.xcassets */; };
+		5937EACF2485CEEC00E0485F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5937EACE2485CEEC00E0485F /* Preview Assets.xcassets */; };
+		5937EAD32485CEEC00E0485F /* BlackBeansWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 5937EAB42485CEE100E0485F /* BlackBeansWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5937EADC2485D1C000E0485F /* Decimal+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4623D35F6D00E13D90 /* Decimal+Extension.swift */; };
+		5937EADD2485D1C900E0485F /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A49B6023E70CC8005221C9 /* String+Extension.swift */; };
+		5937EADE2485D1CC00E0485F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59735AD6240F42350011823E /* Date+Extension.swift */; };
+		5937EADF2485D20B00E0485F /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59600E4923D3601F00E13D90 /* StringFormatter.swift */; };
+		5937EAE02485D20B00E0485F /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5950765623DDFC6A00A5446A /* Log.swift */; };
 		59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59446D7C23CB4FD000BC8176 /* Persistency.swift */; };
 		5947E6F223D1FD590012997E /* BeansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947E6F123D1FD590012997E /* BeansListView.swift */; };
 		5947E6F423D1FD6A0012997E /* EditBeanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5947E6F323D1FD6A0012997E /* EditBeanView.swift */; };
@@ -27,6 +43,8 @@
 		596F5A3B247E8F5000AAC553 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F5A3A247E8F5000AAC553 /* UserView.swift */; };
 		596F5A3E247FCA5700AAC553 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F5A3D247FCA5700AAC553 /* LoginViewModel.swift */; };
 		59735AD7240F42350011823E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59735AD6240F42350011823E /* Date+Extension.swift */; };
+		5973F0BB249B9A2A0000A715 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5973F0BA249B9A2A0000A715 /* APIError.swift */; };
+		5973F0BD249B9A480000A715 /* APICodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5973F0BC249B9A480000A715 /* APICodable.swift */; };
 		5975416624042347001BD684 /* BeanDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5975416524042347001BD684 /* BeanDetailsView.swift */; };
 		5977F69D240DA89900FE53D2 /* AccountsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5977F69C240DA89900FE53D2 /* AccountsListView.swift */; };
 		5977F6A0240DB84100FE53D2 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5977F69F240DB84100FE53D2 /* EditAccountView.swift */; };
@@ -54,6 +72,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5937EAC22485CEEA00E0485F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59F2C4A123C226610040077D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5937EABF2485CEEA00E0485F;
+			remoteInfo = "BlackBeansWatch Extension";
+		};
+		5937EAD12485CEEC00E0485F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59F2C4A123C226610040077D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5937EAB32485CEE100E0485F;
+			remoteInfo = BlackBeansWatch;
+		};
 		59DBA824240869D70061B56D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 59F2C4A123C226610040077D /* Project object */;
@@ -63,8 +95,46 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5937EAD72485CEEC00E0485F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5937EAC12485CEEA00E0485F /* BlackBeansWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5937EADB2485CEEC00E0485F /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				5937EAD32485CEEC00E0485F /* BlackBeansWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5930E11B23D6411D008E8B27 /* BeanCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanCellView.swift; sourceTree = "<group>"; };
+		5937EAAE2481485000E0485F /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		5937EAB0248149B900E0485F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		5937EAB42485CEE100E0485F /* BlackBeansWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackBeansWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5937EAB72485CEE100E0485F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		5937EAB92485CEEA00E0485F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5937EABB2485CEEA00E0485F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5937EAC02485CEEA00E0485F /* BlackBeansWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "BlackBeansWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5937EAC52485CEEA00E0485F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5937EAC72485CEEA00E0485F /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		5937EAC92485CEEA00E0485F /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		5937EACB2485CEEC00E0485F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5937EACE2485CEEC00E0485F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5937EAD02485CEEC00E0485F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59446D7C23CB4FD000BC8176 /* Persistency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistency.swift; sourceTree = "<group>"; };
 		5947E6F123D1FD590012997E /* BeansListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeansListView.swift; sourceTree = "<group>"; };
 		5947E6F323D1FD6A0012997E /* EditBeanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeanView.swift; sourceTree = "<group>"; };
@@ -84,6 +154,8 @@
 		596F5A3A247E8F5000AAC553 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		596F5A3D247FCA5700AAC553 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		59735AD6240F42350011823E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		5973F0BA249B9A2A0000A715 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		5973F0BC249B9A480000A715 /* APICodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICodable.swift; sourceTree = "<group>"; };
 		5975416524042347001BD684 /* BeanDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanDetailsView.swift; sourceTree = "<group>"; };
 		5977F69C240DA89900FE53D2 /* AccountsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListView.swift; sourceTree = "<group>"; };
 		5977F69F240DB84100FE53D2 /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
@@ -115,6 +187,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5937EABD2485CEEA00E0485F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		59DBA81C240869D70061B56D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -138,6 +217,46 @@
 				59639AE023D643C100DD18DC /* CurrencyTextField.swift */,
 			);
 			path = "Shared Views";
+			sourceTree = "<group>";
+		};
+		5937EAAD2481482000E0485F /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				5937EAAE2481485000E0485F /* SignUpView.swift */,
+				5937EAB0248149B900E0485F /* SignUpViewModel.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		5937EAB52485CEE100E0485F /* BlackBeansWatch */ = {
+			isa = PBXGroup;
+			children = (
+				5937EAB62485CEE100E0485F /* Interface.storyboard */,
+				5937EAB92485CEEA00E0485F /* Assets.xcassets */,
+				5937EABB2485CEEA00E0485F /* Info.plist */,
+			);
+			path = BlackBeansWatch;
+			sourceTree = "<group>";
+		};
+		5937EAC42485CEEA00E0485F /* BlackBeansWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5937EAC52485CEEA00E0485F /* ContentView.swift */,
+				5937EAC72485CEEA00E0485F /* HostingController.swift */,
+				5937EAC92485CEEA00E0485F /* ExtensionDelegate.swift */,
+				5937EACB2485CEEC00E0485F /* Assets.xcassets */,
+				5937EAD02485CEEC00E0485F /* Info.plist */,
+				5937EACD2485CEEC00E0485F /* Preview Content */,
+			);
+			path = "BlackBeansWatch Extension";
+			sourceTree = "<group>";
+		};
+		5937EACD2485CEEC00E0485F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				5937EACE2485CEEC00E0485F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		5951CDB42438CD5C00DDFDB9 /* Edit Category */ = {
@@ -289,6 +408,7 @@
 				598C19EE2444B28600001139 /* Structs */,
 				598C19E82444AE0A00001139 /* API.swift */,
 				598C19F12444B5A200001139 /* Synchronizer.swift */,
+				5973F0BA249B9A2A0000A715 /* APIError.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -306,6 +426,7 @@
 		598C19EE2444B28600001139 /* Structs */ = {
 			isa = PBXGroup;
 			children = (
+				5973F0BC249B9A480000A715 /* APICodable.swift */,
 				598C19EF2444B29300001139 /* APIAccount.swift */,
 				598C19F524478B0800001139 /* APICategory.swift */,
 				59DFB23C244E6829001748F1 /* APIBean.swift */,
@@ -351,8 +472,9 @@
 			isa = PBXGroup;
 			children = (
 				59BE027C24570E3A00949366 /* ProfileView.swift */,
-				596F5A3C247FCA4B00AAC553 /* Login */,
 				596F5A3A247E8F5000AAC553 /* UserView.swift */,
+				596F5A3C247FCA4B00AAC553 /* Login */,
+				5937EAAD2481482000E0485F /* SignUp */,
 			);
 			path = Profiles;
 			sourceTree = "<group>";
@@ -406,6 +528,8 @@
 			children = (
 				59F2C4AB23C226610040077D /* BlackBeans */,
 				59DBA820240869D70061B56D /* BlackBeansTests */,
+				5937EAB52485CEE100E0485F /* BlackBeansWatch */,
+				5937EAC42485CEEA00E0485F /* BlackBeansWatch Extension */,
 				59F2C4AA23C226610040077D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -415,6 +539,8 @@
 			children = (
 				59F2C4A923C226610040077D /* BlackBeans.app */,
 				59DBA81F240869D70061B56D /* BlackBeansTests.xctest */,
+				5937EAB42485CEE100E0485F /* BlackBeansWatch.app */,
+				5937EAC02485CEEA00E0485F /* BlackBeansWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -461,6 +587,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5937EAB32485CEE100E0485F /* BlackBeansWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5937EAD82485CEEC00E0485F /* Build configuration list for PBXNativeTarget "BlackBeansWatch" */;
+			buildPhases = (
+				5937EAB22485CEE100E0485F /* Resources */,
+				5937EAD72485CEEC00E0485F /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5937EAC32485CEEA00E0485F /* PBXTargetDependency */,
+			);
+			name = BlackBeansWatch;
+			productName = BlackBeansWatch;
+			productReference = 5937EAB42485CEE100E0485F /* BlackBeansWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		5937EABF2485CEEA00E0485F /* BlackBeansWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5937EAD42485CEEC00E0485F /* Build configuration list for PBXNativeTarget "BlackBeansWatch Extension" */;
+			buildPhases = (
+				5937EABC2485CEEA00E0485F /* Sources */,
+				5937EABD2485CEEA00E0485F /* Frameworks */,
+				5937EABE2485CEEA00E0485F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BlackBeansWatch Extension";
+			productName = "BlackBeansWatch Extension";
+			productReference = 5937EAC02485CEEA00E0485F /* BlackBeansWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		59DBA81E240869D70061B56D /* BlackBeansTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 59DBA826240869D70061B56D /* Build configuration list for PBXNativeTarget "BlackBeansTests" */;
@@ -486,10 +646,12 @@
 				59F2C4A523C226610040077D /* Sources */,
 				59F2C4A623C226610040077D /* Frameworks */,
 				59F2C4A723C226610040077D /* Resources */,
+				5937EADB2485CEEC00E0485F /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5937EAD22485CEEC00E0485F /* PBXTargetDependency */,
 			);
 			name = BlackBeans;
 			productName = BlackBeans;
@@ -502,10 +664,16 @@
 		59F2C4A123C226610040077D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Ricardo Gehrke Filho";
 				TargetAttributes = {
+					5937EAB32485CEE100E0485F = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+					5937EABF2485CEEA00E0485F = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
 					59DBA81E240869D70061B56D = {
 						CreatedOnToolsVersion = 11.3;
 						LastSwiftMigration = 1130;
@@ -531,11 +699,31 @@
 			targets = (
 				59F2C4A823C226610040077D /* BlackBeans */,
 				59DBA81E240869D70061B56D /* BlackBeansTests */,
+				5937EAB32485CEE100E0485F /* BlackBeansWatch */,
+				5937EABF2485CEEA00E0485F /* BlackBeansWatch Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5937EAB22485CEE100E0485F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5937EABA2485CEEA00E0485F /* Assets.xcassets in Resources */,
+				5937EAB82485CEE100E0485F /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5937EABE2485CEEA00E0485F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5937EACF2485CEEC00E0485F /* Preview Assets.xcassets in Resources */,
+				5937EACC2485CEEC00E0485F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		59DBA81D240869D70061B56D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -556,6 +744,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5937EABC2485CEEA00E0485F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5937EAC82485CEEA00E0485F /* HostingController.swift in Sources */,
+				5937EADF2485D20B00E0485F /* StringFormatter.swift in Sources */,
+				5937EADC2485D1C000E0485F /* Decimal+Extension.swift in Sources */,
+				5937EAC62485CEEA00E0485F /* ContentView.swift in Sources */,
+				5937EADD2485D1C900E0485F /* String+Extension.swift in Sources */,
+				5937EACA2485CEEA00E0485F /* ExtensionDelegate.swift in Sources */,
+				5937EAE02485D20B00E0485F /* Log.swift in Sources */,
+				5937EADE2485D1CC00E0485F /* Date+Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		59DBA81B240869D70061B56D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -586,6 +789,7 @@
 				5930E11C23D6411D008E8B27 /* BeanCellView.swift in Sources */,
 				59600E4723D35F6D00E13D90 /* Decimal+Extension.swift in Sources */,
 				59600E4A23D3601F00E13D90 /* StringFormatter.swift in Sources */,
+				5937EAAF2481485000E0485F /* SignUpView.swift in Sources */,
 				59639AE123D643C100DD18DC /* CurrencyTextField.swift in Sources */,
 				598C19F22444B5A200001139 /* Synchronizer.swift in Sources */,
 				5975416624042347001BD684 /* BeanDetailsView.swift in Sources */,
@@ -594,13 +798,16 @@
 				59B5289324070925001F6AC0 /* BlackBeans.xcdatamodeld in Sources */,
 				5951CDB62438CD8500DDFDB9 /* EditCategoryView.swift in Sources */,
 				5951CDBB2439F58300DDFDB9 /* CategoryDetailsView.swift in Sources */,
+				5973F0BD249B9A480000A715 /* APICodable.swift in Sources */,
 				596F5A39247E8D9600AAC553 /* User.swift in Sources */,
 				596F5A3B247E8F5000AAC553 /* UserView.swift in Sources */,
+				5973F0BB249B9A2A0000A715 /* APIError.swift in Sources */,
 				596F5A3E247FCA5700AAC553 /* LoginViewModel.swift in Sources */,
 				598C19E92444AE0A00001139 /* API.swift in Sources */,
 				59DC02972436AECC00FB8A36 /* BeansSumView.swift in Sources */,
 				5977F69D240DA89900FE53D2 /* AccountsListView.swift in Sources */,
 				59639ADF23D6430D00DD18DC /* EditBeanViewModel.swift in Sources */,
+				5937EAB1248149B900E0485F /* SignUpViewModel.swift in Sources */,
 				59D32A7B2473F196005324D9 /* Category+Extension.swift in Sources */,
 				59446D7D23CB4FD000BC8176 /* Persistency.swift in Sources */,
 				5951CDB0243789D600DDFDB9 /* Account+Extension.swift in Sources */,
@@ -614,6 +821,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5937EAC32485CEEA00E0485F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5937EABF2485CEEA00E0485F /* BlackBeansWatch Extension */;
+			targetProxy = 5937EAC22485CEEA00E0485F /* PBXContainerItemProxy */;
+		};
+		5937EAD22485CEEC00E0485F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5937EAB32485CEE100E0485F /* BlackBeansWatch */;
+			targetProxy = 5937EAD12485CEEC00E0485F /* PBXContainerItemProxy */;
+		};
 		59DBA825240869D70061B56D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 59F2C4A823C226610040077D /* BlackBeans */;
@@ -622,6 +839,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5937EAB62485CEE100E0485F /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5937EAB72485CEE100E0485F /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		59F2C4BA23C226660040077D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -633,6 +858,92 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5937EAD52485CEEC00E0485F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"BlackBeansWatch Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 2T9EKFYB5P;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "BlackBeansWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rrghkf.BlackBeans.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		5937EAD62485CEEC00E0485F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"BlackBeansWatch Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 2T9EKFYB5P;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "BlackBeansWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rrghkf.BlackBeans.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
+		5937EAD92485CEEC00E0485F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2T9EKFYB5P;
+				IBSC_MODULE = BlackBeansWatch_Extension;
+				INFOPLIST_FILE = BlackBeansWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rrghkf.BlackBeans.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		5937EADA2485CEEC00E0485F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2T9EKFYB5P;
+				IBSC_MODULE = BlackBeansWatch_Extension;
+				INFOPLIST_FILE = BlackBeansWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rrghkf.BlackBeans.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
 		59DBA827240869D70061B56D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -835,6 +1146,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5937EAD42485CEEC00E0485F /* Build configuration list for PBXNativeTarget "BlackBeansWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5937EAD52485CEEC00E0485F /* Debug */,
+				5937EAD62485CEEC00E0485F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5937EAD82485CEEC00E0485F /* Build configuration list for PBXNativeTarget "BlackBeansWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5937EAD92485CEEC00E0485F /* Debug */,
+				5937EADA2485CEEC00E0485F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		59DBA826240869D70061B56D /* Build configuration list for PBXNativeTarget "BlackBeansTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

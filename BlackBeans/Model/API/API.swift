@@ -10,38 +10,8 @@ import Foundation
 import Network
 import Combine
 
-enum APIError: Error {
-    case noInternet
-    case server(statusCode: Int, url: URL?, body: String)
-    case encoder(type: Any, error: EncodingError?)
-    case decoder(type: Any, error: DecodingError?)
-    case unknown
-    
-    var localizedDescription: String {
-        switch self {
-        case .noInternet:
-            return "Internet unavailable"
-        case .server(let statusCode, let url, _):
-            return "Server error code \(statusCode) in \(url?.absoluteString ?? .empty)"
-        case .encoder(let type, _):
-            return "Error encoding \(String(describing: type.self))"
-        case .decoder(let type, _):
-            return "Error decoding \(String(describing: type.self))"
-        case .unknown:
-            return "Unknown API Error"
-        }
-    }
-}
-
-protocol APICodable: Codable {
-    var id: Int64 { get }
-    var createdTime: TimeInterval { get }
-    var lastSavedTime: TimeInterval { get }
-    var isActive: Bool { get }
-}
-
 struct API {
-    
+
     // MARK: GET Methods
     
     static func getAccounts(updatedAfter timestamp: Date) -> AnyPublisher<[APIAccount], Error> {
@@ -75,11 +45,10 @@ struct API {
                     Log.info("GET \(url.path)?\(url.query ?? .empty) -> \(resources.count) objects")
                     return resources
                 } catch {
-                    throw APIError.decoder(type: T.self, error: error as? DecodingError)
+                    throw APIError.decoder(error: error as? DecodingError)
                 }
         }.eraseToAnyPublisher()
     }
-    
     
     // MARK: POST Methods
     
@@ -148,7 +117,7 @@ struct API {
         do {
             request.httpBody = try JSONEncoder().encode(resource)
         } catch {
-            return Fail(error: APIError.encoder(type: T.self, error: error as? EncodingError))
+            return Fail(error: APIError.encoder(error: error as? EncodingError))
                 .eraseToAnyPublisher()
         }
         return URLSession.DataTaskPublisher(request: request, session: .shared)
@@ -163,11 +132,10 @@ struct API {
                     Log.info("POST \(url.path) -> remoteID: \(resource.id)")
                     return resource
                 } catch {
-                    throw APIError.decoder(type: T.self, error: error as? DecodingError)
+                    throw APIError.decoder(error: error as? DecodingError)
                 }
         }.eraseToAnyPublisher()
     }
-    
     
     // MARK: PUT Methods
     
@@ -234,7 +202,7 @@ struct API {
         do {
             request.httpBody = try JSONEncoder().encode(resource)
         } catch {
-            return Fail(error: APIError.encoder(type: T.self, error: error as? EncodingError))
+            return Fail(error: APIError.encoder(error: error as? EncodingError))
                 .eraseToAnyPublisher()
         }
         return URLSession.DataTaskPublisher(request: request, session: .shared)
@@ -249,11 +217,10 @@ struct API {
                     Log.info("PUT \(url.path) -> remoteID: \(resource.id)")
                     return resource
                 } catch {
-                    throw APIError.decoder(type: T.self, error: error as? DecodingError)
+                    throw APIError.decoder(error: error as? DecodingError)
                 }
         }.eraseToAnyPublisher()
     }
-    
     
     // MARK: Authentication
     
@@ -268,6 +235,37 @@ struct API {
         }.eraseToAnyPublisher()
     }
     
+    static func signUp(name: String, email: String, password: String) -> AnyPublisher<User, APIError> {
+        var request = URLRequest(url: signUpURL())
+        request.httpMethod = "POST"
+        let str = getPostString(params: ["name": name,
+                                         "email": email,
+                                         "password": password])
+        request.httpBody = str.data(using: .utf8)
+        return URLSession.DataTaskPublisher(request: request, session: .shared)
+            .tryMap { data, response in
+                guard let response = response as? HTTPURLResponse else {
+                    throw APIError.unknown
+                }
+                if response.statusCode == 409 {
+                    let serverMessage = String(data: data, encoding: .utf8)
+                    throw APIError.server(statusCode: response.statusCode,
+                                          url: request.url,
+                                          body: serverMessage ?? .empty)
+                }
+                return data
+        }
+        .decode(type: User.self, decoder: JSONDecoder())
+        .mapError { error in
+            if let error = error as? DecodingError {
+                return APIError.decoder(error: error)
+            }
+            if let error = error as? URLError {
+                return APIError.url(error: error)
+            }
+            return error as? APIError ?? .unknown
+        }.eraseToAnyPublisher()
+    }
     
     // MARK: URLs
     
@@ -283,6 +281,12 @@ struct API {
     static private func loginURL() -> URL {
         var url = baseURL()
         url.appendPathComponent("login")
+        return url
+    }
+    
+    static private func signUpURL() -> URL {
+        var url = baseURL()
+        url.appendPathComponent("signup")
         return url
     }
     

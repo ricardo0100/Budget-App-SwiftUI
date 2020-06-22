@@ -37,12 +37,7 @@ struct Log {
   }
   
   static func error(_ error: Error) {
-    switch error {
-    case let apiError as APIError:
-      print("❗️ \(apiError.localizedDescription)")
-    default:
-      print("❗️ \(error.localizedDescription)")
-    }
+    print("❗️ \(error.localizedDescription)")
   }
   
   static func error(_ message: String) {
