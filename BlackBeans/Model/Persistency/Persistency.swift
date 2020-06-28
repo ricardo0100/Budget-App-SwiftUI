@@ -118,6 +118,7 @@ class Persistency: NSObject {
         account.lastSavedTime = Date()
         account.shouldSync = true
         account.name = name
+        account.isActive = true
         try context.save()
         return account
     }
@@ -178,6 +179,9 @@ class Persistency: NSObject {
     func createCategory(name: String) throws -> Category {
         let category = Category(context: context)
         category.createdTime = Date()
+        category.lastSavedTime = Date()
+        category.isActive = true
+        category.shouldSync = true
         category.name = name
         try context.save()
         return category

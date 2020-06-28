@@ -87,5 +87,6 @@ struct AccountsListView: View {
 struct AccountsListView_Previews: PreviewProvider {
   static var previews: some View {
     AccountsListView()
+        .environment(\.managedObjectContext, Persistency.shared.context)
   }
 }

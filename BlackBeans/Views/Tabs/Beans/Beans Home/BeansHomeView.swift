@@ -40,3 +40,10 @@ struct BeansHomeView: View {
     }
   }
 }
+
+struct BeansHomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        BeansHomeView()
+            .environment(\.managedObjectContext, Persistency.shared.context)
+    }
+}
