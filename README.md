@@ -7,14 +7,11 @@ Python API in https://github.com/ricardo0100/BlackBeansAPI
 ### Features
 
 - Accounts (CRUD)
-- Categories (CRUD)
-- Beans* (CRUD)
-
-**Beans are financial transactions*
+- Items* (CRUD)
 
 
 ### For The Future
 
 - Credit cards support
-- Effectivation date for beans
-- Graphics for categories
+- Effectivation date for Items
+- Categories for Items
