@@ -7,7 +7,7 @@ Python API in https://github.com/ricardo0100/BlackBeansAPI
 ### Features
 
 - Accounts (CRUD)
-- Items* (CRUD)
+- Items (CRUD)
 
 
 ### For The Future
