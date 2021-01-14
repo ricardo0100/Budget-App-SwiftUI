@@ -11,7 +11,8 @@ import XCTest
 class ProfileViewModelTests: XCTestCase {
     
     func makeSUT() -> ProfileViewModel {
-        return ProfileViewModel(userManager: UserManagerMock(name: "Test", email: "test@test.com", token: "1234"))
+        userSettings = UserSettingsMock(user: User(name: "Test", email: "test@test.com", token: ""))
+        return ProfileViewModel(userSettings: userSettings, api: APIMock())
     }
     
     func test_onAppear_shouldShowUserNameAndEmail() {
@@ -23,9 +24,8 @@ class ProfileViewModelTests: XCTestCase {
     func test_onLogout_shouldSendNilUser() {
         let viewModel = makeSUT()
         viewModel.onTapLogout()
-        XCTAssertEqual(viewModel.name, "")
-        XCTAssertEqual(viewModel.email, "")
+        XCTAssertTrue(userSettings.didCallDeleteUser)
     }
     
-    private var context = PersistenceController.shared.container.viewContext
+    private var userSettings: UserSettingsMock!
 }

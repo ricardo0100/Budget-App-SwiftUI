@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    @EnvironmentObject var settings: UserSettings
+    
     @ObservedObject var viewModel: ProfileViewModel
     
     var body: some View {
@@ -23,7 +25,7 @@ struct ProfileView: View {
                         .disabled(!viewModel.isEditing)
                 }
                 Button("Logout") {
-                    print("⚠️ Not implemented")
+                    viewModel.onTapLogout()
                 }.foregroundColor(.red)
             }.navigationTitle("Profile")
             .navigationBarItems(trailing: Button(viewModel.editButtonText, action: {
@@ -35,6 +37,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(viewModel: ProfileViewModel(userManager: UserManagerMock()))
+        ProfileView(viewModel: ProfileViewModel(userSettings: UserSettingsPreview(), api: APIPreview()))
     }
 }

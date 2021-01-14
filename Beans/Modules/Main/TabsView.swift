@@ -9,11 +9,11 @@ import SwiftUI
 
 struct TabsView: View {
     
+    @EnvironmentObject var userSettings: UserSettings
+    
     var body: some View {
         TabView {
-            NavigationView {
-                AccountsListView()
-            }.tabItem {
+            AccountsListView().tabItem {
                 VStack {
                     Image(systemName: "creditcard")
                     Text("Accounts")
@@ -25,7 +25,7 @@ struct TabsView: View {
                     Text("Items")
                 }
             }
-            ProfileView(viewModel: ProfileViewModel()).tabItem {
+            ProfileView(viewModel: ProfileViewModel(userSettings: userSettings, api: API())).tabItem {
                 VStack {
                     Image(systemName: "person")
                     Text("Profile")

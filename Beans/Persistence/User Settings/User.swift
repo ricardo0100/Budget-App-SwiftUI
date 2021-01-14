@@ -2,12 +2,12 @@
 //  User.swift
 //  Beans
 //
-//  Created by Ricardo Gehrke on 06/01/21.
+//  Created by Ricardo Gehrke on 10/01/21.
 //
 
 import Foundation
 
-struct User: Codable {
+struct User {
     let name: String
     let email: String
     let token: String
