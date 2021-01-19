@@ -9,14 +9,7 @@ import Foundation
 import Security
 import Combine
 
-protocol UserSettingsProtocol {
-    var userPublisher: AnyPublisher<User?, Never> { get }
-    func saveUser(user: User)
-    func loadUser() -> User?
-    func deleteUser()
-}
-
-class UserSettings: ObservableObject, UserSettingsProtocol {
+class UserSettings: ObservableObject {
     
     private let userValueSubject = CurrentValueSubject<User?, Never>(nil)
     
@@ -25,7 +18,7 @@ class UserSettings: ObservableObject, UserSettingsProtocol {
     }
     
     func saveUser(user: User) {
-        
+        userValueSubject.send(user)
     }
     
     func loadUser() -> User? {
@@ -33,18 +26,6 @@ class UserSettings: ObservableObject, UserSettingsProtocol {
     }
     
     func deleteUser() {
-        
+        userValueSubject.send(nil)
     }
-}
-
-class UserSettingsPreview: UserSettingsProtocol {
-    
-    var userPublisher: AnyPublisher<User?, Never> = Just(User(name: "Ricardo",
-                                                              email: "ric@rdo.com",
-                                                              token: "1234")).eraseToAnyPublisher()
-    func saveUser(user: User) { }
-    
-    func loadUser() -> User? { nil }
-    
-    func deleteUser() { }
 }

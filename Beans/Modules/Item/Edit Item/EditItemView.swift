@@ -33,9 +33,11 @@ struct EditItemView: View {
                 })
             } else {
                 Form {
-                    FormTextField(placeholder: "Item name",
+                    FormTextField(keyboardType: .default,
+                                  placeholder: "Item name",
                                   text: $viewModel.name,
-                                  error: $viewModel.nameError)
+                                  error: $viewModel.nameError,
+                                  useSecureField: false)
                     
                     HStack {
                         Text("Value").foregroundColor(.secondary).layoutPriority(1)

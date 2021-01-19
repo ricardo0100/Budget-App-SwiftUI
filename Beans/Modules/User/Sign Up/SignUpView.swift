@@ -17,19 +17,25 @@ struct SignUpView: View {
         NavigationView {
             Form {
                 Section(header: Text("Name")) {
-                    FormTextField(placeholder: "",
+                    FormTextField(keyboardType: .default,
+                                  placeholder: "",
                                   text: $viewModel.name,
-                                  error: $viewModel.nameError)
+                                  error: $viewModel.nameError,
+                                  useSecureField: false)
                 }
                 Section(header: Text("E-mail")) {
-                    FormTextField(placeholder: "",
+                    FormTextField(keyboardType: .emailAddress,
+                                  placeholder: "",
                                   text: $viewModel.email,
-                                  error: $viewModel.emailError)
+                                  error: $viewModel.emailError,
+                                  useSecureField: false)
                 }
                 Section(header: Text("Password")) {
-                    FormTextField(placeholder: "",
+                    FormTextField(keyboardType: .default,
+                                  placeholder: "",
                                   text: $viewModel.password,
-                                  error: $viewModel.passwordError)
+                                  error: $viewModel.passwordError,
+                                  useSecureField: true)
                 }
                 Section {
                     HStack {
@@ -44,7 +50,7 @@ struct SignUpView: View {
                 }
                 Section(header: Text("New user?")) {
                     NavigationLink(
-                        destination: LogInView(viewModel: LogInViewModel(userSettings: userSettings)),
+                        destination: LogInView(viewModel: LogInViewModel(api: API(), userSettings: userSettings)),
                         label: {
                             HStack {
                                 Spacer()
@@ -60,6 +66,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(viewModel: SignUpViewModel(userSettings: UserSettingsPreview()))
+        SignUpView(viewModel: SignUpViewModel(userSettings: UserSettings()))
     }
 }

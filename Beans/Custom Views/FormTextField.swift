@@ -9,13 +9,19 @@ import SwiftUI
 
 struct FormTextField: View {
     
+    let keyboardType: UIKeyboardType
     let placeholder: String
     @Binding var text: String
     @Binding var error: String?
+    let useSecureField: Bool
     
     var body: some View {
         VStack {
-            TextField(placeholder, text: $text)
+            if useSecureField {
+                SecureField(placeholder, text: $text)
+            } else {
+                TextField(placeholder, text: $text)
+            }
             if let error = error {
                 VStack(alignment: .leading) {
                     Rectangle().frame(height: 1)
@@ -30,12 +36,16 @@ struct FormTextField: View {
 struct FormTextField_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            FormTextField(placeholder: "Name",
+            FormTextField(keyboardType: .default,
+                          placeholder: "Name",
                           text: .constant("Bananas 🍌"),
-                          error: .constant(nil))
-            FormTextField(placeholder: "Value",
+                          error: .constant(nil),
+                          useSecureField: false)
+            FormTextField(keyboardType: .default,
+                          placeholder: "Value",
                           text: .constant(""),
-                          error: .constant("Name should no be empty"))
+                          error: .constant("Name should not be empty"),
+                          useSecureField: true)
         }
     }
 }

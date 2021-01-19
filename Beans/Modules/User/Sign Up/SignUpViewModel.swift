@@ -18,9 +18,9 @@ class SignUpViewModel: ObservableObject {
     @Published var emailError: String?
     @Published var passwordError: String?
     
-    private let userSettings: UserSettingsProtocol
+    private let userSettings: UserSettings
     
-    init(userSettings: UserSettingsProtocol) {
+    init(userSettings: UserSettings) {
         self.userSettings = userSettings
     }
     

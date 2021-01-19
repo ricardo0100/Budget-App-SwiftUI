@@ -25,7 +25,7 @@ struct TabsView: View {
                     Text("Items")
                 }
             }
-            ProfileView(viewModel: ProfileViewModel(userSettings: userSettings, api: API())).tabItem {
+            ProfileView(viewModel: ProfileViewModel(userSettings: userSettings)).tabItem {
                 VStack {
                     Image(systemName: "person")
                     Text("Profile")

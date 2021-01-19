@@ -14,14 +14,18 @@ struct LogInView: View {
     var body: some View {
         Form {
             Section(header: Text("E-mail")) {
-                FormTextField(placeholder: "",
+                FormTextField(keyboardType: .emailAddress,
+                              placeholder: "",
                               text: $viewModel.email,
-                              error: $viewModel.emailError)
+                              error: $viewModel.emailError,
+                              useSecureField: false)
             }
             Section(header: Text("Password")) {
-                FormTextField(placeholder: "",
+                FormTextField(keyboardType: .default,
+                              placeholder: "",
                               text: $viewModel.password,
-                              error: $viewModel.passwordError)
+                              error: $viewModel.passwordError,
+                              useSecureField: true)
             }
             Section {
                 HStack {
@@ -34,14 +38,18 @@ struct LogInView: View {
                 .listRowBackground(Color.accentColor)
                 .foregroundColor(.white)
             }
-        }.navigationTitle("Log In")
+        }
+        .navigationTitle("Log In")
+        .alert(item: $viewModel.alert) { alert -> Alert in
+            Alert(title: Text(alert.title), message: Text(alert.message), dismissButton: nil)
+        }
     }
 }
 
 struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogInView(viewModel: LogInViewModel(userSettings: UserSettingsPreview()))
+            LogInView(viewModel: LogInViewModel(api: APIPreview(), userSettings: UserSettings()))
         }
     }
 }

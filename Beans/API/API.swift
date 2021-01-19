@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 enum APIError: Error {
+    case unauthorized
     case unknown
 }
 

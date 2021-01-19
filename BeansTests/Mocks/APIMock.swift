@@ -9,11 +9,28 @@ import Foundation
 import Combine
 @testable import Beans
 
-struct APIMock: APIProtocol {
+class APIMock: APIProtocol {
+    
+    var didCallLogin = false
+    private let user: User?
+    private let mockError: APIError?
+    
+    init(mockUser: User? = nil, mockError: APIError? = nil) {
+        self.user = mockUser
+        self.mockError = mockError
+    }
     
     func login(email: String, password: String) -> AnyPublisher<User, APIError> {
-        Just(User(name: "Test", email: "test@test.com", token: ""))
-            .mapError { _ in APIError.unknown }
+        didCallLogin = true
+        if let user = user {
+            return Just(user)
+                .mapError { _ in APIError.unknown }
+                .eraseToAnyPublisher()
+        } else if let error = mockError {
+            return Fail(error: error)
+                .eraseToAnyPublisher()
+        }
+        return Fail(error: APIError.unknown)
             .eraseToAnyPublisher()
     }
 }

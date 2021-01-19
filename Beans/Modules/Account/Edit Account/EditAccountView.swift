@@ -15,9 +15,11 @@ struct EditAccountView: View {
         NavigationView {
             Form {
                 Section(header: Text("Name")) {
-                    FormTextField(placeholder: "Account name",
+                    FormTextField(keyboardType: .default,
+                                  placeholder: "Account name",
                                   text: $viewModel.name,
-                                  error: $viewModel.nameError)
+                                  error: $viewModel.nameError,
+                                  useSecureField: false)
                 }
                 Section(header: Text("Color")) {
                     SelectColorView(selectedColor: $viewModel.color)

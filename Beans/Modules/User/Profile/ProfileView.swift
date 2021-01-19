@@ -37,6 +37,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(viewModel: ProfileViewModel(userSettings: UserSettingsPreview(), api: APIPreview()))
+        ProfileView(viewModel: ProfileViewModel(userSettings: UserSettings()))
     }
 }

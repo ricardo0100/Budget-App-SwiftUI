@@ -20,12 +20,10 @@ class ProfileViewModel: ObservableObject {
     @Published var email: String = ""
     
     private var cancellables: [AnyCancellable] = []
-    private let userSettings: UserSettingsProtocol
-    private let api: APIProtocol
+    private let userSettings: UserSettings
     
-    init(userSettings: UserSettingsProtocol, api: APIProtocol) {
+    init(userSettings: UserSettings) {
         self.userSettings = userSettings
-        self.api = api
         userSettings
             .userPublisher
             .sink { user in

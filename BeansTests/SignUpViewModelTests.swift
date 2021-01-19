@@ -11,7 +11,7 @@ import XCTest
 class SignUpViewModelTests: XCTestCase {
 
     private func makeSUT() -> SignUpViewModel {
-        let settings = UserSettingsPreview()
+        let settings = UserSettings()
         return SignUpViewModel(userSettings: settings)
     }
     
