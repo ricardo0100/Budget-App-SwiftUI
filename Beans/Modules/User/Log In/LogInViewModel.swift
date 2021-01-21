@@ -33,6 +33,7 @@ class LogInViewModel: ObservableObject {
         if emailError == nil && passwordError == nil {
             api
                 .login(email: email, password: password)
+                .receive(on: DispatchQueue.main)
                 .sink { completion in
                     switch completion {
                     case .failure(let error):
@@ -81,10 +82,12 @@ class LogInViewModel: ObservableObject {
     
     private func handleError(_ error: APIError) {
         switch error {
-        case .unauthorized:
+        case .wrongCredentials:
             self.alert = AlertMessage(title: "Login failed!", message: "The credentials provided are incorrect.")
-        case .unknown:
-            break
+        case .noConnection:
+            self.alert = AlertMessage(title: "Connection failed!", message: "Please, verify your internet connection.")
+        case .serverError:
+            self.alert = AlertMessage(title: "Server error!", message: "Something is wrong with the server, please try again later.")
         }
     }
 }

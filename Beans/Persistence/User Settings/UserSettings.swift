@@ -18,6 +18,7 @@ class UserSettings: ObservableObject {
     }
     
     func saveUser(user: User) {
+        print("🏳️‍🌈 saveUser: \(user)")
         userValueSubject.send(user)
     }
     

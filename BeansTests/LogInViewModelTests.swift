@@ -83,7 +83,7 @@ class LogInViewModelTests: XCTestCase {
     }
     
     func test_whenAPIReturnsUnauthorizedError_shouldShowErrorMessage() {
-        let apiMock = APIMock(mockError: .unauthorized)
+        let apiMock = APIMock(mockError: .wrongCredentials)
         let viewModel = makeSUT(apiMock: apiMock)
         viewModel.email = "ricardo@gehrke.com"
         viewModel.password = "123456"
@@ -98,6 +98,41 @@ class LogInViewModelTests: XCTestCase {
         
         wait(for: [exp], timeout: 1)
     }
+    
+    func test_whenAPIReturnsNoConnectionError_shouldShowErrorMessage() {
+        let apiMock = APIMock(mockError: .noConnection)
+        let viewModel = makeSUT(apiMock: apiMock)
+        viewModel.email = "ricardo@gehrke.com"
+        viewModel.password = "123456"
+        viewModel.onTapLogIn()
+        
+        let exp = expectation(description: "Login fails if no internet connection")
+        viewModel.$alert.sink { alert in
+            if alert?.title == "Connection failed!" && alert?.message == "Please, verify your internet connection." {
+                exp.fulfill()
+            }
+        }.store(in: &cancellables)
+        
+        wait(for: [exp], timeout: 1)
+    }
+    
+    func test_whenAPIReturnsServerError_shouldShowErrorMessage() {
+        let apiMock = APIMock(mockError: .serverError)
+        let viewModel = makeSUT(apiMock: apiMock)
+        viewModel.email = "ricardo@gehrke.com"
+        viewModel.password = "123456"
+        viewModel.onTapLogIn()
+        
+        let exp = expectation(description: "Login fails after server error")
+        viewModel.$alert.sink { alert in
+            if alert?.title == "Server error!" && alert?.message == "Something is wrong with the server, please try again later." {
+                exp.fulfill()
+            }
+        }.store(in: &cancellables)
+        
+        wait(for: [exp], timeout: 1)
+    }
+       
     
     private var userSettings: UserSettings!
     private var api: APIMock!

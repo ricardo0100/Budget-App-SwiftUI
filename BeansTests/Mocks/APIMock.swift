@@ -24,13 +24,13 @@ class APIMock: APIProtocol {
         didCallLogin = true
         if let user = user {
             return Just(user)
-                .mapError { _ in APIError.unknown }
+                .mapError { _ in APIError.wrongCredentials }
                 .eraseToAnyPublisher()
         } else if let error = mockError {
             return Fail(error: error)
                 .eraseToAnyPublisher()
         }
-        return Fail(error: APIError.unknown)
+        return Fail(error: APIError.wrongCredentials)
             .eraseToAnyPublisher()
     }
 }
