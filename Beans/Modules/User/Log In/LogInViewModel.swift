@@ -38,7 +38,6 @@ class LogInViewModel: ObservableObject {
                     switch completion {
                     case .failure(let error):
                         self.handleError(error)
-                        break
                     case .finished:
                         break
                     }

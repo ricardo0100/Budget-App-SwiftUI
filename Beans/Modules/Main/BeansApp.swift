@@ -12,14 +12,14 @@ import Combine
 struct BeansApp: App {
     
     let persistence = PersistenceController.shared
-    let userSettings = UserSettings()
     var cancellables: [AnyCancellable] = []
-    @State var loggedUser: User?
     
+    @ObservedObject var userSettings = UserSettings()
+
     var body: some Scene {
         WindowGroup {
-            VStack {
-                if loggedUser != nil {
+            Group {
+                if userSettings.user != nil {
                     TabsView()
                         .environment(\.managedObjectContext, persistence.container.viewContext)
                         .environmentObject(userSettings)
@@ -27,9 +27,7 @@ struct BeansApp: App {
                     SignUpView(viewModel: SignUpViewModel(userSettings: userSettings))
                         .environmentObject(userSettings)
                 }
-            }.onReceive(userSettings.userPublisher, perform: { user in
-                loggedUser = user
-            })
+            }
         }
     }
 }

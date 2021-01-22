@@ -34,6 +34,7 @@
 		59A5B20625ACB9920086D335 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A5B20525ACB9920086D335 /* LogInView.swift */; };
 		59A5B20C25ACB99C0086D335 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A5B20B25ACB99C0086D335 /* LogInViewModel.swift */; };
 		59A5B21025ACB9B90086D335 /* LogInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A5B20F25ACB9B90086D335 /* LogInViewModelTests.swift */; };
+		59ACFE1925BA13750025EB70 /* UserSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59ACFE1825BA13750025EB70 /* UserSettingsTests.swift */; };
 		59B04746256E6C6F0095A8FB /* BeansApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B04745256E6C6F0095A8FB /* BeansApp.swift */; };
 		59B0474A256E6C720095A8FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59B04749256E6C720095A8FB /* Assets.xcassets */; };
 		59B0474F256E6C720095A8FB /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0474E256E6C720095A8FB /* PersistenceController.swift */; };
@@ -91,6 +92,7 @@
 		59A5B20525ACB9920086D335 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		59A5B20B25ACB99C0086D335 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
 		59A5B20F25ACB9B90086D335 /* LogInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModelTests.swift; sourceTree = "<group>"; };
+		59ACFE1825BA13750025EB70 /* UserSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsTests.swift; sourceTree = "<group>"; };
 		59B04742256E6C6F0095A8FB /* Beans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B04745256E6C6F0095A8FB /* BeansApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansApp.swift; sourceTree = "<group>"; };
 		59B04747256E6C6F0095A8FB /* RecentItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentItemsView.swift; sourceTree = "<group>"; };
@@ -257,6 +259,19 @@
 			path = "Log In";
 			sourceTree = "<group>";
 		};
+		59ACFE1C25BA137A0025EB70 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				595F606A2572905D00B7DEEF /* EditItemViewModelTests.swift */,
+				59EE0DDC257940F600CF1076 /* EditAccountViewModelTests.swift */,
+				599E48D4258BF5CE009A5E44 /* AccountTests.swift */,
+				59D64D3125A60BDA003557EA /* ProfileViewModelTests.swift */,
+				59CAEBC225ABA7E7007F5E93 /* SignUpViewModelTests.swift */,
+				59A5B20F25ACB9B90086D335 /* LogInViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		59B04739256E6C6F0095A8FB = {
 			isa = PBXGroup;
 			children = (
@@ -302,13 +317,9 @@
 			isa = PBXGroup;
 			children = (
 				593B77C425ADA52E00B89E3E /* Mocks */,
+				59ACFE1C25BA137A0025EB70 /* ViewModels */,
+				59ACFE1825BA13750025EB70 /* UserSettingsTests.swift */,
 				59B0475E256E6C720095A8FB /* Info.plist */,
-				595F606A2572905D00B7DEEF /* EditItemViewModelTests.swift */,
-				59EE0DDC257940F600CF1076 /* EditAccountViewModelTests.swift */,
-				599E48D4258BF5CE009A5E44 /* AccountTests.swift */,
-				59D64D3125A60BDA003557EA /* ProfileViewModelTests.swift */,
-				59CAEBC225ABA7E7007F5E93 /* SignUpViewModelTests.swift */,
-				59A5B20F25ACB9B90086D335 /* LogInViewModelTests.swift */,
 			);
 			path = BeansTests;
 			sourceTree = "<group>";
@@ -533,6 +544,7 @@
 				59A5B21025ACB9B90086D335 /* LogInViewModelTests.swift in Sources */,
 				59CAEBC325ABA7E7007F5E93 /* SignUpViewModelTests.swift in Sources */,
 				59E0064425AE7B3A00630AB7 /* APIMock.swift in Sources */,
+				59ACFE1925BA13750025EB70 /* UserSettingsTests.swift in Sources */,
 				59EE0DDD257940F600CF1076 /* EditAccountViewModelTests.swift in Sources */,
 				595F606B2572905D00B7DEEF /* EditItemViewModelTests.swift in Sources */,
 			);

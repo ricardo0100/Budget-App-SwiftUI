@@ -20,12 +20,12 @@ class ProfileViewModel: ObservableObject {
     @Published var email: String = ""
     
     private var cancellables: [AnyCancellable] = []
-    private let userSettings: UserSettings
+    @Published var userSettings: UserSettings
     
     init(userSettings: UserSettings) {
         self.userSettings = userSettings
         userSettings
-            .userPublisher
+            .$user
             .sink { user in
                 self.name = user?.name ?? ""
                 self.email = user?.email ?? ""

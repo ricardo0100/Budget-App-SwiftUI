@@ -73,7 +73,7 @@ class LogInViewModelTests: XCTestCase {
         viewModel.onTapLogIn()
         
         let exp = expectation(description: "Login success")
-        userSettings.userPublisher.sink {
+        userSettings.$user.sink {
             if $0?.name == "Ricardo", $0?.email == "ricardo@gehrke.com", $0?.token == "1234" {
                 exp.fulfill()
             }

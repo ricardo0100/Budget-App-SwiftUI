@@ -28,7 +28,7 @@ class ProfileViewModelTests: XCTestCase {
         let viewModel = makeSUT()
         viewModel.onTapLogout()
         let exp = expectation(description: "UserSettings gets the right user value")
-        userSettings.userPublisher.sink { user in
+        userSettings.$user.sink { user in
             if user == nil {
                 exp.fulfill()
             }

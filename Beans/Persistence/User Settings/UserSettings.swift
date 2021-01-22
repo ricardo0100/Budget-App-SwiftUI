@@ -11,22 +11,28 @@ import Combine
 
 class UserSettings: ObservableObject {
     
-    private let userValueSubject = CurrentValueSubject<User?, Never>(nil)
+    @Published var user: User?
+    private let userDefaults: UserDefaults
     
-    var userPublisher: AnyPublisher<User?, Never> {
-        userValueSubject.eraseToAnyPublisher()
+    init(userDefaults: UserDefaults = .standard) {
+        self.userDefaults = userDefaults
+        user = Self.loadUser(from: userDefaults)
     }
     
     func saveUser(user: User) {
-        print("🏳️‍🌈 saveUser: \(user)")
-        userValueSubject.send(user)
-    }
-    
-    func loadUser() -> User? {
-        return nil
+        let data = try? JSONEncoder().encode(user)
+        userDefaults.set(data, forKey: "user")
+        self.user = user
     }
     
     func deleteUser() {
-        userValueSubject.send(nil)
+        userDefaults.removeObject(forKey: "user")
+        user = nil
+    }
+    
+    private static func loadUser(from userDefaults: UserDefaults) -> User? {
+        guard let data = userDefaults.value(forKey: "user") as? Data else { return nil }
+        let user = try? JSONDecoder().decode(User.self, from: data)
+        return user
     }
 }
