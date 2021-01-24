@@ -24,7 +24,7 @@ struct BeansApp: App {
                         .environment(\.managedObjectContext, persistence.container.viewContext)
                         .environmentObject(userSettings)
                 } else {
-                    SignUpView(viewModel: SignUpViewModel(userSettings: userSettings))
+                    SignUpView(viewModel: SignUpViewModel(api: API(), userSettings: userSettings))
                         .environmentObject(userSettings)
                 }
             }

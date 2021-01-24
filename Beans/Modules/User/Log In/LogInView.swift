@@ -43,10 +43,6 @@ struct LogInView: View {
         .alert(item: $viewModel.alert) { alert -> Alert in
             Alert(title: Text(alert.title), message: Text(alert.message), dismissButton: nil)
         }
-        .onAppear(perform: {
-            viewModel.email = "ricardo0100@gmail.com"
-            viewModel.password = "123456"
-        })
     }
 }
 

@@ -61,11 +61,19 @@ struct SignUpView: View {
                 }
             }.navigationTitle("Welcome")
         }
+        .alert(item: $viewModel.alert) { alert -> Alert in
+            Alert(title: Text(alert.title), message: Text(alert.message), dismissButton: nil)
+        }
+        .onAppear(perform: {
+            viewModel.name = "Ricardo Gehrke"
+            viewModel.email = "ricardo0100@gmail.com"
+            viewModel.password = "123456"
+        })
     }
 }
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(viewModel: SignUpViewModel(userSettings: UserSettings()))
+        SignUpView(viewModel: SignUpViewModel(api: APIPreview(), userSettings: UserSettings()))
     }
 }

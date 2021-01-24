@@ -12,8 +12,10 @@ class LogInViewModel: ObservableObject {
     
     @Published var email: String = ""
     @Published var password: String = ""
+    
     @Published var emailError: String?
     @Published var passwordError: String?
+    
     @Published var alert: AlertMessage?
     
     private let api: APIProtocol
@@ -87,6 +89,8 @@ class LogInViewModel: ObservableObject {
             self.alert = AlertMessage(title: "Connection failed!", message: "Please, verify your internet connection.")
         case .serverError:
             self.alert = AlertMessage(title: "Server error!", message: "Something is wrong with the server, please try again later.")
+        case .badURL:
+            fatalError("Bad URL error")
         }
     }
 }
