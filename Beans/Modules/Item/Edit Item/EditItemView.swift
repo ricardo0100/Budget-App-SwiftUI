@@ -75,10 +75,10 @@ struct EditItemView: View {
 
 struct EditItemView_Previews: PreviewProvider {
     
-    static let item = Item(context: PersistenceController.preview.container.viewContext)
+    static let item = Item(context: CoreDataController.preview.container.viewContext)
     static var previews: some View {
         EditItemView(viewModel: EditItemViewModel(model: .constant(EditItemModel(item: item)),
-                                                  context: PersistenceController.preview.container.viewContext))
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+                                                  context: CoreDataController.preview.container.viewContext))
+            .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
     }
 }

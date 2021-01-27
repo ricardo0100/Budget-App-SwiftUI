@@ -17,14 +17,15 @@ class LogInViewModel: ObservableObject {
     @Published var passwordError: String?
     
     @Published var alert: AlertMessage?
+    @Published var isInProgress: Bool = false
     
     private let api: APIProtocol
-    private let userSettings: UserSettings
+    private let userSession: UserSession
     private var cancellables: [AnyCancellable] = []
     
-    init(api: APIProtocol, userSettings: UserSettings) {
+    init(api: APIProtocol = API(), userSession: UserSession = .shared) {
         self.api = api
-        self.userSettings = userSettings
+        self.userSession = userSession
     }
     
     func onTapLogIn() {
@@ -33,6 +34,7 @@ class LogInViewModel: ObservableObject {
         validatePasswordField()
         
         if emailError == nil && passwordError == nil {
+            isInProgress = true
             api
                 .login(email: email, password: password)
                 .receive(on: DispatchQueue.main)
@@ -43,8 +45,9 @@ class LogInViewModel: ObservableObject {
                     case .finished:
                         break
                     }
+                    self.isInProgress = false
                 } receiveValue: { user in
-                    self.userSettings.saveUser(user: user)
+                    self.userSession.saveUser(user: user)
                 }.store(in: &cancellables)
         }
     }

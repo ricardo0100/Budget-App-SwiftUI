@@ -28,7 +28,7 @@ struct ItemCell: View {
 struct ItemCell_Previews: PreviewProvider {
     
     static var item: Item {
-        let context = PersistenceController.preview.container.viewContext
+        let context = CoreDataController.preview.container.viewContext
         return try! context.fetch(Item.fetchRequest()).randomElement() as! Item
     }
     

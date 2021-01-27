@@ -57,6 +57,6 @@ struct AccountsListView: View {
 struct AccountsView_Previews: PreviewProvider {
     static var previews: some View {
         AccountsListView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
     }
 }

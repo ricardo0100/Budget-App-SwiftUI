@@ -113,7 +113,7 @@ class EditAccountViewModelTests: XCTestCase {
     // MARK: Tests Setup
     
     private let emptyNameError = "Name should not be empty"
-    private var context = PersistenceController.shared.container.viewContext
+    private var context = CoreDataController.shared.container.viewContext
     private var model: EditAccountModel?
     
     private lazy var modelBinding: Binding<EditAccountModel?> = .init { () -> EditAccountModel? in
@@ -123,7 +123,7 @@ class EditAccountViewModelTests: XCTestCase {
     }
     
     override func tearDown() {
-        PersistenceController.shared.deleteEverything()
+        CoreDataController.shared.deleteEverything()
     }
     
     private func createTestAccount(with name: String = "The Bank 💰") -> Account {

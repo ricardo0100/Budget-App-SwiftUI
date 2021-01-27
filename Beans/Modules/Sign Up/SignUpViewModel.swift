@@ -20,34 +20,40 @@ class SignUpViewModel: ObservableObject {
     
     @Published var alert: AlertMessage?
     
-    private let userSettings: UserSettings
+    private let userSession: UserSession
     private let api: APIProtocol
     private var cancellables: [AnyCancellable] = []
     
-    init(api: APIProtocol, userSettings: UserSettings) {
+    init(api: APIProtocol = API(), userSession: UserSession = .shared) {
         self.api = api
-        self.userSettings = userSettings
+        self.userSession = userSession
     }
     
     func onTapSignUp() {
         validateNameField()
         validateEmailField()
         validatePasswordField()
-        if nameError == nil, passwordError == nil, emailError == nil {
-            api
-                .signUp(name: name, email: email, password: password)
-                .sink { completion in
-                    switch completion {
-                    case .failure(let error):
-                        self.handleError(error)
-                    case .finished:
-                        break
-                    }
-                } receiveValue: { user in
-                    self.userSettings.saveUser(user: user)
-                }.store(in: &cancellables)
-
-        }
+        
+        guard nameError == nil,
+              passwordError == nil,
+              emailError == nil else { return }
+        
+        executeLoginRequest()
+    }
+    
+    private func executeLoginRequest() {
+        api
+            .signUp(name: name, email: email, password: password)
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    self.handleError(error)
+                case .finished:
+                    break
+                }
+            } receiveValue: { user in
+                self.userSession.saveUser(user: user)
+            }.store(in: &cancellables)
     }
     
     private func handleError(_ error: APIError) {

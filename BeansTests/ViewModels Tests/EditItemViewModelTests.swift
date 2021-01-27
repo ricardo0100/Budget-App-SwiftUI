@@ -5,11 +5,11 @@
 //  Created by Ricardo Gehrke on 28/11/20.
 //
 
-@testable import Beans
 import XCTest
 import CoreData
 import Combine
 import SwiftUI
+@testable import Beans
 
 class EditItemViewModelTests: XCTestCase {
     
@@ -230,7 +230,7 @@ class EditItemViewModelTests: XCTestCase {
     
     // MARK: Tests Setup
     
-    private var context = PersistenceController.shared.container.viewContext
+    private var context = CoreDataController.shared.container.viewContext
     private var scheduler: TestableSchedulerOf<RunLoop>!
     private var cancellables: [AnyCancellable]!
     private let emptyNameFieldErrorMessage = "Name should not be empty"
@@ -247,7 +247,7 @@ class EditItemViewModelTests: XCTestCase {
     }
     
     override func tearDown() {
-        PersistenceController.shared.deleteEverything()
+        CoreDataController.shared.deleteEverything()
     }
     
     private func createModelWithItem(name: String, value: NSDecimalNumber, account: Account?) -> EditItemModel {

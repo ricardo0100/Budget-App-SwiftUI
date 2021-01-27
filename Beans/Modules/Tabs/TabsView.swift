@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabsView: View {
     
-    @EnvironmentObject var userSettings: UserSettings
+    @ObservedObject var viewModel = TabsViewModel()
     
     var body: some View {
         TabView {
@@ -25,7 +25,7 @@ struct TabsView: View {
                     Text("Items")
                 }
             }
-            ProfileView(viewModel: ProfileViewModel(userSettings: userSettings)).tabItem {
+            ProfileView().tabItem {
                 VStack {
                     Image(systemName: "person")
                     Text("Profile")

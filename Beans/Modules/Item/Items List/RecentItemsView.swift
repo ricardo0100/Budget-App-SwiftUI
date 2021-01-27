@@ -70,6 +70,6 @@ struct RecentItemsView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         RecentItemsView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
     }
 }

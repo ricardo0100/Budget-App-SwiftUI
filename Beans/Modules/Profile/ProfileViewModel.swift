@@ -20,12 +20,12 @@ class ProfileViewModel: ObservableObject {
     @Published var email: String = ""
     
     private var cancellables: [AnyCancellable] = []
-    @Published var userSettings: UserSettings
+    let userSession: UserSession
     
-    init(userSettings: UserSettings) {
-        self.userSettings = userSettings
-        userSettings
-            .$user
+    init(userSession: UserSession = .shared) {
+        self.userSession = userSession
+        userSession
+            .userPublisher
             .sink { user in
                 self.name = user?.name ?? ""
                 self.email = user?.email ?? ""
@@ -33,6 +33,6 @@ class ProfileViewModel: ObservableObject {
     }
     
     func onTapLogout() {
-        userSettings.deleteUser()
+        userSession.deleteUser()
     }
 }

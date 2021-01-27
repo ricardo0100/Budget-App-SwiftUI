@@ -34,7 +34,7 @@ class EditItemViewModel: ObservableObject {
     
     
     init(model: Binding<EditItemModel?> = .constant(.init()),
-         context: NSManagedObjectContext = PersistenceController.shared.container.viewContext,
+         context: NSManagedObjectContext = CoreDataController.shared.container.viewContext,
          locale: Locale = .current,
          scheduler: TestableSchedulerOf<RunLoop> = TestableScheduler(RunLoop.main)) {
         self.scheduler = scheduler

@@ -40,10 +40,10 @@ class AccountTests: XCTestCase {
     
     // MARK: Tests Setup
     
-    private let context = PersistenceController.shared.container.viewContext
+    private let context = CoreDataController.shared.container.viewContext
     
     override func tearDown() {
-        PersistenceController.shared.deleteEverything()
+        CoreDataController.shared.deleteEverything()
     }
     
     @discardableResult private func createAccount() -> Account {

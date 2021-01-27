@@ -9,9 +9,7 @@ import SwiftUI
 
 struct SignUpView: View {
     
-    @EnvironmentObject var userSettings: UserSettings
-    
-    @ObservedObject var viewModel: SignUpViewModel
+    @ObservedObject var viewModel = SignUpViewModel()
     
     var body: some View {
         NavigationView {
@@ -48,9 +46,9 @@ struct SignUpView: View {
                     .listRowBackground(Color.accentColor)
                     .foregroundColor(.white)
                 }
-                Section(header: Text("New user?")) {
+                Section(header: Text("Already have an account?")) {
                     NavigationLink(
-                        destination: LogInView(viewModel: LogInViewModel(api: API(), userSettings: userSettings)),
+                        destination: LogInView(),
                         label: {
                             HStack {
                                 Spacer()
@@ -73,7 +71,8 @@ struct SignUpView: View {
 }
 
 struct SignUpView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        SignUpView(viewModel: SignUpViewModel(api: APIPreview(), userSettings: UserSettings()))
+        SignUpView(viewModel: SignUpViewModel(api: APIPreview(), userSession: .preview))
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LogInView: View {
     
-    @ObservedObject var viewModel: LogInViewModel
+    @ObservedObject var viewModel = LogInViewModel()
     
     var body: some View {
         Form {
@@ -30,7 +30,7 @@ struct LogInView: View {
             Section {
                 HStack {
                     Spacer()
-                    Button("Log In") {
+                    Button("Log in") {
                         viewModel.onTapLogIn()
                     }
                     Spacer()
@@ -43,13 +43,17 @@ struct LogInView: View {
         .alert(item: $viewModel.alert) { alert -> Alert in
             Alert(title: Text(alert.title), message: Text(alert.message), dismissButton: nil)
         }
+        .onAppear(perform: {
+            viewModel.email = "ricardo0100@gmail.com"
+            viewModel.password = "123456"
+        })
     }
 }
 
 struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogInView(viewModel: LogInViewModel(api: APIPreview(), userSettings: UserSettings()))
+            LogInView(viewModel: LogInViewModel(api: APIPreview(), userSession: .preview))
         }
     }
 }

@@ -20,7 +20,7 @@ protocol APIProtocol {
     func signUp(name: String, email: String, password: String) -> AnyPublisher<User, APIError>
 }
 
-struct API: APIProtocol {
+class API: ObservableObject, APIProtocol {
     
     private let baseURLString = "http://127.0.0.1:5000"
     
@@ -32,19 +32,10 @@ struct API: APIProtocol {
         }
         return URLSession.shared
             .dataTaskPublisher(for: request)
-            .tryMap() { element -> Data in
-                let httpResponse = element.response as? HTTPURLResponse
-                switch httpResponse?.statusCode {
-                case 200:
-                    return element.data
-                case 401, 404:
-                    throw APIError.wrongCredentials
-                default:
-                    throw APIError.serverError
-                }
-            }
+            .tryMap() { try self.getData(from: $0) }
             .decode(type: User.self, decoder: JSONDecoder())
-            .mapError { print($0); return $0 as? APIError ?? .serverError }
+            .mapError { $0 as? APIError ?? .serverError }
+            .delay(for: .seconds(1.5), scheduler: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
     
@@ -57,7 +48,7 @@ struct API: APIProtocol {
         }
         return URLSession.shared
             .dataTaskPublisher(for: request)
-            .tryMap() { try getData(from: $0) }
+            .tryMap() { try self.getData(from: $0) }
             .decode(type: User.self, decoder: JSONDecoder())
             .mapError { $0 as? APIError ?? .serverError }
             .eraseToAnyPublisher()
@@ -87,7 +78,7 @@ struct API: APIProtocol {
     }
 }
 
-struct APIPreview: APIProtocol {
+class APIPreview: ObservableObject, APIProtocol {
     func login(email: String, password: String) -> AnyPublisher<User, APIError> {
         Just(User(name: "Ricardo", email: "ric@rdo.com", token: "1234"))
             .mapError { _ in APIError.wrongCredentials }

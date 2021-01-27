@@ -21,7 +21,7 @@ class EditAccountViewModel: ObservableObject {
     private let context: NSManagedObjectContext
     
     init(modelBinding: Binding<EditAccountModel?>,
-         context: NSManagedObjectContext = PersistenceController.shared.container.viewContext) {
+         context: NSManagedObjectContext = CoreDataController.shared.container.viewContext) {
         self.modelBinding = modelBinding
         self.context = context
     }

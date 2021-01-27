@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @EnvironmentObject var settings: UserSettings
-    
-    @ObservedObject var viewModel: ProfileViewModel
+    @ObservedObject var viewModel = ProfileViewModel()
     
     var body: some View {
         NavigationView {
@@ -37,6 +35,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(viewModel: ProfileViewModel(userSettings: UserSettings()))
+        ProfileView(viewModel: ProfileViewModel(userSession: .preview))
     }
 }

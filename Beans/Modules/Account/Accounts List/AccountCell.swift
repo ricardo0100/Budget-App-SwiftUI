@@ -69,7 +69,7 @@ struct AccountCell: View {
 struct AccountCell_Previews: PreviewProvider {
     
     static var accounts: [Account] {
-        let context = PersistenceController.preview.container.viewContext
+        let context = CoreDataController.preview.container.viewContext
         return try! context.fetch(Account.fetchRequest())
     }
     
