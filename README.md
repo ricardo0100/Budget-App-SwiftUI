@@ -24,7 +24,18 @@ Every module follows the **MVVM** pattern with one or more Views, and one ViewMo
 #### Dependency Injection
 
 The `ViewModel` should receive its dependencies in the `init()`. This allows `ViewModel` unit tests.
-The injection should be done in the `View` that owns the `ViewModel`, where the available dependecies should be available using the `@EnvironmentObject` property wrapper.
-This is necessary to use SwiftUI's `@FetchedRequest`.
+The current dependencies in the project are:
 
-#### Example
+- `APIProtocol`: 
+  - `API`: real implementation.
+  - `APIMock` for `ViewModel` unit tests.
+  - `APIPreview` for SwiftUI's previews.
+- `UserSession`: 
+  - `UserSession.shared`: real implementation.
+  - `UserSession(userDefaults: #mockedUserDefaults)`: for `ViewModel` unit tests.
+  - `UserSession.preview`: for SwiftUI's previews.
+- `CoreDataController`:
+  - `CoreDataController.shared`: real implementation.
+  - `CoreDataController.preview`: for SwiftUI's previews.
+  - `CoreDataController(inMemory: true)`: for unit tests.
+  - Also the Core Data `NSManagedObjectContext`, used by SwiftUI's `@FetchedRequest` by some Views, is injected in the view hierarchy in the `BeansApp` using SwitUI's environment object.
