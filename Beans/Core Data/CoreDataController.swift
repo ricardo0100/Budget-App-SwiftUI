@@ -7,7 +7,7 @@
 
 import CoreData
 
-struct CoreDataController {
+class CoreDataController {
     
     static let shared = CoreDataController()
     
@@ -16,6 +16,8 @@ struct CoreDataController {
         createPreviewContent(in: controller.container.viewContext)
         return controller
     }()
+    
+    static let tests = CoreDataController(inMemory: true)
     
     let container: NSPersistentContainer
 
@@ -34,11 +36,12 @@ struct CoreDataController {
     
     func deleteEverything() {
         do {
-            let deleteItems = NSBatchDeleteRequest(fetchRequest: Item.fetchRequest())
-            try container.persistentStoreCoordinator.execute(deleteItems, with: container.viewContext)
+            let context = container.viewContext
+            let items = try context.fetch(Item.allItemsFetchRequest)
+            items.forEach { context.delete($0) }
             
-            let deleteAccounts = NSBatchDeleteRequest(fetchRequest: Account.fetchRequest())
-            try container.persistentStoreCoordinator.execute(deleteAccounts, with: container.viewContext)
+            let accounts = try context.fetch(Account.allAccountsFetchRequest)
+            accounts.forEach { context.delete($0) }
             
             try container.viewContext.save()
         } catch {

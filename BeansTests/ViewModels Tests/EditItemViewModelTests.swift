@@ -13,9 +13,29 @@ import SwiftUI
 
 class EditItemViewModelTests: XCTestCase {
     
+    private var context = CoreDataController.tests.container.viewContext
+    private var scheduler: TestableSchedulerOf<RunLoop>!
+    private var cancellables: [AnyCancellable]!
+    private let emptyNameFieldErrorMessage = "Name should not be empty"
+    private var editItemModel: EditItemModel?
+    private lazy var editItemModelBinding: Binding<EditItemModel?> = .init { () -> EditItemModel? in
+        return self.editItemModel
+    } set: { model in
+        self.editItemModel = model
+    }
+    
+    override func setUp() {
+        scheduler = TestableScheduler(RunLoop.main, isTesting: true)
+        cancellables = []
+        CoreDataController.tests.deleteEverything()
+    }
+    
     private func makeSUT(model: EditItemModel? = nil, locale: Locale = .current) -> EditItemViewModel {
         editItemModelBinding.wrappedValue = model
-        let viewModel = EditItemViewModel(model: editItemModelBinding, locale: locale, scheduler: scheduler)
+        let viewModel = EditItemViewModel(model: editItemModelBinding,
+                                          context: context,
+                                          locale: locale,
+                                          scheduler: scheduler)
         viewModel.onAppear()
         return viewModel
     }
@@ -228,27 +248,7 @@ class EditItemViewModelTests: XCTestCase {
         XCTAssert(newTimestamp! > oldTimestamp!)
     }
     
-    // MARK: Tests Setup
-    
-    private var context = CoreDataController.shared.container.viewContext
-    private var scheduler: TestableSchedulerOf<RunLoop>!
-    private var cancellables: [AnyCancellable]!
-    private let emptyNameFieldErrorMessage = "Name should not be empty"
-    private var editItemModel: EditItemModel?
-    private lazy var editItemModelBinding: Binding<EditItemModel?> = .init { () -> EditItemModel? in
-        return self.editItemModel
-    } set: { model in
-        self.editItemModel = model
-    }
-    
-    override func setUp() {
-        scheduler = TestableScheduler(RunLoop.main, isTesting: true)
-        cancellables = []
-    }
-    
-    override func tearDown() {
-        CoreDataController.shared.deleteEverything()
-    }
+    // MARK: Helpers
     
     private func createModelWithItem(name: String, value: NSDecimalNumber, account: Account?) -> EditItemModel {
         let item = Item(context: context)

@@ -18,6 +18,7 @@ enum APIError: Error {
 protocol APIProtocol {
     func login(email: String, password: String) -> AnyPublisher<User, APIError>
     func signUp(name: String, email: String, password: String) -> AnyPublisher<User, APIError>
+    func getAccounts(after timestamp: Date) -> AnyPublisher<[Account], APIError>
 }
 
 class API: ObservableObject, APIProtocol {
@@ -35,7 +36,6 @@ class API: ObservableObject, APIProtocol {
             .tryMap() { try self.getData(from: $0) }
             .decode(type: User.self, decoder: JSONDecoder())
             .mapError { $0 as? APIError ?? .serverError }
-            .delay(for: .seconds(1.5), scheduler: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
     
@@ -53,6 +53,12 @@ class API: ObservableObject, APIProtocol {
             .mapError { $0 as? APIError ?? .serverError }
             .eraseToAnyPublisher()
     }
+    
+    func getAccounts(after timestamp: Date) -> AnyPublisher<[Account], APIError> {
+        Fail(error: APIError.badURL).eraseToAnyPublisher()
+    }
+    
+    // MARK: Private
     
     private func createURLRequest(path: String, queryItems: [URLQueryItem], method: String = "GET") -> URLRequest? {
         guard let url = URL(string: baseURLString + path) else { return nil }
@@ -79,6 +85,12 @@ class API: ObservableObject, APIProtocol {
 }
 
 class APIPreview: ObservableObject, APIProtocol {
+    func getAccounts(after timestamp: Date) -> AnyPublisher<[Account], APIError> {
+        Just([Account(context: CoreDataController.preview.container.viewContext)])
+            .mapError { _ in APIError.wrongCredentials }
+            .eraseToAnyPublisher()
+    }
+    
     func login(email: String, password: String) -> AnyPublisher<User, APIError> {
         Just(User(name: "Ricardo", email: "ric@rdo.com", token: "1234"))
             .mapError { _ in APIError.wrongCredentials }

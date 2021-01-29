@@ -10,6 +10,12 @@ import CoreData
 
 extension Account {
     
+    static var allAccountsFetchRequest: NSFetchRequest<Account> {
+        let request = NSFetchRequest<Account>(entityName: "Account")
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: false)]
+        return request
+    }
+    
     func sum() -> NSDecimalNumber {
         let expression = NSExpressionDescription()
         expression.expression =  NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "value")])

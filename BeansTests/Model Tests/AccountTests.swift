@@ -6,10 +6,17 @@
 //
 
 import XCTest
+import CoreData
 @testable import Beans
 
 class AccountTests: XCTestCase {
 
+    var context = CoreDataController.tests.container.viewContext
+    
+    override func setUp() {
+        CoreDataController.tests.deleteEverything()
+    }
+    
     func test_accountHasNoItems_shouldReturnZeroInSum() {
         let account = createAccount()
         XCTAssertEqual(account.sum(), 0)
@@ -39,12 +46,6 @@ class AccountTests: XCTestCase {
     }
     
     // MARK: Tests Setup
-    
-    private let context = CoreDataController.shared.container.viewContext
-    
-    override func tearDown() {
-        CoreDataController.shared.deleteEverything()
-    }
     
     @discardableResult private func createAccount() -> Account {
         let account = Account(context: context)

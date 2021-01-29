@@ -13,13 +13,26 @@ import CoreData
 
 class EditAccountViewModelTests: XCTestCase {
     
+    private var model: EditAccountModel?
+    
+    override func setUp() {
+        CoreDataController.tests.deleteEverything()
+    }
+    
+    private lazy var modelBinding: Binding<EditAccountModel?> = .init { () -> EditAccountModel? in
+        return self.model
+    } set: { model in
+        self.model = model
+    }
+    
     private func makeSUT(withExistingAccount: Bool = false) -> EditAccountViewModel {
         if withExistingAccount {
             modelBinding.wrappedValue = EditAccountModel(account: createTestAccount())
         } else {
             modelBinding.wrappedValue = EditAccountModel()
         }
-        return EditAccountViewModel(modelBinding: modelBinding)
+        return EditAccountViewModel(modelBinding: modelBinding,
+                                    context: CoreDataController.tests.container.viewContext)
     }
     
     func test_whenIsNewAccount_shouldShowNewAccountInTitle() {
@@ -56,7 +69,7 @@ class EditAccountViewModelTests: XCTestCase {
         let viewModel = makeSUT()
         viewModel.onAppear()
         viewModel.onSave()
-        XCTAssertEqual(viewModel.nameError, emptyNameError)
+        XCTAssertEqual(viewModel.nameError, "Name should not be empty")
     }
     
     func test_whenIsShowingNameFieldEmptyError_andNameFieldIsNotEmpty_andTappedSave_shouldNotShowError() {
@@ -110,23 +123,10 @@ class EditAccountViewModelTests: XCTestCase {
         XCTAssertEqual(accounts.first?.name, "Test")
     }
     
-    // MARK: Tests Setup
-    
-    private let emptyNameError = "Name should not be empty"
-    private var context = CoreDataController.shared.container.viewContext
-    private var model: EditAccountModel?
-    
-    private lazy var modelBinding: Binding<EditAccountModel?> = .init { () -> EditAccountModel? in
-        return self.model
-    } set: { model in
-        self.model = model
-    }
-    
-    override func tearDown() {
-        CoreDataController.shared.deleteEverything()
-    }
+    // MARK: Helpers
     
     private func createTestAccount(with name: String = "The Bank 💰") -> Account {
+        let context = CoreDataController.tests.container.viewContext
         let account = Account(context: context)
         account.name = name
         account.color = "#FF0000"
@@ -135,6 +135,7 @@ class EditAccountViewModelTests: XCTestCase {
     }
     
     private func retrieveAllAccounts() -> [Account] {
+        let context = CoreDataController.tests.container.viewContext
         return try! context.fetch(Account.fetchRequest())
     }
 }

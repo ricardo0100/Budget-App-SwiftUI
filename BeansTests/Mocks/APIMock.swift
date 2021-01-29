@@ -9,12 +9,14 @@ import Foundation
 import Combine
 @testable import Beans
 
+// TODO: Improve the way this class is created and configured. Maybe "Builder" Design Pattern
 class APIMock: APIProtocol {
     
     private let user: User?
     private let mockError: APIError?
     var didCallLogin = false
     var didCallSignUp = false
+    var didCallGetAccounts = false
     
     init(mockUser: User? = nil, mockError: APIError? = nil) {
         self.user = mockUser
@@ -46,6 +48,13 @@ class APIMock: APIProtocol {
                 .eraseToAnyPublisher()
         }
         return Fail(error: APIError.wrongCredentials)
+            .eraseToAnyPublisher()
+    }
+    
+    func getAccounts(after timestamp: Date) -> AnyPublisher<[Account], APIError> {
+        didCallGetAccounts = true
+        return Just([])
+            .mapError { _ in APIError .wrongCredentials }
             .eraseToAnyPublisher()
     }
 }
