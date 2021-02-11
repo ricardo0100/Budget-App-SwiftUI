@@ -15,12 +15,7 @@ class SignUpViewModelTests: XCTestCase {
     
     private var userSession: UserSession!
     
-    private lazy var urlSession: URLSession = {
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [URLProtocolMock.self]
-        let urlSession = URLSession(configuration: config)
-        return urlSession
-    }()
+    private let urlSession: URLSession = URLProtocolMock.createMockedURLSession()
     
     override func setUp() {
         userDefaults = UserDefaults(suiteName: #file)

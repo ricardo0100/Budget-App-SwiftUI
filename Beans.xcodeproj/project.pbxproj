@@ -56,7 +56,6 @@
 		59D64D3225A60BDA003557EA /* ProfileViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D64D3125A60BDA003557EA /* ProfileViewModelTests.swift */; };
 		59DE0ACD25D49562001B89DF /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DE0ACC25D49562001B89DF /* URLProtocolMock.swift */; };
 		59E0064025ADA8F300630AB7 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E0063F25ADA8F300630AB7 /* API.swift */; };
-		59E0064425AE7B3A00630AB7 /* APIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E0064325AE7B3A00630AB7 /* APIMock.swift */; };
 		59E6A66D25A5E8FB007638D0 /* RecentItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B04747256E6C6F0095A8FB /* RecentItemsView.swift */; };
 		59E6A67225A5E99C007638D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59B0474C256E6C720095A8FB /* Preview Assets.xcassets */; };
 		59E7518825C37E010010F558 /* APISyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E7518725C37E010010F558 /* APISyncTests.swift */; };
@@ -130,7 +129,6 @@
 		59D64D3125A60BDA003557EA /* ProfileViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelTests.swift; sourceTree = "<group>"; };
 		59DE0ACC25D49562001B89DF /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
 		59E0063F25ADA8F300630AB7 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		59E0064325AE7B3A00630AB7 /* APIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMock.swift; sourceTree = "<group>"; };
 		59E7518725C37E010010F558 /* APISyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISyncTests.swift; sourceTree = "<group>"; };
 		59E7518D25C37E260010F558 /* APISync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISync.swift; sourceTree = "<group>"; };
 		59EE0DDC257940F600CF1076 /* EditAccountViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountViewModelTests.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 		593B77C425ADA52E00B89E3E /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				59E0064325AE7B3A00630AB7 /* APIMock.swift */,
 				591458FC25D4582700D9C8B7 /* URLSessionMock.swift */,
 				59DE0ACC25D49562001B89DF /* URLProtocolMock.swift */,
 			);
@@ -587,7 +584,6 @@
 				59A5B21025ACB9B90086D335 /* LogInViewModelTests.swift in Sources */,
 				59CAEBC325ABA7E7007F5E93 /* SignUpViewModelTests.swift in Sources */,
 				59DE0ACD25D49562001B89DF /* URLProtocolMock.swift in Sources */,
-				59E0064425AE7B3A00630AB7 /* APIMock.swift in Sources */,
 				592FE3C425C15AA400E2F227 /* MainViewModelTests.swift in Sources */,
 				59ACFE1925BA13750025EB70 /* UserSessionTests.swift in Sources */,
 				59ACFE2B25BEE2220025EB70 /* XCTestCase+Extension.swift in Sources */,

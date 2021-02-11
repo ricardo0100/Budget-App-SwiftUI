@@ -37,6 +37,13 @@ class URLProtocolMock: URLProtocol {
         }
     }
     
+    static func createMockedURLSession() -> URLSession {
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [Self.self]
+        let urlSession = URLSession(configuration: config)
+        return urlSession
+    }
+    
     static func mockAPIWithSuccessfulLoginOrSignUp() {
         requestHandler = { request in
             let exampleData = """
