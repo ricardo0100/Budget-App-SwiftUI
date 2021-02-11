@@ -53,7 +53,7 @@ struct LogInView: View {
 struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogInView(viewModel: LogInViewModel(api: APIPreview(), userSession: .preview))
+            LogInView(viewModel: LogInViewModel(urlSession: .shared, userSession: .preview))
         }
     }
 }

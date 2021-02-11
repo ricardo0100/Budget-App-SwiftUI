@@ -16,7 +16,8 @@ class APIMock: APIProtocol {
     private let mockError: APIError?
     var didCallLogin = false
     var didCallSignUp = false
-    var didCallGetAccounts = false
+    var getAccountsCalls = 0
+    var postAccountsCalls = 0
     
     init(mockUser: User? = nil, mockError: APIError? = nil) {
         self.user = mockUser
@@ -52,9 +53,21 @@ class APIMock: APIProtocol {
     }
     
     func getAccounts(after timestamp: Date) -> AnyPublisher<[Account], APIError> {
-        didCallGetAccounts = true
-        return Just([])
-            .mapError { _ in APIError .wrongCredentials }
+        return Future { promise in
+            print("💔")
+            self.getAccountsCalls += 1
+            
+            if let error = self.mockError {
+                promise(.failure(error))
+            } else {
+                promise(.success([]))
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func postAccounts(accounts: [Account]) -> AnyPublisher<[Account], APIError> {
+        postAccountsCalls += 1
+        return Fail(error: APIError.badURL)
             .eraseToAnyPublisher()
     }
 }

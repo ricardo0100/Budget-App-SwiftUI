@@ -13,7 +13,13 @@ class LogInViewModelTests: XCTestCase {
     
     private var userDefaults: UserDefaults!
     private var userSession: UserSession!
-    private var api: APIMock!
+    
+    private lazy var urlSession: URLSession = {
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [URLProtocolMock.self]
+        let urlSession = URLSession(configuration: config)
+        return urlSession
+    }()
     
     override func setUp() {
         userDefaults = UserDefaults(suiteName: #file)
@@ -21,9 +27,8 @@ class LogInViewModelTests: XCTestCase {
         userSession = UserSession(userDefaults: userDefaults)
     }
     
-    private func makeSUT(apiMock: APIMock = APIMock()) -> LogInViewModel {
-        self.api = apiMock
-        return LogInViewModel(api: apiMock, userSession: userSession)
+    private func makeSUT() -> LogInViewModel {
+        return LogInViewModel(urlSession: urlSession, userSession: userSession)
     }
     
     func test_whenEmailFieldIsEmpty_andTapSingUp_shouldShowErrorMessage() {
@@ -31,7 +36,6 @@ class LogInViewModelTests: XCTestCase {
         viewModel.onTapLogIn()
         
         XCTAssertEqual(viewModel.emailError, "E-mail field should not be empty")
-        XCTAssertFalse(api.didCallLogin)
     }
     
     func test_whenPasswordIsEmpty_andTapSignUp_shouldShowErrorMessage() {
@@ -40,7 +44,6 @@ class LogInViewModelTests: XCTestCase {
         viewModel.onTapLogIn()
         
         XCTAssertEqual(viewModel.passwordError, "Password field should not be empty")
-        XCTAssertFalse(api.didCallLogin)
     }
     
     func test_whenEmailFieldIsNotValid_andTapSingUp_shouldShowErrorMessage() {
@@ -50,7 +53,6 @@ class LogInViewModelTests: XCTestCase {
             viewModel.onTapLogIn()
             
             XCTAssertEqual(viewModel.emailError, "Inform a valid e-mail")
-            XCTAssertFalse(api.didCallLogin)
         }
     }
     
@@ -61,7 +63,6 @@ class LogInViewModelTests: XCTestCase {
         viewModel.onTapLogIn()
         
         XCTAssertEqual(viewModel.passwordError, "Password should cointain at least 6 characters")
-        XCTAssertFalse(api.didCallLogin)
     }
     
     func test_whenErrorsAreShowing_andFieldsAreRight_andUserTapsSignUp_shouldRemoveErrors() {
@@ -77,16 +78,16 @@ class LogInViewModelTests: XCTestCase {
         
         XCTAssertNil(viewModel.emailError)
         XCTAssertNil(viewModel.passwordError)
-        XCTAssertTrue(api.didCallLogin)
     }
     
-    func test_whenFieldsAreCorrect_APIReturnsSuccess_andUserTapsLogin_shouldSaveUserInUserSettings() {
-        let apiMock = APIMock(mockUser: User(name: "Ricardo", email: "ricardo@gehrke.com", token: "1234"))
-        let viewModel = makeSUT(apiMock: apiMock)
+    func test_whenAPIReturnsSuccess_shouldSaveUserInUserSettings() {
+        URLProtocolMock.mockAPIWithSuccessfulLoginOrSignUp()
+        
+        let viewModel = makeSUT()
         viewModel.email = "ricardo@gehrke.com"
         viewModel.password = "123456"
         
-        let expectedUser = User(name: "Ricardo", email: "ricardo@gehrke.com", token: "1234")
+        let expectedUser = User(name: "Ricardo", email: "ricardo@gehrke.com", token: "123456")
         let exp = expectValues(of: userSession.userPublisher, equalsTo: [nil, expectedUser])
         
         viewModel.onTapLogIn()
@@ -94,8 +95,9 @@ class LogInViewModelTests: XCTestCase {
     }
     
     func test_whenAPIReturnsUnauthorizedError_shouldShowErrorMessage() {
-        let apiMock = APIMock(mockError: .wrongCredentials)
-        let viewModel = makeSUT(apiMock: apiMock)
+        URLProtocolMock.mockAPIWithNotFoundError()
+        
+        let viewModel = makeSUT()
         viewModel.email = "ricardo@gehrke.com"
         viewModel.password = "123456"
         
@@ -106,22 +108,10 @@ class LogInViewModelTests: XCTestCase {
         wait(for: [exp.expectation], timeout: 1)
     }
     
-    func test_whenAPIReturnsNoConnectionError_shouldShowErrorMessage() {
-        let apiMock = APIMock(mockError: .noConnection)
-        let viewModel = makeSUT(apiMock: apiMock)
-        viewModel.email = "ricardo@gehrke.com"
-        viewModel.password = "123456"
-        
-        let expectedAlert = AlertMessage(title: "Connection failed!", message: "Please, verify your internet connection.")
-        let exp = expectValues(of: viewModel.$alert, equalsTo: [nil, expectedAlert])
-        
-        viewModel.onTapLogIn()
-        wait(for: [exp.expectation], timeout: 1)
-    }
-    
     func test_whenAPIReturnsServerError_shouldShowErrorMessage() {
-        let apiMock = APIMock(mockError: .serverError)
-        let viewModel = makeSUT(apiMock: apiMock)
+        URLProtocolMock.mockAPIWithServerError()
+        
+        let viewModel = makeSUT()
         viewModel.email = "ricardo@gehrke.com"
         viewModel.password = "123456"
         
@@ -133,8 +123,7 @@ class LogInViewModelTests: XCTestCase {
     }
     
     func test_whenTapsLogin_ProgressViewShouldBeUpdated() {
-        let apiMock = APIMock(mockError: .serverError)
-        let viewModel = makeSUT(apiMock: apiMock)
+        let viewModel = makeSUT()
         viewModel.email = "ricardo@gehrke.com"
         viewModel.password = "123456"
         

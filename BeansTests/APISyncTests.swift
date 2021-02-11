@@ -9,12 +9,11 @@ import XCTest
 @testable import Beans
 
 class APISyncTests: XCTestCase {
-
+    
     private var apiMock: APIMock!
     private var coreDataController: CoreDataController!
     
     override func setUp() {
-        apiMock = APIMock()
         coreDataController = CoreDataController(inMemory: true)
     }
     
@@ -22,9 +21,31 @@ class APISyncTests: XCTestCase {
         return APISync(api: apiMock, coreDataController: coreDataController)
     }
     
-    func test_APISyncIsIdle_andStartsSync_shouldMakeCorrectAPIRequestsOrder() {
+    func test_APISyncIsIdle_andStartsSync_shouldCallGetAccounts() {
+        apiMock = APIMock()
         let sync = makeSUT()
+        
         sync.start()
-        XCTAssertTrue(apiMock.didCallGetAccounts)
+        
+        XCTAssertEqual(apiMock.getAccountsCalls, 1)
+    }
+    
+    func test_GetAccountsSucceeds_shouldCallPostAccounts() {
+        apiMock = APIMock()
+        let sync = makeSUT()
+        
+        sync.start()
+        
+        XCTAssertEqual(apiMock.getAccountsCalls, 1)
+        XCTAssertEqual(apiMock.postAccountsCalls, 1)
+    }
+    
+    func test_GetAccountsFails_shouldCallItAgain3TimesBeforeFailing() {
+        apiMock = APIMock(mockError: .serverError)
+        let sync = makeSUT()
+        
+        sync.start()
+        
+//        XCTAssertEqual(apiMock.getAccountsCalls, 3)
     }
 }

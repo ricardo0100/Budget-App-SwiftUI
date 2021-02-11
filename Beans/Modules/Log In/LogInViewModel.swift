@@ -23,8 +23,8 @@ class LogInViewModel: ObservableObject {
     private let userSession: UserSession
     private var cancellables: [AnyCancellable] = []
     
-    init(api: APIProtocol = API(), userSession: UserSession = .shared) {
-        self.api = api
+    init(urlSession: URLSession = .shared, userSession: UserSession = .shared) {
+        self.api = API(urlSession: urlSession)
         self.userSession = userSession
     }
     
@@ -88,8 +88,6 @@ class LogInViewModel: ObservableObject {
         switch error {
         case .wrongCredentials:
             self.alert = AlertMessage(title: "Login failed!", message: "The credentials provided are incorrect.")
-        case .noConnection:
-            self.alert = AlertMessage(title: "Connection failed!", message: "Please, verify your internet connection.")
         case .serverError:
             self.alert = AlertMessage(title: "Server error!", message: "Something is wrong with the server, please try again later.")
         case .badURL:

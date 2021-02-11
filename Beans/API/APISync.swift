@@ -8,7 +8,11 @@
 import Foundation
 import Combine
 
-struct APISync {
+//enum APISyncResponse<T: Decodable> {
+//
+//}
+
+class APISync {
     
     private let api: APIProtocol
     private let coreDataController: CoreDataController
@@ -20,6 +24,14 @@ struct APISync {
     }
     
     func start() {
-        api.getAccounts(after: Date())
+        api
+            .getAccounts(after: Date())
+            .retry(3)
+            .flatMap { _ in self.api.postAccounts(accounts: []) }
+            .sink { completion in
+                print(completion)
+            } receiveValue: { accounts in
+                print(accounts)
+            }.store(in: &cancellables)
     }
 }

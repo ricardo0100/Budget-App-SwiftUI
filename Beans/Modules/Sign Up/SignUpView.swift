@@ -73,6 +73,6 @@ struct SignUpView: View {
 struct SignUpView_Previews: PreviewProvider {
     
     static var previews: some View {
-        SignUpView(viewModel: SignUpViewModel(api: APIPreview(), userSession: .preview))
+        SignUpView(viewModel: SignUpViewModel(urlSession: .shared, userSession: .preview))
     }
 }

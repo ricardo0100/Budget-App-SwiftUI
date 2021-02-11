@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		591458FD25D4582700D9C8B7 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591458FC25D4582700D9C8B7 /* URLSessionMock.swift */; };
 		592C748725A5AF6B009C3C2C /* SelectAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592C748625A5AF6B009C3C2C /* SelectAccountCell.swift */; };
 		592F9E3625AB06520032EE37 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 592F9E3525AB06520032EE37 /* README.md */; };
 		592FE3C025C15A9100E2F227 /* TabsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592FE3BF25C15A9100E2F227 /* TabsViewModelTests.swift */; };
@@ -53,6 +54,7 @@
 		59D64D2825A6085D003557EA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D64D2725A6085D003557EA /* ProfileView.swift */; };
 		59D64D2E25A6086A003557EA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D64D2D25A6086A003557EA /* ProfileViewModel.swift */; };
 		59D64D3225A60BDA003557EA /* ProfileViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D64D3125A60BDA003557EA /* ProfileViewModelTests.swift */; };
+		59DE0ACD25D49562001B89DF /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DE0ACC25D49562001B89DF /* URLProtocolMock.swift */; };
 		59E0064025ADA8F300630AB7 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E0063F25ADA8F300630AB7 /* API.swift */; };
 		59E0064425AE7B3A00630AB7 /* APIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E0064325AE7B3A00630AB7 /* APIMock.swift */; };
 		59E6A66D25A5E8FB007638D0 /* RecentItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B04747256E6C6F0095A8FB /* RecentItemsView.swift */; };
@@ -73,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		591458FC25D4582700D9C8B7 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		592C748625A5AF6B009C3C2C /* SelectAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountCell.swift; sourceTree = "<group>"; };
 		592F9E3525AB06520032EE37 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		592FE3BF25C15A9100E2F227 /* TabsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewModelTests.swift; sourceTree = "<group>"; };
@@ -125,6 +128,7 @@
 		59D64D2725A6085D003557EA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		59D64D2D25A6086A003557EA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		59D64D3125A60BDA003557EA /* ProfileViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelTests.swift; sourceTree = "<group>"; };
+		59DE0ACC25D49562001B89DF /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
 		59E0063F25ADA8F300630AB7 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		59E0064325AE7B3A00630AB7 /* APIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMock.swift; sourceTree = "<group>"; };
 		59E7518725C37E010010F558 /* APISyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISyncTests.swift; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				59E0064325AE7B3A00630AB7 /* APIMock.swift */,
+				591458FC25D4582700D9C8B7 /* URLSessionMock.swift */,
+				59DE0ACC25D49562001B89DF /* URLProtocolMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -577,8 +583,10 @@
 			files = (
 				59D64D3225A60BDA003557EA /* ProfileViewModelTests.swift in Sources */,
 				599E48D5258BF5CE009A5E44 /* AccountTests.swift in Sources */,
+				591458FD25D4582700D9C8B7 /* URLSessionMock.swift in Sources */,
 				59A5B21025ACB9B90086D335 /* LogInViewModelTests.swift in Sources */,
 				59CAEBC325ABA7E7007F5E93 /* SignUpViewModelTests.swift in Sources */,
+				59DE0ACD25D49562001B89DF /* URLProtocolMock.swift in Sources */,
 				59E0064425AE7B3A00630AB7 /* APIMock.swift in Sources */,
 				592FE3C425C15AA400E2F227 /* MainViewModelTests.swift in Sources */,
 				59ACFE1925BA13750025EB70 /* UserSessionTests.swift in Sources */,

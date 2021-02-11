@@ -24,8 +24,8 @@ class SignUpViewModel: ObservableObject {
     private let api: APIProtocol
     private var cancellables: [AnyCancellable] = []
     
-    init(api: APIProtocol = API(), userSession: UserSession = .shared) {
-        self.api = api
+    init(urlSession: URLSession = .shared, userSession: UserSession = .shared) {
+        self.api = API(urlSession: urlSession)
         self.userSession = userSession
     }
     
@@ -60,8 +60,6 @@ class SignUpViewModel: ObservableObject {
         switch error {
         case .wrongCredentials:
             self.alert = AlertMessage(title: "Sign Up failed!", message: "The information provided is incorrect.")
-        case .noConnection:
-            self.alert = AlertMessage(title: "Connection failed!", message: "Please, verify your internet connection.")
         case .serverError:
             self.alert = AlertMessage(title: "Server error!", message: "Something is wrong with the server, please try again later.")
         case .badURL:
