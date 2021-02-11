@@ -19,7 +19,7 @@ class LogInViewModel: ObservableObject {
     @Published var alert: AlertMessage?
     @Published var isInProgress: Bool = false
     
-    private let api: APIProtocol
+    private let api: API
     private let userSession: UserSession
     private var cancellables: [AnyCancellable] = []
     

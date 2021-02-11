@@ -14,14 +14,7 @@ enum APIError: Error {
     case badURL
 }
 
-protocol APIProtocol {
-    func login(email: String, password: String) -> AnyPublisher<User, APIError>
-    func signUp(name: String, email: String, password: String) -> AnyPublisher<User, APIError>
-    func getAccounts(after timestamp: Date) -> AnyPublisher<[Account], APIError>
-    func postAccounts(accounts: [Account]) -> AnyPublisher<[Account], APIError>
-}
-
-class API: ObservableObject, APIProtocol {
+class API: ObservableObject {
     
     private let baseURLString = "http://127.0.0.1:5000"
     
@@ -92,31 +85,5 @@ class API: ObservableObject, APIProtocol {
         default:
             throw APIError.serverError
         }
-    }
-}
-
-class APIPreview: ObservableObject, APIProtocol {
-    
-    func login(email: String, password: String) -> AnyPublisher<User, APIError> {
-        Just(User(name: "Ricardo", email: "ric@rdo.com", token: "1234"))
-            .mapError { _ in APIError.wrongCredentials }
-            .eraseToAnyPublisher()
-    }
-    
-    func signUp(name: String, email: String, password: String) -> AnyPublisher<User, APIError> {
-        Just(User(name: "Ricardo", email: "ric@rdo.com", token: "1234"))
-            .mapError { _ in APIError.wrongCredentials }
-            .eraseToAnyPublisher()
-    }
-    
-    func getAccounts(after timestamp: Date) -> AnyPublisher<[Account], APIError> {
-        Just([Account(context: CoreDataController.preview.container.viewContext)])
-            .mapError { _ in APIError.wrongCredentials }
-            .eraseToAnyPublisher()
-    }
-    
-    func postAccounts(accounts: [Account]) -> AnyPublisher<[Account], APIError> {
-        Fail(error: APIError.badURL)
-            .eraseToAnyPublisher()
     }
 }

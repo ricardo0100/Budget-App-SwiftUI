@@ -21,7 +21,7 @@ class SignUpViewModel: ObservableObject {
     @Published var alert: AlertMessage?
     
     private let userSession: UserSession
-    private let api: APIProtocol
+    private let api: API
     private var cancellables: [AnyCancellable] = []
     
     init(urlSession: URLSession = .shared, userSession: UserSession = .shared) {

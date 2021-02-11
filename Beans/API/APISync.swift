@@ -14,11 +14,11 @@ import Combine
 
 class APISync {
     
-    private let api: APIProtocol
+    private let api: API
     private let coreDataController: CoreDataController
     private var cancellables: [AnyCancellable] = []
     
-    init(api: APIProtocol, coreDataController: CoreDataController) {
+    init(api: API, coreDataController: CoreDataController) {
         self.api = api
         self.coreDataController = coreDataController
     }
