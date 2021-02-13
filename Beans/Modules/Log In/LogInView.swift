@@ -28,15 +28,9 @@ struct LogInView: View {
                               useSecureField: true)
             }
             Section {
-                HStack {
-                    Spacer()
-                    Button("Log in") {
-                        viewModel.onTapLogIn()
-                    }
-                    Spacer()
-                }
-                .listRowBackground(Color.accentColor)
-                .foregroundColor(.white)
+                FormButton(action: viewModel.onTapLogIn, text: "Log in",
+                           disabled: $viewModel.isInProgress,
+                           showProgressView: $viewModel.isInProgress)
             }
         }
         .navigationTitle("Log In")

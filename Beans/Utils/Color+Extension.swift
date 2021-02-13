@@ -54,7 +54,7 @@ extension Color {
         return Color(.sRGB, red: Double(red), green: Double(green), blue: Double(blue), opacity: Double(opacity))
     }
     
-    func whiter(by amount: CGFloat = 0.1) -> Color {
+    func lighter(by amount: CGFloat = 0.1) -> Color {
         let uiColor = UIColor(self)
         guard
             var red = uiColor.cgColor.components?[0],

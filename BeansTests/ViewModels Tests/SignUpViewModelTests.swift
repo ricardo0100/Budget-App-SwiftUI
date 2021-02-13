@@ -132,4 +132,15 @@ class SignUpViewModelTests: XCTestCase {
         
         wait(for: [exp.expectation], timeout: 1)
     }
+    
+    func test_whenTapsSignup_ProgressViewShouldBeUpdated() {
+        let viewModel = makeSUT()
+        viewModel.name = "Ricardo"
+        viewModel.email = "ricardo@gehrke.com"
+        viewModel.password = "123456"
+        
+        let exp = expectValues(of: viewModel.$isInProgress, equalsTo: [false, true, false])
+        viewModel.onTapSignUp()
+        wait(for: [exp.expectation], timeout: 0.5)
+    }
 }

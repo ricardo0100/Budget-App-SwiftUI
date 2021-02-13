@@ -19,6 +19,7 @@ class SignUpViewModel: ObservableObject {
     @Published var passwordError: String?
     
     @Published var alert: AlertMessage?
+    @Published var isInProgress: Bool = false
     
     private let userSession: UserSession
     private let api: API
@@ -42,6 +43,7 @@ class SignUpViewModel: ObservableObject {
     }
     
     private func executeLoginRequest() {
+        isInProgress = true
         api
             .signUp(name: name, email: email, password: password)
             .sink { completion in
@@ -51,6 +53,7 @@ class SignUpViewModel: ObservableObject {
                 case .finished:
                     break
                 }
+                self.isInProgress = false
             } receiveValue: { user in
                 self.userSession.saveUser(user: user)
             }.store(in: &cancellables)

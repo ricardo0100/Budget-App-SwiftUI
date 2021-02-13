@@ -36,15 +36,10 @@ struct SignUpView: View {
                                   useSecureField: true)
                 }
                 Section {
-                    HStack {
-                        Spacer()
-                        Button("Sign Up") {
-                            viewModel.onTapSignUp()
-                        }
-                        Spacer()
-                    }
-                    .listRowBackground(Color.accentColor)
-                    .foregroundColor(.white)
+                    FormButton(action: viewModel.onTapSignUp,
+                               text: "Sign Up",
+                               disabled: $viewModel.isInProgress,
+                               showProgressView: $viewModel.isInProgress)
                 }
                 Section(header: Text("Already have an account?")) {
                     NavigationLink(
