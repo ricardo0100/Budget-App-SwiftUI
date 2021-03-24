@@ -44,15 +44,9 @@ class URLProtocolMock: URLProtocol {
         return urlSession
     }
     
-    static func mockAPIWithSuccessfulLoginOrSignUp() {
+    static func mockAPIWithSuccessfulResponse(body: String) {
         requestHandler = { request in
-            let exampleData = """
-        {
-          "name": "Ricardo",
-          "email": "ricardo@gehrke.com",
-          "token": "123456"
-        }
-        """.data(using: .utf8)!
+            let exampleData = body.data(using: .utf8)!
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "2.0", headerFields: nil)!
             return (response, exampleData)
         }

@@ -53,9 +53,19 @@ class API: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    func getAccounts(after timestamp: Date) -> AnyPublisher<[Account], APIError> {
-        /// TODO: Implement request
-        Fail(error: APIError.badURL).eraseToAnyPublisher()
+    func getResources<T: GetResourceResponse>() -> AnyPublisher<[T], APIError> {
+        guard
+            let path = path(for: T.self),
+            let request = createURLRequest(path: path, queryItems: [])
+        else {
+            return Fail(error: APIError.badURL).eraseToAnyPublisher()
+        }
+        
+        return urlSession.dataTaskPublisher(for: request)
+            .tryMap { try self.getData(from: $0) }
+            .decode(type: [T].self, decoder: JSONDecoder())
+            .mapError { $0 as? APIError ?? .serverError }
+            .eraseToAnyPublisher()
     }
     
     func postAccounts(accounts: [Account]) -> AnyPublisher<[Account], APIError> {
@@ -75,8 +85,18 @@ class API: ObservableObject {
         return request
     }
     
+    private func path(for type: GetResourceResponse.Type) -> String? {
+        switch type {
+        case is AccountResponse.Type:
+            return "/account"
+        default:
+            return nil
+        }
+    }
+    
     private func getData(from response: URLSession.DataTaskPublisher.Output) throws -> Data {
         let httpResponse = response.response as? HTTPURLResponse
+        
         switch httpResponse?.statusCode {
         case 200:
             return response.data

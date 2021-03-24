@@ -37,6 +37,7 @@ class CoreDataController {
     func deleteEverything() {
         do {
             let context = container.viewContext
+            
             let items = try context.fetch(Item.allItemsFetchRequest)
             items.forEach { context.delete($0) }
             

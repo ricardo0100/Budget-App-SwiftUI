@@ -46,6 +46,7 @@ class SignUpViewModel: ObservableObject {
         isInProgress = true
         api
             .signUp(name: name, email: email, password: password)
+            .receive(on: OperationQueue.main)
             .sink { completion in
                 switch completion {
                 case .failure(let error):

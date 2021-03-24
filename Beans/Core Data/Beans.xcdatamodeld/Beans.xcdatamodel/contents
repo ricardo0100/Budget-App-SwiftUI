@@ -3,6 +3,7 @@
     <entity name="Account" representedClassName="Account" syncable="YES" codeGenerationType="class">
         <attribute name="color" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="remoteID" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="account" inverseEntity="Item"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
@@ -12,7 +13,7 @@
         <relationship name="account" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="items" inverseEntity="Account"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-63" positionY="9" width="128" height="74"/>
+        <element name="Account" positionX="-63" positionY="9" width="128" height="89"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="89"/>
     </elements>
 </model>

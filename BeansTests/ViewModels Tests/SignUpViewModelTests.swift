@@ -89,7 +89,13 @@ class SignUpViewModelTests: XCTestCase {
     }
     
     func test_whenAPIReturnsSuccess_shouldSaveUserInUserSettings() {
-        URLProtocolMock.mockAPIWithSuccessfulLoginOrSignUp()
+        URLProtocolMock.mockAPIWithSuccessfulResponse(body: """
+        {
+          "name": "Ricardo",
+          "email": "ricardo@gehrke.com",
+          "token": "123456"
+        }
+        """)
         
         let viewModel = makeSUT()
         viewModel.name = "Ricardo"
