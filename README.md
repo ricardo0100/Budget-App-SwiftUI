@@ -24,16 +24,17 @@ Every module follows the **MVVM** pattern with one or more Views, and one ViewMo
 #### Dependency Injection
 
 The `ViewModel` should receive its dependencies in the `init()`. This allows `ViewModel` unit tests.
-The current dependencies in the project are:
+The current dependencies a `ViewModel` can have are:
 
-- `APIProtocol`: 
-  - `API`: real implementation.
-  - `APIMock` for `ViewModel` unit tests.
-  - `APIPreview` for SwiftUI's previews.
+- `API`:
+  - `API(urlSession: .shared)`: real implementation.
+  - `URLProtocolMock` is used in a custom configuration of `URLSession` to be able to mock API calls in unit tests.
+  
 - `UserSession`: 
   - `UserSession.shared`: real implementation.
   - `UserSession(userDefaults: #mockedUserDefaults)`: for `ViewModel` unit tests.
   - `UserSession.preview`: for SwiftUI's previews.
+  
 - `CoreDataController`:
   - `CoreDataController.shared`: real implementation.
   - `CoreDataController.preview`: for SwiftUI's previews.
