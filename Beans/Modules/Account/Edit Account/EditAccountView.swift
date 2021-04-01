@@ -37,6 +37,6 @@ struct EditAccountView: View {
 
 struct EditAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        EditAccountView(viewModel: EditAccountViewModel(modelBinding: .constant(EditAccountModel())))
+        EditAccountView(viewModel: EditAccountViewModel(account: .constant(nil)))
     }
 }

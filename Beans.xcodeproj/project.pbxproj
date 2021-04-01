@@ -11,6 +11,7 @@
 		592F9E3625AB06520032EE37 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 592F9E3525AB06520032EE37 /* README.md */; };
 		592FE3C025C15A9100E2F227 /* TabsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592FE3BF25C15A9100E2F227 /* TabsViewModelTests.swift */; };
 		592FE3C425C15AA400E2F227 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592FE3C325C15AA400E2F227 /* MainViewModelTests.swift */; };
+		59376196260BDDBE001FD759 /* SelectAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59376195260BDDBE001FD759 /* SelectAccountView.swift */; };
 		59378034257FB5B600A71B6A /* SelectColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59378033257FB5B600A71B6A /* SelectColorView.swift */; };
 		595F605B257194B300B7DEEF /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F605A257194B300B7DEEF /* EditItemView.swift */; };
 		595F606325728FE200B7DEEF /* EditItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F606225728FE200B7DEEF /* EditItemViewModel.swift */; };
@@ -22,8 +23,6 @@
 		596B312225792F7F00408346 /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596B312125792F7F00408346 /* TabsView.swift */; };
 		596B3126257930DB00408346 /* AccountsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596B3125257930DB00408346 /* AccountsListView.swift */; };
 		596BA806257AF1B900C6BDC5 /* NSDecimalNumber+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596BA805257AF1B900C6BDC5 /* NSDecimalNumber+Extension.swift */; };
-		596BA80A257BC5AE00C6BDC5 /* EditItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596BA809257BC5AE00C6BDC5 /* EditItemModel.swift */; };
-		596BA80E257CF29800C6BDC5 /* EditAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596BA80D257CF29800C6BDC5 /* EditAccountModel.swift */; };
 		597AA0CD257D88E4007A946B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597AA0CC257D88E4007A946B /* Color+Extension.swift */; };
 		597AA0D1257E5C13007A946B /* StatefulPreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597AA0D0257E5C13007A946B /* StatefulPreviewWrapper.swift */; };
 		597B05462580F74E0012C2D6 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597B05452580F74E0012C2D6 /* AccountCell.swift */; };
@@ -80,6 +79,7 @@
 		592F9E3525AB06520032EE37 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		592FE3BF25C15A9100E2F227 /* TabsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewModelTests.swift; sourceTree = "<group>"; };
 		592FE3C325C15AA400E2F227 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
+		59376195260BDDBE001FD759 /* SelectAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountView.swift; sourceTree = "<group>"; };
 		59378033257FB5B600A71B6A /* SelectColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorView.swift; sourceTree = "<group>"; };
 		595F605A257194B300B7DEEF /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
 		595F606225728FE200B7DEEF /* EditItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewModel.swift; sourceTree = "<group>"; };
@@ -91,8 +91,6 @@
 		596B312125792F7F00408346 /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
 		596B3125257930DB00408346 /* AccountsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListView.swift; sourceTree = "<group>"; };
 		596BA805257AF1B900C6BDC5 /* NSDecimalNumber+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDecimalNumber+Extension.swift"; sourceTree = "<group>"; };
-		596BA809257BC5AE00C6BDC5 /* EditItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemModel.swift; sourceTree = "<group>"; };
-		596BA80D257CF29800C6BDC5 /* EditAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountModel.swift; sourceTree = "<group>"; };
 		597AA0CC257D88E4007A946B /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		597AA0D0257E5C13007A946B /* StatefulPreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulPreviewWrapper.swift; sourceTree = "<group>"; };
 		597B05452580F74E0012C2D6 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
@@ -179,8 +177,6 @@
 			children = (
 				595F605A257194B300B7DEEF /* EditItemView.swift */,
 				595F606225728FE200B7DEEF /* EditItemViewModel.swift */,
-				596BA809257BC5AE00C6BDC5 /* EditItemModel.swift */,
-				592C748625A5AF6B009C3C2C /* SelectAccountCell.swift */,
 			);
 			path = "Edit Item";
 			sourceTree = "<group>";
@@ -244,7 +240,6 @@
 			children = (
 				596B311725792B1C00408346 /* EditAccountView.swift */,
 				596B311D25792B2900408346 /* EditAccountViewModel.swift */,
-				596BA80D257CF29800C6BDC5 /* EditAccountModel.swift */,
 			);
 			path = "Edit Account";
 			sourceTree = "<group>";
@@ -252,6 +247,7 @@
 		596B3129257930E900408346 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				59C3E3F7260CD38100BE2630 /* Select Account */,
 				59E6A65F25A5E84B007638D0 /* Accounts List */,
 				596B311625792AC600408346 /* Edit Account */,
 			);
@@ -380,6 +376,15 @@
 				59B0DBB425C0AEEC00F6BA96 /* TabsViewModel.swift */,
 			);
 			path = Tabs;
+			sourceTree = "<group>";
+		};
+		59C3E3F7260CD38100BE2630 /* Select Account */ = {
+			isa = PBXGroup;
+			children = (
+				59376195260BDDBE001FD759 /* SelectAccountView.swift */,
+				592C748625A5AF6B009C3C2C /* SelectAccountCell.swift */,
+			);
+			path = "Select Account";
 			sourceTree = "<group>";
 		};
 		59CAEBB625ABA5A9007F5E93 /* Sign Up */ = {
@@ -549,6 +554,7 @@
 				597AA0CD257D88E4007A946B /* Color+Extension.swift in Sources */,
 				595F60852573B40E00B7DEEF /* FormTextField.swift in Sources */,
 				592C748725A5AF6B009C3C2C /* SelectAccountCell.swift in Sources */,
+				59376196260BDDBE001FD759 /* SelectAccountView.swift in Sources */,
 				59CAEBAD25AB9E9C007F5E93 /* User.swift in Sources */,
 				59D64D2825A6085D003557EA /* ProfileView.swift in Sources */,
 				59B4DBDA25D7F74200B61E47 /* GetResourceResponse.swift in Sources */,
@@ -557,7 +563,6 @@
 				59A5B20625ACB9920086D335 /* LogInView.swift in Sources */,
 				596B311E25792B2900408346 /* EditAccountViewModel.swift in Sources */,
 				59D64D2E25A6086A003557EA /* ProfileViewModel.swift in Sources */,
-				596BA80E257CF29800C6BDC5 /* EditAccountModel.swift in Sources */,
 				5968549825A6594300D86679 /* UserSession.swift in Sources */,
 				596B311825792B1C00408346 /* EditAccountView.swift in Sources */,
 				59B0DBB125C0AE7F00F6BA96 /* MainViewModel.swift in Sources */,
@@ -573,7 +578,6 @@
 				59B4DBD225D7CD2200B61E47 /* FormButton.swift in Sources */,
 				59B04752256E6C720095A8FB /* Beans.xcdatamodeld in Sources */,
 				59CAEBBF25ABA5C9007F5E93 /* SignUpViewModel.swift in Sources */,
-				596BA80A257BC5AE00C6BDC5 /* EditItemModel.swift in Sources */,
 				596B3126257930DB00408346 /* AccountsListView.swift in Sources */,
 				59378034257FB5B600A71B6A /* SelectColorView.swift in Sources */,
 				597DCF2625780D66004B6CDB /* CurrencyTextField.swift in Sources */,

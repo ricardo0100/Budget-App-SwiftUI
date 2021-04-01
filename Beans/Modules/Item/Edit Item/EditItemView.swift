@@ -15,7 +15,8 @@ struct EditItemView: View {
     
     @ObservedObject var viewModel: EditItemViewModel
     
-    @State var editAccountModel: EditAccountModel?
+    @State var isShowingSelectAccount: Bool = false
+    @State var editAccount: Account?
     
     var body: some View {
         NavigationView {
@@ -24,7 +25,7 @@ struct EditItemView: View {
                     Text("No accounts created")
                         .font(.headline)
                     Button("Create account") {
-                        editAccountModel = EditAccountModel()
+                        editAccount = Account(context: viewContext)
                     }
                 }.toolbar(content: {
                     ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
@@ -38,18 +39,13 @@ struct EditItemView: View {
                                   text: $viewModel.name,
                                   error: $viewModel.nameError,
                                   useSecureField: false)
-                    
                     HStack {
                         Text("Value").foregroundColor(.secondary).layoutPriority(1)
                         Spacer().layoutPriority(1)
                         CurrencyTextField(value: $viewModel.value)
                     }
-                    
-                    Picker(selection: $viewModel.selectedAccountIndex, label: Text("Account").foregroundColor(.secondary), content: {
-                        ForEach(0..<viewModel.availableAccounts.count) {
-                            SelectAccountCell(account: viewModel.availableAccounts[$0]).tag($0)
-                        }
-                    })
+                    NavigationLink("Select Account",
+                                   destination: SelectAccountView(selectedAccountIndex: $viewModel.selectedAccountIndex))
                 }
                 .navigationTitle(viewModel.title)
                 .toolbar(content: {
@@ -63,11 +59,11 @@ struct EditItemView: View {
             }
         }
         .onAppear(perform: viewModel.onAppear)
-        .onChange(of: editAccountModel, perform: { _ in
-            viewModel.onAppear()
+        .onChange(of: editAccount, perform: { value in
+            print(value)
         })
-        .sheet(item: $editAccountModel) { item in
-            EditAccountView(viewModel: EditAccountViewModel(modelBinding: $editAccountModel))
+        .sheet(item: $editAccount) { item in
+            EditAccountView(viewModel: EditAccountViewModel(account: $editAccount))
                 .environment(\.managedObjectContext, viewContext)
         }
     }
@@ -77,7 +73,7 @@ struct EditItemView_Previews: PreviewProvider {
     
     static let item = Item(context: CoreDataController.preview.container.viewContext)
     static var previews: some View {
-        EditItemView(viewModel: EditItemViewModel(model: .constant(EditItemModel(item: item)),
+        EditItemView(viewModel: EditItemViewModel(item: Binding.constant(item),
                                                   context: CoreDataController.preview.container.viewContext))
             .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
     }

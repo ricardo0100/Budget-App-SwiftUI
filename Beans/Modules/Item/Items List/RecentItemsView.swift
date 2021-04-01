@@ -12,7 +12,7 @@ struct RecentItemsView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    @State var editItemModel: EditItemModel?
+    @State var editingItem: Item?
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.name, ascending: true)],
@@ -30,7 +30,7 @@ struct RecentItemsView: View {
                         ForEach(items) { item in
                             ItemCell(item: item)
                                 .onTapGesture {
-                                    editItemModel = EditItemModel(item: item)
+                                    editingItem = item
                                 }
                         }
                         .onDelete(perform: deleteItems)
@@ -39,15 +39,15 @@ struct RecentItemsView: View {
             }.toolbar {
                 HStack {
                     Button(action: {
-                        editItemModel = EditItemModel()
+                        editingItem = Item(context: viewContext)
                     }) {
                         Image(systemName: "plus")
                     }
                 }
             }
         }
-        .sheet(item: $editItemModel) { item in
-            EditItemView(viewModel: EditItemViewModel(model: $editItemModel, context: viewContext))
+        .sheet(item: $editingItem) { item in
+            EditItemView(viewModel: EditItemViewModel(item: $editingItem, context: viewContext))
                 .environment(\.managedObjectContext, viewContext)
         }
     }

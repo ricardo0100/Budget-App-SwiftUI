@@ -22,25 +22,24 @@ class EditItemViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var nameError: String?
     @Published var availableAccounts: [Account] = []
-    @Published var selectedAccountIndex: Int = 0
+    @Published var selectedAccountIndex: Int?
+    var item: Binding<Item?>
     
     private var cancellables = [AnyCancellable]()
     private let nameErrorMessage = "Name should not be empty"
     private let scheduler: TestableSchedulerOf<RunLoop>
-    private var model: Binding<EditItemModel?>
     private let locale: Locale
     private let context: NSManagedObjectContext
     private var shouldSkipNameIsEmptyValidation = true
     
-    
-    init(model: Binding<EditItemModel?> = .constant(.init()),
+    init(item: Binding<Item?>,
          context: NSManagedObjectContext = CoreDataController.shared.container.viewContext,
          locale: Locale = .current,
          scheduler: TestableSchedulerOf<RunLoop> = TestableScheduler(RunLoop.main)) {
         self.scheduler = scheduler
         self.context = context
         self.locale = locale
-        self.model = model
+        self.item = item
     }
     
     func onTapSave() {
@@ -52,7 +51,11 @@ class EditItemViewModel: ObservableObject {
     }
     
     func onTapCancel() {
-        model.wrappedValue = nil
+        item.wrappedValue = nil
+        if let item = item.wrappedValue {
+            context.delete(item)
+            try? context.save()
+        }
     }
     
     func onAppear() {
@@ -63,10 +66,11 @@ class EditItemViewModel: ObservableObject {
     }
     
     private func saveItem() {
-        let item = model.wrappedValue?.item ?? Item(context: context)
+        let index = selectedAccountIndex ?? 0
+        let item = self.item.wrappedValue ?? Item(context: context)
         item.name = name
         item.value = NSDecimalNumber(decimal: value)
-        item.account = availableAccounts[selectedAccountIndex]
+        item.account = availableAccounts[index]
         item.timestamp = Date()
         do {
             try context.save()
@@ -77,7 +81,7 @@ class EditItemViewModel: ObservableObject {
     }
     
     private func dismiss() {
-        model.wrappedValue = nil
+        
     }
     
     private func clearErrors() {
@@ -85,7 +89,7 @@ class EditItemViewModel: ObservableObject {
     }
     
     private func updateFields() {
-        let item = model.wrappedValue?.item
+        let item = self.item.wrappedValue
         title = item?.name ?? "New Item"
         name = item?.name ?? ""
         value = item?.value?.decimalValue ?? 0

@@ -15,9 +15,8 @@ struct AccountsListView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Account.name, ascending: true)],
         animation: .default)
     private var accounts: FetchedResults<Account>
-    
-    @State var editAccountModelBinding: EditAccountModel? = nil
-    
+    @State var editAccount: Account?
+        
     var body: some View {
         NavigationView {
             VStack {
@@ -29,7 +28,7 @@ struct AccountsListView: View {
                         LazyVStack {
                             ForEach(accounts) { account in
                                 Button(action: {
-                                    editAccountModelBinding = EditAccountModel(account: account)
+                                    editAccount = account
                                 }) {
                                     AccountCell(account: account)
                                 }
@@ -41,14 +40,14 @@ struct AccountsListView: View {
             .navigationTitle("Accounts")
             .toolbar {
                 Button(action: {
-                    editAccountModelBinding = EditAccountModel()
+                    editAccount = Account(context: viewContext)
                 }) {
                     Image(systemName: "plus")
                 }
             }
         }
-        .sheet(item: $editAccountModelBinding) { model in
-            EditAccountView(viewModel: EditAccountViewModel(modelBinding: $editAccountModelBinding))
+        .sheet(item: $editAccount) { model in
+            EditAccountView(viewModel: EditAccountViewModel(account: $editAccount))
                 .environment(\.managedObjectContext, viewContext)
         }
     }

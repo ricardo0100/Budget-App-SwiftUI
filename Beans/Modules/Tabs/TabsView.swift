@@ -13,16 +13,16 @@ struct TabsView: View {
     
     var body: some View {
         TabView {
-            AccountsListView().tabItem {
-                VStack {
-                    Image(systemName: "creditcard")
-                    Text("Accounts")
-                }
-            }
             RecentItemsView().tabItem {
                 VStack {
                     Image(systemName: "rectangle.and.pencil.and.ellipsis")
                     Text("Items")
+                }
+            }
+            AccountsListView().tabItem {
+                VStack {
+                    Image(systemName: "creditcard")
+                    Text("Accounts")
                 }
             }
             ProfileView().tabItem {

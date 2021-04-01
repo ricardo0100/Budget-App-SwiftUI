@@ -17,17 +17,17 @@ class EditAccountViewModel: ObservableObject {
     @Published var nameError: String?
     @Published var color: String?
     
-    private let modelBinding: Binding<EditAccountModel?>
+    private let account: Binding<Account?>
     private let context: NSManagedObjectContext
     
-    init(modelBinding: Binding<EditAccountModel?>,
+    init(account: Binding<Account?>,
          context: NSManagedObjectContext = CoreDataController.shared.container.viewContext) {
-        self.modelBinding = modelBinding
+        self.account = account
         self.context = context
     }
     
     func onAppear() {
-        let account = modelBinding.wrappedValue?.account
+        let account = self.account.wrappedValue
         title = account?.name ?? "New Account"
         name = account?.name ?? ""
         color = account?.color
@@ -40,12 +40,12 @@ class EditAccountViewModel: ObservableObject {
         } else {
             nameError = nil
         }
-        let account = modelBinding.wrappedValue?.account ?? Account(context: context)
+        let account = self.account.wrappedValue ?? Account(context: context)
         account.name = name
         account.color = color
         do {
             try context.save()
-            modelBinding.wrappedValue = nil
+            self.account.wrappedValue = nil
         } catch {
             fatalError(error.localizedDescription)
         }

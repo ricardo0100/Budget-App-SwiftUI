@@ -15,7 +15,7 @@ struct SelectAccountCell: View {
         HStack {
             Circle()
                 .foregroundColor(Color.from(hex: account.color))
-                .frame(width: 16, height: 16, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .frame(width: 16, height: 16, alignment: .center)
             Text(account.name ?? "")
         }
     }
@@ -28,6 +28,8 @@ struct SelectAccountCell_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        SelectAccountCell(account: accounts.first!)
+        List {
+            SelectAccountCell(account: accounts.first!)
+        }
     }
 }
