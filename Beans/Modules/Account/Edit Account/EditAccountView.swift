@@ -13,30 +13,42 @@ struct EditAccountView: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("Name")) {
-                    FormTextField(keyboardType: .default,
-                                  placeholder: "Account name",
-                                  text: $viewModel.name,
-                                  error: $viewModel.nameError,
-                                  useSecureField: false)
+            VStack(alignment: .leading, spacing: 0) {
+                FormTextField(fieldName: "Account name",
+                              text: $viewModel.name,
+                              error: $viewModel.nameError)
+                Text("Select a color")
+                    .font(.headline)
+                SelectColorView(selectedColor: $viewModel.color)
+                Spacer()
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        viewModel.onCancel()
+                    }
                 }
-                Section(header: Text("Color")) {
-                    SelectColorView(selectedColor: $viewModel.color)
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Save") {
+                        viewModel.onSave()
+                    }
                 }
             }
+            .padding()
             .navigationTitle(viewModel.title)
-            .toolbar(content: {
-                Button("Save", action: {
-                    viewModel.onSave()
-                })
-            })
         }.onAppear(perform: viewModel.onAppear)
+            .onDisappear {
+                viewModel.onCancel()
+            }
     }
 }
 
 struct EditAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        EditAccountView(viewModel: EditAccountViewModel(account: .constant(nil)))
+        Group {
+            EditAccountView(viewModel: EditAccountViewModel(account: .constant(nil)))
+            EditAccountView(viewModel: EditAccountViewModel(account: .constant(nil)))
+                .preferredColorScheme(.dark)
+        }
     }
 }

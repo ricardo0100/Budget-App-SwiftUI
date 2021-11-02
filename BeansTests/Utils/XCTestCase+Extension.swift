@@ -14,7 +14,7 @@ extension XCTestCase {
                                  cancellable: AnyCancellable)
     
     func expectValues<T: Publisher>(of publisher: T,
-                                   equalsTo expectedOutput: [T.Output]) -> CompetionResult where T.Output: Equatable {
+                                    equalsTo expectedOutput: [T.Output]) -> CompetionResult where T.Output: Equatable {
         
         let exp = expectation(description: "Correct values of " + String(describing: publisher))
         var output = expectedOutput

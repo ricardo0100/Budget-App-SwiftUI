@@ -35,7 +35,7 @@ struct SelectColorView: View {
                     }
                 }
             }
-        }
+        }.frame(height: 52)
     }
 }
 

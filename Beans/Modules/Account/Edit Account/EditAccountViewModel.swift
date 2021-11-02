@@ -12,22 +12,21 @@ import CoreData
 
 class EditAccountViewModel: ObservableObject {
     
-    @Published var title = ""
+    @Published var title = "New Account"
     @Published var name = ""
     @Published var nameError: String?
     @Published var color: String?
     
-    private let account: Binding<Account?>
+    @Binding var account: Account?
     private let context: NSManagedObjectContext
     
     init(account: Binding<Account?>,
          context: NSManagedObjectContext = CoreDataController.shared.container.viewContext) {
-        self.account = account
+        self._account = account
         self.context = context
     }
     
     func onAppear() {
-        let account = self.account.wrappedValue
         title = account?.name ?? "New Account"
         name = account?.name ?? ""
         color = account?.color
@@ -40,14 +39,21 @@ class EditAccountViewModel: ObservableObject {
         } else {
             nameError = nil
         }
-        let account = self.account.wrappedValue ?? Account(context: context)
+        let account = account ?? Account(context: context)
         account.name = name
         account.color = color
         do {
             try context.save()
-            self.account.wrappedValue = nil
+            self.account = nil
         } catch {
             fatalError(error.localizedDescription)
+        }
+    }
+    
+    func onCancel() {
+        account = nil
+        if context.hasChanges {
+            context.rollback()
         }
     }
 }

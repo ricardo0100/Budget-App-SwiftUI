@@ -42,6 +42,10 @@ class SignUpViewModel: ObservableObject {
         executeLoginRequest()
     }
     
+    func onTapSkip() {
+        self.userSession.saveUser(user: User(name: "", email: "", token: ""))
+    }
+    
     private func executeLoginRequest() {
         isInProgress = true
         api

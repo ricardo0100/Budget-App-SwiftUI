@@ -13,44 +13,39 @@ struct SignUpView: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("Name")) {
-                    FormTextField(keyboardType: .default,
-                                  placeholder: "",
-                                  text: $viewModel.name,
-                                  error: $viewModel.nameError,
-                                  useSecureField: false)
-                }
-                Section(header: Text("E-mail")) {
-                    FormTextField(keyboardType: .emailAddress,
-                                  placeholder: "",
-                                  text: $viewModel.email,
-                                  error: $viewModel.emailError,
-                                  useSecureField: false)
-                }
-                Section(header: Text("Password")) {
-                    FormTextField(keyboardType: .default,
-                                  placeholder: "",
-                                  text: $viewModel.password,
-                                  error: $viewModel.passwordError,
-                                  useSecureField: true)
-                }
-                Section {
-                    FormButton(action: viewModel.onTapSignUp,
-                               text: "Sign Up",
-                               disabled: $viewModel.isInProgress,
-                               showProgressView: $viewModel.isInProgress)
-                }
-                Section(header: Text("Already have an account?")) {
-                    NavigationLink(
-                        destination: LogInView(),
-                        label: {
-                            HStack {
-                                Spacer()
-                                Text("Log In")
-                                Spacer()
-                            }
-                        })
+            VStack {
+                FormTextField(fieldName: "Name",
+                              text: $viewModel.name,
+                              error: $viewModel.nameError)
+                FormTextField(fieldName: "E-mail",
+                              keyboardType: .emailAddress,
+                              text: $viewModel.email,
+                              error: $viewModel.emailError)
+                FormTextField(fieldName: "Password",
+                              useSecureField: true,
+                              text: $viewModel.password,
+                              error: $viewModel.passwordError)
+                
+                Button("Sign up") {
+                    viewModel.onTapSignUp()
+                }.buttonStyle(.borderedProminent)
+                
+                Spacer()
+                Text("Already have an account?")
+                
+                NavigationLink(
+                    destination: LogInView(),
+                    label: {
+                        HStack {
+                            Spacer()
+                            Text("Log In")
+                            Spacer()
+                        }
+                    })
+                
+                Spacer()
+                Button("Skip") {
+                    viewModel.onTapSkip()
                 }
             }.navigationTitle("Welcome")
         }
@@ -68,6 +63,11 @@ struct SignUpView: View {
 struct SignUpView_Previews: PreviewProvider {
     
     static var previews: some View {
-        SignUpView(viewModel: SignUpViewModel(urlSession: .shared, userSession: .preview))
+        Group {
+            SignUpView(viewModel: SignUpViewModel(urlSession: .shared, userSession: .preview))
+            SignUpView(viewModel: SignUpViewModel(urlSession: .shared, userSession: .preview))
+                .previewDevice("iPhone 8")
+                .preferredColorScheme(.dark)
+        }
     }
 }

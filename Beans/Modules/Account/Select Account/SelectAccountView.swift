@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SelectAccountView: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @State var newAccount: Account?
     @Binding var selectedAccountIndex: Int?
     @Environment(\.managedObjectContext) private var viewContext
@@ -20,22 +21,33 @@ struct SelectAccountView: View {
     var body: some View {
         List {
             ForEach(accounts) { account in
-                SelectAccountCell(account: account)
-                    .onTapGesture {
-                        selectedAccountIndex = accounts.firstIndex { $0 == account }
+                Button(action: {
+                    selectedAccountIndex = accounts.firstIndex { $0 == account }
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    HStack {
+                        Text(account.name ?? "")
+                        Circle()
+                            .foregroundColor(Color.from(hex: account.color))
+                            .frame(width: 10, height: 10, alignment: .center)
+                        Spacer()
                     }
+                })
             }
         }
         .navigationTitle("Select an account")
-        .navigationBarItems(trailing: Button("New", action: {
+        .navigationBarItems(
+            trailing: Button("New", action: {
             newAccount = Account(context: viewContext)
         }))
-        .sheet(item: $newAccount) {
-            print("🏳️‍🌈")
-        } content: { _ in
-            EditAccountView(viewModel: EditAccountViewModel(account: $newAccount))
-        }
-
+        .sheet(
+            item: $newAccount,
+            onDismiss: {
+                print("🏳️‍🌈")
+            },
+            content: { _ in
+                EditAccountView(viewModel: EditAccountViewModel(account: $newAccount))
+            })
     }
 }
 

@@ -22,8 +22,17 @@ class EditItemViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var nameError: String?
     @Published var availableAccounts: [Account] = []
-    @Published var selectedAccountIndex: Int?
-    var item: Binding<Item?>
+    @Published var selectedAccount: Account?
+    @Published var selectedAccountIndex: Int? {
+        didSet {
+            guard let index = selectedAccountIndex else {
+                return
+            }
+            let account = availableAccounts[index]
+            selectedAccount = account
+        }
+    }
+    @Binding var item: Item?
     
     private var cancellables = [AnyCancellable]()
     private let nameErrorMessage = "Name should not be empty"
@@ -39,7 +48,7 @@ class EditItemViewModel: ObservableObject {
         self.scheduler = scheduler
         self.context = context
         self.locale = locale
-        self.item = item
+        self._item = item
     }
     
     func onTapSave() {
@@ -51,10 +60,9 @@ class EditItemViewModel: ObservableObject {
     }
     
     func onTapCancel() {
-        item.wrappedValue = nil
-        if let item = item.wrappedValue {
-            context.delete(item)
-            try? context.save()
+        item = nil
+        if context.hasChanges {
+            context.rollback()
         }
     }
     
@@ -67,7 +75,7 @@ class EditItemViewModel: ObservableObject {
     
     private func saveItem() {
         let index = selectedAccountIndex ?? 0
-        let item = self.item.wrappedValue ?? Item(context: context)
+        let item = item ?? Item(context: context)
         item.name = name
         item.value = NSDecimalNumber(decimal: value)
         item.account = availableAccounts[index]
@@ -81,7 +89,7 @@ class EditItemViewModel: ObservableObject {
     }
     
     private func dismiss() {
-        
+        item = nil
     }
     
     private func clearErrors() {
@@ -89,11 +97,10 @@ class EditItemViewModel: ObservableObject {
     }
     
     private func updateFields() {
-        let item = self.item.wrappedValue
         title = item?.name ?? "New Item"
         name = item?.name ?? ""
         value = item?.value?.decimalValue ?? 0
-        availableAccounts = (try? context.fetch(Account.fetchRequest()) as? [Account]) ?? []
+        availableAccounts = (try? context.fetch(Account.fetchRequest())) ?? []
         if let account = item?.account {
             selectedAccountIndex = availableAccounts.firstIndex(of: account) ?? 0
         }

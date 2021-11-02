@@ -21,47 +21,53 @@ struct EditItemView: View {
     var body: some View {
         NavigationView {
             if viewModel.shouldShowNoAccountsError {
-                VStack(spacing: 8) {
+                VStack(spacing: 0) {
                     Text("No accounts created")
                         .font(.headline)
                     Button("Create account") {
                         editAccount = Account(context: viewContext)
                     }
-                }.toolbar(content: {
-                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
+                }.toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
                         Button("Cancel", action: viewModel.onTapCancel)
                     }
-                })
-            } else {
-                Form {
-                    FormTextField(keyboardType: .default,
-                                  placeholder: "Item name",
-                                  text: $viewModel.name,
-                                  error: $viewModel.nameError,
-                                  useSecureField: false)
-                    HStack {
-                        Text("Value").foregroundColor(.secondary).layoutPriority(1)
-                        Spacer().layoutPriority(1)
-                        CurrencyTextField(value: $viewModel.value)
-                    }
-                    NavigationLink("Select Account",
-                                   destination: SelectAccountView(selectedAccountIndex: $viewModel.selectedAccountIndex))
                 }
+            } else {
+                VStack(alignment: .leading, spacing: 0) {
+                    FormTextField(fieldName: "Item name",
+                                  text: $viewModel.name,
+                                  error: $viewModel.nameError)
+                    
+                    FormCurrencyTextField(fieldName: "Value",
+                                          value: $viewModel.value,
+                                          error: .constant(nil))
+                    
+                    Spacer().frame(height: 6)
+                    Text("Account")
+                        .font(.headline)
+                    let selectView = SelectAccountView(
+                        selectedAccountIndex: $viewModel.selectedAccountIndex)
+                    NavigationLink(destination: selectView) {
+                        SelectAccountCell(account: $viewModel.selectedAccount)
+                    }
+                    Spacer()
+                }
+                .padding()
                 .navigationTitle(viewModel.title)
-                .toolbar(content: {
-                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
                         Button("Cancel", action: viewModel.onTapCancel)
                     }
-                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
+                    ToolbarItem(placement: .primaryAction) {
                         Button("Save", action: viewModel.onTapSave)
                     }
-                })
+                }
             }
         }
         .onAppear(perform: viewModel.onAppear)
-        .onChange(of: editAccount, perform: { value in
-            print(value)
-        })
+        .onDisappear {
+            viewModel.onTapCancel()
+        }
         .sheet(item: $editAccount) { item in
             EditAccountView(viewModel: EditAccountViewModel(account: $editAccount))
                 .environment(\.managedObjectContext, viewContext)
@@ -73,8 +79,17 @@ struct EditItemView_Previews: PreviewProvider {
     
     static let item = Item(context: CoreDataController.preview.container.viewContext)
     static var previews: some View {
-        EditItemView(viewModel: EditItemViewModel(item: Binding.constant(item),
-                                                  context: CoreDataController.preview.container.viewContext))
-            .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
+        Group {
+            EditItemView(viewModel: EditItemViewModel(
+                item: Binding.constant(item),
+                context: CoreDataController.preview.container.viewContext)
+            ).environment(\.managedObjectContext,
+                       CoreDataController.preview.container.viewContext)
+            EditItemView(viewModel: EditItemViewModel(
+                item: Binding.constant(item),
+                context: CoreDataController.preview.container.viewContext)
+            ).preferredColorScheme(.dark).environment(\.managedObjectContext,
+                           CoreDataController.preview.container.viewContext)
+        }
     }
 }

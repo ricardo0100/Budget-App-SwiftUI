@@ -13,25 +13,25 @@ struct LogInView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("E-mail")) {
-                FormTextField(keyboardType: .emailAddress,
-                              placeholder: "",
-                              text: $viewModel.email,
-                              error: $viewModel.emailError,
-                              useSecureField: false)
-            }
-            Section(header: Text("Password")) {
-                FormTextField(keyboardType: .default,
-                              placeholder: "",
-                              text: $viewModel.password,
-                              error: $viewModel.passwordError,
-                              useSecureField: true)
-            }
-            Section {
-                FormButton(action: viewModel.onTapLogIn, text: "Log in",
-                           disabled: $viewModel.isInProgress,
-                           showProgressView: $viewModel.isInProgress)
-            }
+//            Section(header: Text("E-mail")) {
+//                FormTextField(keyboardType: .emailAddress,
+//                              placeholder: "",
+//                              text: $viewModel.email,
+//                              error: $viewModel.emailError,
+//                              useSecureField: false)
+//            }
+//            Section(header: Text("Password")) {
+//                FormTextField(keyboardType: .default,
+//                              placeholder: "",
+//                              text: $viewModel.password,
+//                              error: $viewModel.passwordError,
+//                              useSecureField: true)
+//            }
+//            Section {
+//                FormButton(action: viewModel.onTapLogIn, text: "Log in",
+//                           disabled: $viewModel.isInProgress,
+//                           showProgressView: $viewModel.isInProgress)
+//            }
         }
         .navigationTitle("Log In")
         .alert(item: $viewModel.alert) { alert -> Alert in

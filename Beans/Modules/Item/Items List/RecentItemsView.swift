@@ -28,10 +28,11 @@ struct RecentItemsView: View {
                 } else {
                     List {
                         ForEach(items) { item in
-                            ItemCell(item: item)
-                                .onTapGesture {
-                                    editingItem = item
-                                }
+                            Button(action: {
+                                editingItem = item
+                            }, label: {
+                                ItemCell(item: item)
+                            })
                         }
                         .onDelete(perform: deleteItems)
                     }
@@ -69,7 +70,12 @@ struct RecentItemsView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        RecentItemsView()
-            .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
+        Group {
+            RecentItemsView()
+                .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
+            RecentItemsView()
+                .preferredColorScheme(.dark)
+                .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
+        }
     }
 }

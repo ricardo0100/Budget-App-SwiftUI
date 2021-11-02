@@ -67,7 +67,7 @@ struct CurrencyTextField: UIViewRepresentable {
 
 struct CurrencyTextField_Previews: PreviewProvider {
     static var previews: some View {
-        Form {
+        VStack {
             CurrencyTextField(value: .constant(0))
         }
     }

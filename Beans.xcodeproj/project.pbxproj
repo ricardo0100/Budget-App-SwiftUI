@@ -44,7 +44,6 @@
 		59B0DBAD25C0AE7500F6BA96 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0DBAC25C0AE7500F6BA96 /* MainView.swift */; };
 		59B0DBB125C0AE7F00F6BA96 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0DBB025C0AE7F00F6BA96 /* MainViewModel.swift */; };
 		59B0DBB525C0AEEC00F6BA96 /* TabsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0DBB425C0AEEC00F6BA96 /* TabsViewModel.swift */; };
-		59B4DBD225D7CD2200B61E47 /* FormButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B4DBD125D7CD2200B61E47 /* FormButton.swift */; };
 		59B4DBD625D7E68E00B61E47 /* AccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B4DBD525D7E68E00B61E47 /* AccountResponse.swift */; };
 		59B4DBDA25D7F74200B61E47 /* GetResourceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B4DBD925D7F74200B61E47 /* GetResourceResponse.swift */; };
 		59BCD5D32583748F00E9BF58 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BCD5D22583748F00E9BF58 /* ItemCell.swift */; };
@@ -52,6 +51,7 @@
 		59CAEBBB25ABA5C0007F5E93 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CAEBBA25ABA5C0007F5E93 /* SignUpView.swift */; };
 		59CAEBBF25ABA5C9007F5E93 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CAEBBE25ABA5C9007F5E93 /* SignUpViewModel.swift */; };
 		59CAEBC325ABA7E7007F5E93 /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CAEBC225ABA7E7007F5E93 /* SignUpViewModelTests.swift */; };
+		59CF7B722730A8CC00A507AC /* FormCurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CF7B712730A8CC00A507AC /* FormCurrencyTextField.swift */; };
 		59D64D2825A6085D003557EA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D64D2725A6085D003557EA /* ProfileView.swift */; };
 		59D64D2E25A6086A003557EA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D64D2D25A6086A003557EA /* ProfileViewModel.swift */; };
 		59D64D3225A60BDA003557EA /* ProfileViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D64D3125A60BDA003557EA /* ProfileViewModelTests.swift */; };
@@ -118,7 +118,6 @@
 		59B0DBAC25C0AE7500F6BA96 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		59B0DBB025C0AE7F00F6BA96 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		59B0DBB425C0AEEC00F6BA96 /* TabsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewModel.swift; sourceTree = "<group>"; };
-		59B4DBD125D7CD2200B61E47 /* FormButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButton.swift; sourceTree = "<group>"; };
 		59B4DBD525D7E68E00B61E47 /* AccountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountResponse.swift; sourceTree = "<group>"; };
 		59B4DBD925D7F74200B61E47 /* GetResourceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetResourceResponse.swift; sourceTree = "<group>"; };
 		59BCD5D22583748F00E9BF58 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
@@ -126,6 +125,7 @@
 		59CAEBBA25ABA5C0007F5E93 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		59CAEBBE25ABA5C9007F5E93 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		59CAEBC225ABA7E7007F5E93 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
+		59CF7B712730A8CC00A507AC /* FormCurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCurrencyTextField.swift; sourceTree = "<group>"; };
 		59D64D2725A6085D003557EA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		59D64D2D25A6086A003557EA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		59D64D3125A60BDA003557EA /* ProfileViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelTests.swift; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 				595F60842573B40E00B7DEEF /* FormTextField.swift */,
 				597DCF2525780D66004B6CDB /* CurrencyTextField.swift */,
 				59378033257FB5B600A71B6A /* SelectColorView.swift */,
-				59B4DBD125D7CD2200B61E47 /* FormButton.swift */,
+				59CF7B712730A8CC00A507AC /* FormCurrencyTextField.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -558,6 +558,7 @@
 				59CAEBAD25AB9E9C007F5E93 /* User.swift in Sources */,
 				59D64D2825A6085D003557EA /* ProfileView.swift in Sources */,
 				59B4DBDA25D7F74200B61E47 /* GetResourceResponse.swift in Sources */,
+				59CF7B722730A8CC00A507AC /* FormCurrencyTextField.swift in Sources */,
 				59B4DBD625D7E68E00B61E47 /* AccountResponse.swift in Sources */,
 				597DCF2225779E85004B6CDB /* TestableScheduler.swift in Sources */,
 				59A5B20625ACB9920086D335 /* LogInView.swift in Sources */,
@@ -575,7 +576,6 @@
 				595F605B257194B300B7DEEF /* EditItemView.swift in Sources */,
 				59E0064025ADA8F300630AB7 /* API.swift in Sources */,
 				59B04746256E6C6F0095A8FB /* BeansApp.swift in Sources */,
-				59B4DBD225D7CD2200B61E47 /* FormButton.swift in Sources */,
 				59B04752256E6C720095A8FB /* Beans.xcdatamodeld in Sources */,
 				59CAEBBF25ABA5C9007F5E93 /* SignUpViewModel.swift in Sources */,
 				596B3126257930DB00408346 /* AccountsListView.swift in Sources */,
@@ -668,7 +668,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -723,7 +723,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -739,11 +739,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Beans/Preview Content\"";
 				DEVELOPMENT_TEAM = ZU366JQ22B;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Beans/Bundle/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -761,11 +762,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Beans/Preview Content\"";
 				DEVELOPMENT_TEAM = ZU366JQ22B;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Beans/Bundle/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -786,7 +788,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZU366JQ22B;
 				INFOPLIST_FILE = BeansTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -810,7 +812,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZU366JQ22B;
 				INFOPLIST_FILE = BeansTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

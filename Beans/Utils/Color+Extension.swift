@@ -69,4 +69,10 @@ extension Color {
         
         return Color(.sRGB, red: Double(red), green: Double(green), blue: Double(blue), opacity: Double(opacity))
     }
+    
+    static func fieldBackgroundColor(for colorScheme: ColorScheme) -> Color {
+        colorScheme == .dark ?
+        Color.white.darker(by: 0.8) :
+        Color.gray.lighter(by: 0.35)
+    }
 }
