@@ -55,6 +55,7 @@ extension CoreDataController {
     
     private static func createPreviewContent(in context: NSManagedObjectContext) {
         var accounts: [Account] = []
+        var categories: [ItemCategory] = []
         
         for i in 0..<3 {
             let newAccount = Account(context: context)
@@ -63,11 +64,18 @@ extension CoreDataController {
             accounts.append(newAccount)
         }
         
-        for _ in 0..<20 {
+        for i in 0..<5 {
+            let category = ItemCategory(context: context)
+            category.name = "Category \(i)"
+            category.symbol = Symbols.all.randomElement()
+            categories.append(category)
+        }
+        
+        for i in 0..<8 {
             let newItem = Item(context: context)
             let account = accounts.randomElement()
-            newItem.name = "Item \(Int.random(in: 0...999)) in account \(account?.name ?? "")"
-            newItem.value = NSDecimalNumber(value: Double.random(in: 0.01...100))
+            newItem.name = "Item \(i) in account \(account?.name ?? "")"
+            newItem.value = NSDecimalNumber(value: Double.random(in: -4...10))
             newItem.account = account
             newItem.timestamp = Date()
         }

@@ -6,27 +6,23 @@
 //
 
 import Foundation
-import Combine
 import SwiftUI
 import CoreData
 
 class EditAccountViewModel: ObservableObject {
     
-    @Published var title = "New Account"
+    @Published var title = ""
     @Published var name = ""
     @Published var nameError: String?
     @Published var color: String?
     
-    @Binding var account: Account?
     private let context: NSManagedObjectContext
+    private var account: Account?
     
-    init(account: Binding<Account?>,
+    init(account: Account? = nil,
          context: NSManagedObjectContext = CoreDataController.shared.container.viewContext) {
-        self._account = account
+        self.account = account
         self.context = context
-    }
-    
-    func onAppear() {
         title = account?.name ?? "New Account"
         name = account?.name ?? ""
         color = account?.color
@@ -44,16 +40,8 @@ class EditAccountViewModel: ObservableObject {
         account.color = color
         do {
             try context.save()
-            self.account = nil
         } catch {
             fatalError(error.localizedDescription)
-        }
-    }
-    
-    func onCancel() {
-        account = nil
-        if context.hasChanges {
-            context.rollback()
         }
     }
 }

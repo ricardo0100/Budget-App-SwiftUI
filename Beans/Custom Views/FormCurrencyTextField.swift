@@ -9,20 +9,14 @@ import SwiftUI
 
 struct FormCurrencyTextField: View {
     
-    let fieldName: String
+    let fieldName: String?
     
     @Environment(\.colorScheme) var colorScheme
     
     @Binding var value: Decimal
     @Binding var error: String?
     
-    var fieldBackgroundColor: Color {
-        colorScheme == .dark ?
-        Color.white.darker(by: 0.8) :
-        Color.gray.lighter(by: 0.35)
-    }
-    
-    init(fieldName: String,
+    init(fieldName: String? = nil,
          value: Binding<Decimal>,
          error: Binding<String?>) {
         self.fieldName = fieldName
@@ -32,36 +26,49 @@ struct FormCurrencyTextField: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(fieldName)
-                .font(.headline)
-            ZStack {
-                Rectangle()
-                    .foregroundColor(fieldBackgroundColor)
-                    .cornerRadius(5)
-                    .frame(height: 40)
-                
-                CurrencyTextField(value: $value)
-                    .padding()
-                    .frame(height: 40)
+            if let fieldName = fieldName {
+                Text(fieldName)
+                    .fontWeight(.light)
             }
-            
+            ZStack {
+                RoundedRectangle(cornerRadius: 4)
+                    .frame(height: 30)
+                    .foregroundColor(.fieldBackgroundColor(for: colorScheme))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.red, lineWidth: error == nil ? 0 : 1)
+                    )
+                CurrencyTextField(value: $value).padding(.horizontal, 8)
+            }
             if let error = error {
                 Text(error).font(.caption2)
                     .foregroundColor(.red)
             }
-        }
+        }.padding(.bottom, 4)
     }
 }
 
 struct FormCurrencyTextField_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            FormCurrencyTextField(
-                fieldName: "Value",
-                value: .constant(1.99),
-                error: .constant(nil)
-            ).padding()
-            Spacer()
+        Group {
+            Form {
+                FormCurrencyTextField(
+                    fieldName: "Value",
+                    value: .constant(1.99),
+                    error: .constant(nil)
+                )
+                FormCurrencyTextField(
+                    value: .constant(1.99),
+                    error: .constant(nil)
+                )
+            }
+            Form {
+                FormCurrencyTextField(
+                    fieldName: "Value",
+                    value: .constant(1.99),
+                    error: .constant(nil)
+                )
+            }.preferredColorScheme(.dark)
         }
     }
 }

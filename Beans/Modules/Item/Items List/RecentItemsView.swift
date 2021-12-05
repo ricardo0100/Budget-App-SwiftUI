@@ -11,45 +11,38 @@ import CoreData
 struct RecentItemsView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    
-    @State var editingItem: Item?
-    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.name, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
     
     var body: some View {
-        NavigationView {
-            VStack {
-                if items.isEmpty {
-                    Text("No items")
-                        .foregroundColor(.gray)
-                } else {
-                    List {
-                        ForEach(items) { item in
-                            Button(action: {
-                                editingItem = item
-                            }, label: {
-                                ItemCell(item: item)
-                            })
-                        }
-                        .onDelete(perform: deleteItems)
+        VStack {
+            if items.isEmpty {
+                Text("No items")
+                    .foregroundColor(.secondary)
+            } else {
+                List {
+                    ForEach(items) { item in
+                        NavigationLink(destination: {
+                            EditItemView(viewModel: EditItemViewModel())
+                        }, label: {
+                            ItemCell(item: item)
+                        })
                     }
-                }
-            }.toolbar {
-                HStack {
-                    Button(action: {
-                        editingItem = Item(context: viewContext)
-                    }) {
-                        Image(systemName: "plus")
-                    }
+                    .onDelete(perform: deleteItems)
                 }
             }
         }
-        .sheet(item: $editingItem) { item in
-            EditItemView(viewModel: EditItemViewModel(item: $editingItem, context: viewContext))
-                .environment(\.managedObjectContext, viewContext)
+        .navigationTitle("Recent Items")
+        .toolbar {
+            ToolbarItem(placement: .automatic) {
+                NavigationLink(destination: {
+                    EditItemView(viewModel: EditItemViewModel())
+                }, label: {
+                    Image(systemName: "plus")
+                })
+            }
         }
     }
     
@@ -71,11 +64,24 @@ struct RecentItemsView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecentItemsView()
-                .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
-            RecentItemsView()
-                .preferredColorScheme(.dark)
-                .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
+            NavigationView {
+                RecentItemsView()
+                    .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
+            }
+            NavigationView {
+                RecentItemsView()
+                    .preferredColorScheme(.dark)
+                    .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
+            }
+            NavigationView {
+                RecentItemsView()
+                    .environment(\.managedObjectContext, CoreDataController.shared.container.viewContext)
+            }
+            NavigationView {
+                RecentItemsView()
+                    .preferredColorScheme(.dark)
+                    .environment(\.managedObjectContext, CoreDataController.shared.container.viewContext)
+            }
         }
     }
 }

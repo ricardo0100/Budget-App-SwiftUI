@@ -74,13 +74,13 @@ class APISyncTests: XCTestCase {
         XCTAssertEqual(accounts.filter { $0.name == "Feijão's Bank" }.count, 1)
     }
     
-    func test_GetAccountsFails_shouldCallItAgain3TimesBeforeFailing() {
-        let sync = makeSUT()
-        
-        sync.startSync()
-        
+//    func test_GetAccountsFails_shouldCallItAgain3TimesBeforeFailing() {
+//        let sync = makeSUT()
+//
+//        sync.startSync()
+//
 //        XCTAssertEqual(apiMock.getAccountsCalls, 3)
-    }
+//    }
     
     // MARK: Tests helpers
     

@@ -13,33 +13,35 @@ struct LogInView: View {
     
     var body: some View {
         Form {
-//            Section(header: Text("E-mail")) {
-//                FormTextField(keyboardType: .emailAddress,
-//                              placeholder: "",
-//                              text: $viewModel.email,
-//                              error: $viewModel.emailError,
-//                              useSecureField: false)
-//            }
-//            Section(header: Text("Password")) {
-//                FormTextField(keyboardType: .default,
-//                              placeholder: "",
-//                              text: $viewModel.password,
-//                              error: $viewModel.passwordError,
-//                              useSecureField: true)
-//            }
-//            Section {
-//                FormButton(action: viewModel.onTapLogIn, text: "Log in",
-//                           disabled: $viewModel.isInProgress,
-//                           showProgressView: $viewModel.isInProgress)
-//            }
+            Section {
+                FormTextField(fieldName: "E-mail",
+                              placeholder: "",
+                              keyboardType: .emailAddress,
+                              text: $viewModel.email,
+                              error: $viewModel.emailError)
+                FormTextField(fieldName: "Password",
+                              placeholder: "",
+                              useSecureField: true,
+                              text: $viewModel.password,
+                              error: $viewModel.passwordError)
+            } footer: {
+                HStack {
+                    Spacer()
+                    Button("Log In", action: viewModel.onTapLogIn)
+                        .buttonStyle(.borderedProminent)
+                        .font(.callout)
+                }
+            }
         }
         .navigationTitle("Log In")
         .alert(item: $viewModel.alert) { alert -> Alert in
             Alert(title: Text(alert.title), message: Text(alert.message), dismissButton: nil)
         }
         .onAppear(perform: {
+            #if DEBUG
             viewModel.email = "ricardo0100@gmail.com"
             viewModel.password = "123456"
+            #endif
         })
     }
 }

@@ -16,7 +16,7 @@ struct SelectColorView: View {
     
     var body: some View {
         ScrollView(.horizontal) {
-            LazyHGrid(rows: [.init(.fixed(34))]) {
+            LazyHGrid(rows: [.init(.fixed(38))]) {
                 ForEach(colors, id: \.self) { color in
                     ZStack {
                         Circle()
@@ -27,15 +27,15 @@ struct SelectColorView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                             .foregroundColor(Color.white.opacity(0.85))
-                            .scaleEffect(selectedColor == color ? 0.0 : 0.8)
+                            .scaleEffect(selectedColor == color ? 0.0 : 0.9)
                     }.onTapGesture {
                         withAnimation(.linear(duration: 0.25)) {
                             selectedColor = color
                         }
                     }
                 }
-            }
-        }.frame(height: 52)
+            }.padding(4)
+        }
     }
 }
 

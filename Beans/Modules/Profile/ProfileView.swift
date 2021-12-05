@@ -15,6 +15,7 @@ struct ProfileView: View {
         NavigationView {
             if viewModel.email.isEmpty {
                 Text("No account")
+                    .foregroundColor(.secondary)
             } else {
                 Form {
                     Section(header: Text("Name")) {
@@ -28,14 +29,14 @@ struct ProfileView: View {
                     Button("Logout") {
                         viewModel.onTapLogout()
                     }.foregroundColor(.red)
-                }
+                }.navigationTitle("Profile")
             }
         }
-        .navigationTitle("Profile")
         .navigationBarItems(
             trailing: Button(viewModel.editButtonText, action: {
                 viewModel.isEditing.toggle()
             }))
+        .navigationViewStyle(StackNavigationViewStyle())
         }
 }
 

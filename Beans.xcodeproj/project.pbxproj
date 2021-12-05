@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		592C748725A5AF6B009C3C2C /* SelectAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592C748625A5AF6B009C3C2C /* SelectAccountCell.swift */; };
+		592C748725A5AF6B009C3C2C /* SelectAccountCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592C748625A5AF6B009C3C2C /* SelectAccountCellView.swift */; };
 		592F9E3625AB06520032EE37 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 592F9E3525AB06520032EE37 /* README.md */; };
 		592FE3C025C15A9100E2F227 /* TabsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592FE3BF25C15A9100E2F227 /* TabsViewModelTests.swift */; };
 		592FE3C425C15AA400E2F227 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592FE3C325C15AA400E2F227 /* MainViewModelTests.swift */; };
-		59376196260BDDBE001FD759 /* SelectAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59376195260BDDBE001FD759 /* SelectAccountView.swift */; };
+		59376196260BDDBE001FD759 /* AccountSelectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59376195260BDDBE001FD759 /* AccountSelectionListView.swift */; };
 		59378034257FB5B600A71B6A /* SelectColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59378033257FB5B600A71B6A /* SelectColorView.swift */; };
 		595F605B257194B300B7DEEF /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F605A257194B300B7DEEF /* EditItemView.swift */; };
 		595F606325728FE200B7DEEF /* EditItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F606225728FE200B7DEEF /* EditItemViewModel.swift */; };
@@ -62,6 +62,14 @@
 		59E7518825C37E010010F558 /* APISyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E7518725C37E010010F558 /* APISyncTests.swift */; };
 		59E7518E25C37E260010F558 /* APISync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E7518D25C37E260010F558 /* APISync.swift */; };
 		59EE0DDD257940F600CF1076 /* EditAccountViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EE0DDC257940F600CF1076 /* EditAccountViewModelTests.swift */; };
+		BA8442A8275E319600DB295B /* SelectCategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8442A7275E319600DB295B /* SelectCategoryCellView.swift */; };
+		BAB489772750404D001DDAB7 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB489762750404D001DDAB7 /* CategoryList.swift */; };
+		BAB48979275045A4001DDAB7 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB48978275045A4001DDAB7 /* CategoryCell.swift */; };
+		BAB4897D27504F28001DDAB7 /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB4897C27504F28001DDAB7 /* EditCategoryView.swift */; };
+		BAB4897F275050C6001DDAB7 /* EditCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB4897E275050C6001DDAB7 /* EditCategoryViewModel.swift */; };
+		BADA22A0275231790040B979 /* SelectCategoryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA229F275231790040B979 /* SelectCategoryIconView.swift */; };
+		BADA22A22752318D0040B979 /* CategoryIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA22A12752318D0040B979 /* CategoryIcons.swift */; };
+		BAEDF40A275E9F71003B390F /* SelectCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEDF409275E9F71003B390F /* SelectCategoryListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,11 +83,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		592C748625A5AF6B009C3C2C /* SelectAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountCell.swift; sourceTree = "<group>"; };
+		592C748625A5AF6B009C3C2C /* SelectAccountCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountCellView.swift; sourceTree = "<group>"; };
 		592F9E3525AB06520032EE37 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		592FE3BF25C15A9100E2F227 /* TabsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewModelTests.swift; sourceTree = "<group>"; };
 		592FE3C325C15AA400E2F227 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
-		59376195260BDDBE001FD759 /* SelectAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountView.swift; sourceTree = "<group>"; };
+		59376195260BDDBE001FD759 /* AccountSelectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSelectionListView.swift; sourceTree = "<group>"; };
 		59378033257FB5B600A71B6A /* SelectColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectColorView.swift; sourceTree = "<group>"; };
 		595F605A257194B300B7DEEF /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
 		595F606225728FE200B7DEEF /* EditItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewModel.swift; sourceTree = "<group>"; };
@@ -134,6 +142,14 @@
 		59E7518725C37E010010F558 /* APISyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISyncTests.swift; sourceTree = "<group>"; };
 		59E7518D25C37E260010F558 /* APISync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISync.swift; sourceTree = "<group>"; };
 		59EE0DDC257940F600CF1076 /* EditAccountViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountViewModelTests.swift; sourceTree = "<group>"; };
+		BA8442A7275E319600DB295B /* SelectCategoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryCellView.swift; sourceTree = "<group>"; };
+		BAB489762750404D001DDAB7 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
+		BAB48978275045A4001DDAB7 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		BAB4897C27504F28001DDAB7 /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
+		BAB4897E275050C6001DDAB7 /* EditCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryViewModel.swift; sourceTree = "<group>"; };
+		BADA229F275231790040B979 /* SelectCategoryIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryIconView.swift; sourceTree = "<group>"; };
+		BADA22A12752318D0040B979 /* CategoryIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIcons.swift; sourceTree = "<group>"; };
+		BAEDF409275E9F71003B390F /* SelectCategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,12 +201,13 @@
 			isa = PBXGroup;
 			children = (
 				59EE0DE0257941E800CF1076 /* Main */,
+				59B0DBBF25C0AF0A00F6BA96 /* Tabs */,
 				59A5B20425ACB9840086D335 /* Log In */,
 				59CAEBB625ABA5A9007F5E93 /* Sign Up */,
-				59CAEBB725ABA5B1007F5E93 /* Profile */,
-				59B0DBBF25C0AF0A00F6BA96 /* Tabs */,
-				596B3129257930E900408346 /* Account */,
 				596B312C257930F300408346 /* Item */,
+				596B3129257930E900408346 /* Account */,
+				BAB489752750403E001DDAB7 /* Categories */,
+				59CAEBB725ABA5B1007F5E93 /* Profile */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -381,8 +398,8 @@
 		59C3E3F7260CD38100BE2630 /* Select Account */ = {
 			isa = PBXGroup;
 			children = (
-				59376195260BDDBE001FD759 /* SelectAccountView.swift */,
-				592C748625A5AF6B009C3C2C /* SelectAccountCell.swift */,
+				59376195260BDDBE001FD759 /* AccountSelectionListView.swift */,
+				592C748625A5AF6B009C3C2C /* SelectAccountCellView.swift */,
 			);
 			path = "Select Account";
 			sourceTree = "<group>";
@@ -441,6 +458,45 @@
 				59B0DBB025C0AE7F00F6BA96 /* MainViewModel.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		BAB489752750403E001DDAB7 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BAD14B88275E2FD10084F28E /* Select Category */,
+				BAB4897B27504F15001DDAB7 /* Edit Category */,
+				BAB4897A2750467F001DDAB7 /* Category List */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		BAB4897A2750467F001DDAB7 /* Category List */ = {
+			isa = PBXGroup;
+			children = (
+				BAB489762750404D001DDAB7 /* CategoryList.swift */,
+				BAB48978275045A4001DDAB7 /* CategoryCell.swift */,
+			);
+			path = "Category List";
+			sourceTree = "<group>";
+		};
+		BAB4897B27504F15001DDAB7 /* Edit Category */ = {
+			isa = PBXGroup;
+			children = (
+				BAB4897C27504F28001DDAB7 /* EditCategoryView.swift */,
+				BAB4897E275050C6001DDAB7 /* EditCategoryViewModel.swift */,
+				BADA229F275231790040B979 /* SelectCategoryIconView.swift */,
+				BADA22A12752318D0040B979 /* CategoryIcons.swift */,
+			);
+			path = "Edit Category";
+			sourceTree = "<group>";
+		};
+		BAD14B88275E2FD10084F28E /* Select Category */ = {
+			isa = PBXGroup;
+			children = (
+				BA8442A7275E319600DB295B /* SelectCategoryCellView.swift */,
+				BAEDF409275E9F71003B390F /* SelectCategoryListView.swift */,
+			);
+			path = "Select Category";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -546,31 +602,39 @@
 			files = (
 				59B0DBAD25C0AE7500F6BA96 /* MainView.swift in Sources */,
 				59B0474F256E6C720095A8FB /* CoreDataController.swift in Sources */,
+				BA8442A8275E319600DB295B /* SelectCategoryCellView.swift in Sources */,
 				599E48D9258BF726009A5E44 /* Account+Extension.swift in Sources */,
 				59B0DBB525C0AEEC00F6BA96 /* TabsViewModel.swift in Sources */,
 				599304F325B6434F00E76B38 /* AlertMessage.swift in Sources */,
 				598BFD1E258C2CA300D75FE3 /* Item+Extension.swift in Sources */,
 				597B05462580F74E0012C2D6 /* AccountCell.swift in Sources */,
+				BADA22A0275231790040B979 /* SelectCategoryIconView.swift in Sources */,
+				BAB489772750404D001DDAB7 /* CategoryList.swift in Sources */,
+				BAB4897D27504F28001DDAB7 /* EditCategoryView.swift in Sources */,
 				597AA0CD257D88E4007A946B /* Color+Extension.swift in Sources */,
+				BAB4897F275050C6001DDAB7 /* EditCategoryViewModel.swift in Sources */,
 				595F60852573B40E00B7DEEF /* FormTextField.swift in Sources */,
-				592C748725A5AF6B009C3C2C /* SelectAccountCell.swift in Sources */,
-				59376196260BDDBE001FD759 /* SelectAccountView.swift in Sources */,
+				592C748725A5AF6B009C3C2C /* SelectAccountCellView.swift in Sources */,
+				59376196260BDDBE001FD759 /* AccountSelectionListView.swift in Sources */,
 				59CAEBAD25AB9E9C007F5E93 /* User.swift in Sources */,
 				59D64D2825A6085D003557EA /* ProfileView.swift in Sources */,
 				59B4DBDA25D7F74200B61E47 /* GetResourceResponse.swift in Sources */,
 				59CF7B722730A8CC00A507AC /* FormCurrencyTextField.swift in Sources */,
 				59B4DBD625D7E68E00B61E47 /* AccountResponse.swift in Sources */,
+				BAB48979275045A4001DDAB7 /* CategoryCell.swift in Sources */,
 				597DCF2225779E85004B6CDB /* TestableScheduler.swift in Sources */,
 				59A5B20625ACB9920086D335 /* LogInView.swift in Sources */,
 				596B311E25792B2900408346 /* EditAccountViewModel.swift in Sources */,
 				59D64D2E25A6086A003557EA /* ProfileViewModel.swift in Sources */,
 				5968549825A6594300D86679 /* UserSession.swift in Sources */,
 				596B311825792B1C00408346 /* EditAccountView.swift in Sources */,
+				BAEDF40A275E9F71003B390F /* SelectCategoryListView.swift in Sources */,
 				59B0DBB125C0AE7F00F6BA96 /* MainViewModel.swift in Sources */,
 				597AA0D1257E5C13007A946B /* StatefulPreviewWrapper.swift in Sources */,
 				596B312225792F7F00408346 /* TabsView.swift in Sources */,
 				59BCD5D32583748F00E9BF58 /* ItemCell.swift in Sources */,
 				59E7518E25C37E260010F558 /* APISync.swift in Sources */,
+				BADA22A22752318D0040B979 /* CategoryIcons.swift in Sources */,
 				596BA806257AF1B900C6BDC5 /* NSDecimalNumber+Extension.swift in Sources */,
 				59A5B20C25ACB99C0086D335 /* LogInViewModel.swift in Sources */,
 				595F605B257194B300B7DEEF /* EditItemView.swift in Sources */,

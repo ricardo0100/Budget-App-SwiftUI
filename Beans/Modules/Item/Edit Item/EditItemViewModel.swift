@@ -12,7 +12,6 @@ import SwiftUI
 
 class EditItemViewModel: ObservableObject {
     
-    @Published var shouldShowNoAccountsError: Bool = false
     @Published var name: String = "" {
         didSet {
             shouldSkipNameIsEmptyValidation = false
@@ -21,18 +20,9 @@ class EditItemViewModel: ObservableObject {
     @Published var value: Decimal = 0
     @Published var title: String = ""
     @Published var nameError: String?
-    @Published var availableAccounts: [Account] = []
     @Published var selectedAccount: Account?
-    @Published var selectedAccountIndex: Int? {
-        didSet {
-            guard let index = selectedAccountIndex else {
-                return
-            }
-            let account = availableAccounts[index]
-            selectedAccount = account
-        }
-    }
-    @Binding var item: Item?
+    @Published var selectedCategory: ItemCategory?
+    var item: Item?
     
     private var cancellables = [AnyCancellable]()
     private let nameErrorMessage = "Name should not be empty"
@@ -41,14 +31,14 @@ class EditItemViewModel: ObservableObject {
     private let context: NSManagedObjectContext
     private var shouldSkipNameIsEmptyValidation = true
     
-    init(item: Binding<Item?>,
+    init(item: Item? = nil,
          context: NSManagedObjectContext = CoreDataController.shared.container.viewContext,
          locale: Locale = .current,
          scheduler: TestableSchedulerOf<RunLoop> = TestableScheduler(RunLoop.main)) {
         self.scheduler = scheduler
         self.context = context
         self.locale = locale
-        self._item = item
+        self.item = item
     }
     
     func onTapSave() {
@@ -73,12 +63,15 @@ class EditItemViewModel: ObservableObject {
         startErrorsTimers()
     }
     
+    func onDisappear() {
+        
+    }
+    
     private func saveItem() {
-        let index = selectedAccountIndex ?? 0
         let item = item ?? Item(context: context)
         item.name = name
         item.value = NSDecimalNumber(decimal: value)
-        item.account = availableAccounts[index]
+        item.account = selectedAccount
         item.timestamp = Date()
         do {
             try context.save()
@@ -100,15 +93,6 @@ class EditItemViewModel: ObservableObject {
         title = item?.name ?? "New Item"
         name = item?.name ?? ""
         value = item?.value?.decimalValue ?? 0
-        availableAccounts = (try? context.fetch(Account.fetchRequest())) ?? []
-        if let account = item?.account {
-            selectedAccountIndex = availableAccounts.firstIndex(of: account) ?? 0
-        }
-        if availableAccounts.isEmpty {
-            shouldShowNoAccountsError = true
-        } else {
-            shouldShowNoAccountsError = false
-        }
     }
     
     private func startErrorsTimers() {

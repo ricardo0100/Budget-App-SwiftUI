@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct SelectAccountView: View {
+struct AccountSelectionListView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @State var newAccount: Account?
-    @Binding var selectedAccountIndex: Int?
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @Binding var selectedAccount: Account?
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Account.name, ascending: true)],
         animation: .default)
@@ -22,7 +23,7 @@ struct SelectAccountView: View {
         List {
             ForEach(accounts) { account in
                 Button(action: {
-                    selectedAccountIndex = accounts.firstIndex { $0 == account }
+                    selectedAccount = account
                     presentationMode.wrappedValue.dismiss()
                 }, label: {
                     HStack {
@@ -32,30 +33,22 @@ struct SelectAccountView: View {
                             .frame(width: 10, height: 10, alignment: .center)
                         Spacer()
                     }
-                })
+                }).buttonStyle(.plain)
             }
         }
-        .navigationTitle("Select an account")
-        .navigationBarItems(
-            trailing: Button("New", action: {
-            newAccount = Account(context: viewContext)
-        }))
-        .sheet(
-            item: $newAccount,
-            onDismiss: {
-                print("🏳️‍🌈")
-            },
-            content: { _ in
-                EditAccountView(viewModel: EditAccountViewModel(account: $newAccount))
-            })
+        .navigationTitle("Select account")
     }
 }
 
 struct SelectAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            SelectAccountView(selectedAccountIndex: .constant(nil))
-                .environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
-        }
+        Group {
+            NavigationView {
+                AccountSelectionListView(selectedAccount: .constant(nil))
+            }
+            NavigationView {
+                AccountSelectionListView(selectedAccount: .constant(nil))
+            }.preferredColorScheme(.dark)
+        }.environment(\.managedObjectContext, CoreDataController.preview.container.viewContext)
     }
 }

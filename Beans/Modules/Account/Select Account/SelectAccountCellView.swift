@@ -7,36 +7,28 @@
 
 import SwiftUI
 
-struct SelectAccountCell: View {
+struct SelectAccountCellView: View {
     
-    @Binding var account: Account?
+    @Binding var selectedAccount: Account?
     
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(.fieldBackgroundColor(for: colorScheme))
-                .cornerRadius(5)
-                .frame(height: 40)
-            if let account = account {
+        NavigationLink {
+            AccountSelectionListView(selectedAccount: $selectedAccount)
+        } label: {
+            if let account = selectedAccount {
                 HStack {
                     Text(account.name ?? "")
                     Circle()
                         .foregroundColor(Color.from(hex: account.color))
                         .frame(width: 10, height: 10, alignment: .center)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.gray)
-                }.padding()
+                }
             } else {
                 HStack {
                     Text("Select an account")
-                        .foregroundStyle(Color.gray)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.gray)
-                }.padding()
+                        .foregroundStyle(Color.secondary)
+                }
             }
         }
     }
@@ -51,22 +43,26 @@ struct SelectAccountCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                VStack {
-                    Text("")
-                    SelectAccountCell(account: .constant(accounts.first!))
-                    SelectAccountCell(account: .constant(nil))
-                    Spacer()
+                Form {
+                    NavigationLink(destination: Text("")) {
+                        SelectAccountCellView(selectedAccount: .constant(accounts.first!))
+                    }
+                    NavigationLink(destination: Text("")) {
+                        SelectAccountCellView(selectedAccount: .constant(nil))
+                    }
                 }
-                .padding()
                 .navigationTitle("SelectAccountCell")
             }
+            
             NavigationView {
-                VStack {
-                    Text("")
-                    SelectAccountCell(account: .constant(accounts.first!))
-                    Spacer()
+                Form {
+                    NavigationLink(destination: Text("")) {
+                        SelectAccountCellView(selectedAccount: .constant(accounts.first!))
+                    }
+                    NavigationLink(destination: Text("")) {
+                        SelectAccountCellView(selectedAccount: .constant(nil))
+                    }
                 }
-                .padding()
                 .navigationTitle("SelectAccountCell")
             }
             .preferredColorScheme(.dark)

@@ -9,61 +9,62 @@ import SwiftUI
 
 struct ItemCell: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var item: Item
     
     var body: some View {
-        HStack() {
+        let value = item.value ?? 0
+        let valueColor = value.decimalValue >= 0 ? Color.greenText(for: colorScheme) : Color.redText(for: colorScheme)
+        HStack {
             ZStack {
                 Circle()
-                    .foregroundColor(Color.purple)
+                    .foregroundColor(Color.accentColor)
                     .frame(width: 32, height: 32)
                 Image(systemName: "fork.knife")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 18, height: 18)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.white)
             }
-            Spacer()
             VStack(alignment: .leading, spacing: 2) {
-                Text(item.name ?? "").lineLimit(2)
-                
+                Text(item.name ?? "")
+                    .font(.subheadline)
+                    .lineLimit(2)
                 HStack(spacing: 4) {
-                    Image(systemName: "circle.fill")
-                        .resizable()
+                    Circle()
                         .frame(width: 8, height: 8)
                         .foregroundColor(Color.from(hex: item.account?.color))
                     Text(item.account?.name ?? "")
                         .font(.footnote)
-                        .foregroundColor(.gray)
+                        .fontWeight(.light)
                 }
             }
             Spacer()
-            VStack {
-                Text(item.value?.toCurrency() ?? "")
-                    .bold()
-            }
+            Text(value.toCurrency() ?? "")
+                .font(.headline)
+                .foregroundColor(valueColor)
         }
     }
 }
 
 struct ItemCell_Previews: PreviewProvider {
     
-    static var item: Item {
+    static var items: [Item] {
         let context = CoreDataController.preview.container.viewContext
-        return try! context.fetch(Item.fetchRequest()).randomElement() as! Item
+        return try! context.fetch(Item.fetchRequest())
     }
     
     static var previews: some View {
         Group {
             NavigationView {
-                List {
+                List(items) { item in
                     ItemCell(item: item)
                     ItemCell(item: item)
                     ItemCell(item: item)
                 }.navigationTitle("Items")
             }
             NavigationView {
-                List {
+                List(items) { item in
                     ItemCell(item: item)
                     ItemCell(item: item)
                     ItemCell(item: item)

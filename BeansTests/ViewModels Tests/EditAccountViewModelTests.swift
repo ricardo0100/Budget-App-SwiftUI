@@ -18,7 +18,7 @@ class EditAccountViewModelTests: XCTestCase {
     }
     
     private func makeSUT(withExistingAccount: Bool = false) -> EditAccountViewModel {
-        return EditAccountViewModel(account: .constant(withExistingAccount ? createTestAccount() : nil),
+        return EditAccountViewModel(account: withExistingAccount ? createTestAccount() : nil,
                                     context: CoreDataController.tests.container.viewContext)
     }
     

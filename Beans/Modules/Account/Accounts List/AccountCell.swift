@@ -9,60 +9,29 @@ import SwiftUI
 
 struct AccountCell: View {
     
+    @Environment(\.colorScheme) var colorScheme
+    
     @ObservedObject var account: Account
     
     var body: some View {
-        let accountColor = Color.from(hex: account.color) ?? .gray
-        return ZStack {
-            Rectangle()
-                .foregroundColor(accountColor.opacity(0.15))
-                .cornerRadius(12.0)
-            
-            VStack(alignment: .leading) {
-                HStack(alignment: .top) {
-                    Text(account.name ?? "")
-                        .font(.title3)
-                        .foregroundColor(accountColor.darker(by: 0.25))
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        Text(account.sum().toCurrency() ?? "")
-                            .font(.headline)
-                            .foregroundColor(Color.currencyGreen)
-                        Text("Last activity 5 min ago")
-                            .foregroundColor(.gray)
-                            .font(.caption2)
-                    }
-                }
+        let accountColor = Color.from(hex: account.color)
+        let sum = account.sum()
+        let sumColor = sum.decimalValue >= 0 ? Color.greenText(for: colorScheme) : Color.redText(for: colorScheme)
+        return VStack(alignment: .leading) {
+            HStack(spacing: 0) {
+                Circle()
+                    .frame(width: 12, height: 12)
+                    .foregroundColor(accountColor)
                 Spacer()
-                if !account.recentItems().isEmpty {
-                    HStack {
-                        Rectangle()
-                            .frame(width: 2)
-                            .foregroundColor(accountColor)
-                            .padding(.trailing, 8)
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Last items:")
-                                .foregroundColor(Color.black.opacity(0.5))
-                            
-                            VStack(alignment: .leading) {
-                                ForEach(account.recentItems(), id: \.self) { item in
-                                    HStack {
-                                        Text(item.name ?? "")
-                                        Spacer()
-                                        Text(item.value?.toCurrency() ?? "")
-                                            .font(.caption)
-                                            .foregroundColor(Color.currencyRed)
-                                    }
-                                }
-                            }
-                        }.font(.caption)
-                    }
+                    .frame(width: 4)
+                Text(account.name ?? "")
+                Spacer()
+                VStack(alignment: .trailing) {
+                    Text(sum.toCurrency() ?? "")
+                        .foregroundColor(sumColor)
                 }
-            }.padding()
+            }
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 4)
     }
 }
 
@@ -74,15 +43,20 @@ struct AccountCell_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        NavigationView {
-            ScrollView {
-                LazyVStack {
-                    ForEach(accounts, id: \.self) { account in
-                        AccountCell(account: account)
-                    }
+        Group {
+            NavigationView {
+                List(accounts, id: \.self) { account in
+                    AccountCell(account: account)
                 }
+                .navigationTitle("Accounts")
             }
-            .navigationTitle("Accounts")
+            NavigationView {
+                List(accounts, id: \.self) { account in
+                    AccountCell(account: account)
+                }
+                .navigationTitle("Accounts")
+            }
+            .preferredColorScheme(.dark)
         }
     }
 }
