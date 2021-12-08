@@ -77,6 +77,7 @@ extension CoreDataController {
             newItem.name = "Item \(i) in account \(account?.name ?? "")"
             newItem.value = NSDecimalNumber(value: Double.random(in: -4...10))
             newItem.account = account
+            newItem.category = categories.randomElement()
             newItem.timestamp = Date()
         }
         

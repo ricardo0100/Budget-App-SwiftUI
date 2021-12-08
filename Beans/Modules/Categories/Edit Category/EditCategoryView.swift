@@ -15,8 +15,7 @@ struct EditCategoryView: View {
     var body: some View {
         Form {
             Section {
-                FormTextField(fieldName: "Name",
-                              text: $viewModel.name,
+                FormTextField(text: $viewModel.name,
                               error: $viewModel.nameError)
                 
                 NavigationLink(destination: SelectCategoryIconView(selectedSymbol: $viewModel.symbol), label: {

@@ -18,6 +18,10 @@ struct SelectCategoryCellView: View {
             if let category = selectedCategory {
                 HStack {
                     Image(systemName: category.symbol ?? "")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .padding(.horizontal, 2)
                     Text(category.name ?? "")
                 }
             } else {

@@ -26,7 +26,6 @@
 		597AA0CD257D88E4007A946B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597AA0CC257D88E4007A946B /* Color+Extension.swift */; };
 		597AA0D1257E5C13007A946B /* StatefulPreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597AA0D0257E5C13007A946B /* StatefulPreviewWrapper.swift */; };
 		597B05462580F74E0012C2D6 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597B05452580F74E0012C2D6 /* AccountCell.swift */; };
-		597DCF2225779E85004B6CDB /* TestableScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597DCF2125779E85004B6CDB /* TestableScheduler.swift */; };
 		597DCF2625780D66004B6CDB /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597DCF2525780D66004B6CDB /* CurrencyTextField.swift */; };
 		598BFD1E258C2CA300D75FE3 /* Item+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598BFD1D258C2CA300D75FE3 /* Item+Extension.swift */; };
 		599304F325B6434F00E76B38 /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599304F225B6434F00E76B38 /* AlertMessage.swift */; };
@@ -102,7 +101,6 @@
 		597AA0CC257D88E4007A946B /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		597AA0D0257E5C13007A946B /* StatefulPreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulPreviewWrapper.swift; sourceTree = "<group>"; };
 		597B05452580F74E0012C2D6 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
-		597DCF2125779E85004B6CDB /* TestableScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableScheduler.swift; sourceTree = "<group>"; };
 		597DCF2525780D66004B6CDB /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
 		598BFD1D258C2CA300D75FE3 /* Item+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+Extension.swift"; sourceTree = "<group>"; };
 		599304F225B6434F00E76B38 /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 		595F607E2573096A00B7DEEF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				597DCF2125779E85004B6CDB /* TestableScheduler.swift */,
 				596BA805257AF1B900C6BDC5 /* NSDecimalNumber+Extension.swift */,
 				597AA0CC257D88E4007A946B /* Color+Extension.swift */,
 				597AA0D0257E5C13007A946B /* StatefulPreviewWrapper.swift */,
@@ -622,7 +619,6 @@
 				59CF7B722730A8CC00A507AC /* FormCurrencyTextField.swift in Sources */,
 				59B4DBD625D7E68E00B61E47 /* AccountResponse.swift in Sources */,
 				BAB48979275045A4001DDAB7 /* CategoryCell.swift in Sources */,
-				597DCF2225779E85004B6CDB /* TestableScheduler.swift in Sources */,
 				59A5B20625ACB9920086D335 /* LogInView.swift in Sources */,
 				596B311E25792B2900408346 /* EditAccountViewModel.swift in Sources */,
 				59D64D2E25A6086A003557EA /* ProfileViewModel.swift in Sources */,

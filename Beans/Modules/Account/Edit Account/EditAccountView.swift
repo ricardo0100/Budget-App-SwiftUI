@@ -15,14 +15,10 @@ struct EditAccountView: View {
     var body: some View {
         Form {
             Section {
-                FormTextField(fieldName: "Account name",
+                FormTextField(placeholder: "Account name",
                               text: $viewModel.name,
                               error: $viewModel.nameError)
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Select a color")
-                        .fontWeight(.light)
-                    SelectColorView(selectedColor: $viewModel.color)
-                }
+                SelectColorView(selectedColor: $viewModel.color)
             } footer: {
                 HStack {
                     Spacer()

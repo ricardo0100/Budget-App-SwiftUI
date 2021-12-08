@@ -14,12 +14,10 @@ import SwiftUI
 class EditItemViewModelTests: XCTestCase {
     
     private var context = CoreDataController.tests.container.viewContext
-    private var scheduler: TestableSchedulerOf<RunLoop>!
     private var cancellables: [AnyCancellable]!
     private let emptyNameFieldErrorMessage = "Name should not be empty"
     
     override func setUp() {
-        scheduler = TestableScheduler(RunLoop.main, isTesting: true)
         cancellables = []
         CoreDataController.tests.deleteEverything()
     }
@@ -27,9 +25,7 @@ class EditItemViewModelTests: XCTestCase {
     private func makeSUT(item: Item? = nil, locale: Locale = .current) -> EditItemViewModel {
         let viewModel = EditItemViewModel(item: item,
                                           context: context,
-                                          locale: locale,
-                                          scheduler: scheduler)
-        viewModel.onAppear()
+                                          locale: locale)
         return viewModel
     }
     
@@ -100,67 +96,10 @@ class EditItemViewModelTests: XCTestCase {
     func test_whenNameFieldIsShowingError_andViewAppears_shouldNotShowErrorForNewItem() {
         let viewModel = makeSUT()
         viewModel.nameError = emptyNameFieldErrorMessage
-        viewModel.onAppear()
         
         XCTAssertEqual(viewModel.nameError, nil)
     }
 
-    func test_whenNewItem_andNameFieldWasNeverFilled_shouldNotShowNameErrorAfter2Seconds() {
-        let viewModel = makeSUT()
-        
-        viewModel
-            .$nameError
-            .sink { _ in }
-            .store(in: &cancellables)
-
-        scheduler.advance(in: .seconds(2))
-        XCTAssertEqual(viewModel.nameError, nil)
-    }
-
-    func test_whenNameFieldStartsBeignFilled_andIsErased_shouldShowEmptyNameErrorAfter2Seconds() {
-        let viewModel = makeSUT()
-        
-        viewModel.name = "R"
-        viewModel.name = ""
-        viewModel
-            .$nameError
-            .sink { _ in }
-            .store(in: &cancellables)
-
-        scheduler.advance(in: .seconds(2))
-        XCTAssertEqual(viewModel.nameError, emptyNameFieldErrorMessage)
-    }
-
-    func test_whenNameFieldIsEmptyAfterErasing_shouldShowEmptyNameErrorAfter2Seconds() {
-        let viewModel = makeSUT()
-        
-        viewModel.name = "R"
-        viewModel.name = ""
-        viewModel
-            .$nameError
-            .sink { _ in }
-            .store(in: &cancellables)
-
-        XCTAssertEqual(viewModel.nameError, nil)
-        scheduler.advance(in: .seconds(2))
-        XCTAssertEqual(viewModel.nameError, emptyNameFieldErrorMessage)
-    }
-
-    func test_whenNameFieldIsNotEmpty_andIsShowingEmptyNameError_shouldHideEmptyNameErrorAfter2Seconds() {
-        let viewModel = makeSUT()
-        
-        viewModel.onTapSave()
-        viewModel.name = "R"
-        viewModel
-            .$nameError
-            .sink { _ in }
-            .store(in: &cancellables)
-
-        XCTAssertEqual(viewModel.nameError, emptyNameFieldErrorMessage)
-        scheduler.advance(in: .seconds(2))
-        XCTAssertEqual(viewModel.nameError, nil)
-    }
-    
     func test_whenIsNewItem_andNameFieldIsFilled_andSaveIsTapped_shouldSaveANewItem() {
         createAccount(name: "Bank")
         let viewModel = makeSUT()
@@ -209,14 +148,6 @@ class EditItemViewModelTests: XCTestCase {
 //
 //        XCTAssertNotNil(editItemModelBinding.wrappedValue)
 //    }
-    
-    func test_whenNameIsEmpty_andDidTapSave_AndWait2Seconds_shouldKeepEmptyNameError() {
-        let viewModel = makeSUT()
-        
-        viewModel.onTapSave()
-        scheduler.advance(in: .seconds(2))
-        XCTAssertNotNil(viewModel.nameError)
-    }
     
 //    func test_whenIsExistingItem_andSave_willUpdateTimestamp() {
 //        let account = createAccount(name: "Bank")

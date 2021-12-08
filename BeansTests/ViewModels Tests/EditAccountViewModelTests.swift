@@ -24,44 +24,37 @@ class EditAccountViewModelTests: XCTestCase {
     
     func test_whenIsNewAccount_shouldShowNewAccountInTitle() {
         let viewModel = makeSUT()
-        viewModel.onAppear()
         XCTAssertEqual(viewModel.title, "New Account")
     }
     
     func test_whenIsNewAccount_shouldShowEmptyNameField() {
         let viewModel = makeSUT()
-        viewModel.onAppear()
         XCTAssertEqual(viewModel.name, "")
     }
     
     func test_whenIsExistingAccount_shouldShowAccountNameInTitle() {
         let viewModel = makeSUT(withExistingAccount: true)
-        viewModel.onAppear()
         XCTAssertEqual(viewModel.title, "The Bank 💰")
     }
     
     func test_whenIsExistingAccount_shouldShowAccountNameInNameField() {
         let viewModel = makeSUT(withExistingAccount: true)
-        viewModel.onAppear()
         XCTAssertEqual(viewModel.name, "The Bank 💰")
     }
     
     func test_whenIsExistingAccount_shouldShowColorInColorField() {
         let viewModel = makeSUT(withExistingAccount: true)
-        viewModel.onAppear()
         XCTAssertEqual(viewModel.color, "#FF0000")
     }
     
     func test_whenIsNewAccountAndNameIsEmpty_andTappedSave_shouldShowNameFieldEmptyError() {
         let viewModel = makeSUT()
-        viewModel.onAppear()
         viewModel.onSave()
         XCTAssertEqual(viewModel.nameError, "Name should not be empty")
     }
     
     func test_whenIsShowingNameFieldEmptyError_andNameFieldIsNotEmpty_andTappedSave_shouldNotShowError() {
         let viewModel = makeSUT()
-        viewModel.onAppear()
         viewModel.onSave()
         viewModel.name = "T"
         viewModel.onSave()
@@ -70,7 +63,6 @@ class EditAccountViewModelTests: XCTestCase {
     
     func test_whenIsNewItem_AndFieldNameIsEmpty_andTappedSave_shouldNotSaveInContext() {
         let viewModel = makeSUT()
-        viewModel.onAppear()
         viewModel.onSave()
         
         let accounts = retrieveAllAccounts()
@@ -79,7 +71,6 @@ class EditAccountViewModelTests: XCTestCase {
     
     func test_whenIsNewItem_AndFieldNameIsNotEmpty_andTappedSave_shouldSaveInContext() {
         let viewModel = makeSUT()
-        viewModel.onAppear()
         viewModel.name = "The Bank 💰"
         viewModel.color = "#FFBBAAFF"
         viewModel.onSave()
@@ -92,7 +83,6 @@ class EditAccountViewModelTests: XCTestCase {
     
     func test_whenIsNewItem_AndFieldNameIsNotEmpty_andTappedSave_shouldDismiss() {
         let viewModel = makeSUT()
-        viewModel.onAppear()
         viewModel.name = "The Bank 💰"
         viewModel.onSave()
         
@@ -101,7 +91,6 @@ class EditAccountViewModelTests: XCTestCase {
     
     func test_whenIsExistingItem_shouldSaveDataInSameObject() {
         let viewModel = makeSUT(withExistingAccount: true)
-        viewModel.onAppear()
         viewModel.name = "Test"
         viewModel.onSave()
         

@@ -16,16 +16,13 @@ struct ItemCell: View {
         let value = item.value ?? 0
         let valueColor = value.decimalValue >= 0 ? Color.greenText(for: colorScheme) : Color.redText(for: colorScheme)
         HStack {
-            ZStack {
-                Circle()
-                    .foregroundColor(Color.accentColor)
-                    .frame(width: 32, height: 32)
-                Image(systemName: "fork.knife")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 18, height: 18)
-                    .foregroundColor(.white)
-            }
+            Image(systemName: item.category?.symbol ?? "")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 24, height: 24)
+                .opacity(0.6)
+            Spacer()
+                .frame(width: 16)
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.name ?? "")
                     .font(.subheadline)

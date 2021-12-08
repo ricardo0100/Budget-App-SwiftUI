@@ -23,14 +23,15 @@ struct RecentItemsView: View {
                     .foregroundColor(.secondary)
             } else {
                 List {
-                    ForEach(items) { item in
-                        NavigationLink(destination: {
-                            EditItemView(viewModel: EditItemViewModel())
-                        }, label: {
-                            ItemCell(item: item)
-                        })
+                    Group {
+                        ForEach(items) { item in
+                            NavigationLink(destination: {
+                                EditItemView(viewModel: EditItemViewModel(item: item))
+                            }, label: {
+                                ItemCell(item: item)
+                            })
+                        }.onDelete(perform: deleteItems)
                     }
-                    .onDelete(perform: deleteItems)
                 }
             }
         }

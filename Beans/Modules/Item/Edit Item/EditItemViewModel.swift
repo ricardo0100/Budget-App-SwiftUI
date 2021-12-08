@@ -10,79 +10,68 @@ import Combine
 import CoreData
 import SwiftUI
 
+enum OperationType {
+    case debit
+    case credit
+}
+
 class EditItemViewModel: ObservableObject {
     
-    @Published var name: String = "" {
-        didSet {
-            shouldSkipNameIsEmptyValidation = false
-        }
-    }
+    @Published var name: String = ""
     @Published var value: Decimal = 0
     @Published var title: String = ""
     @Published var nameError: String?
     @Published var selectedAccount: Account?
     @Published var selectedCategory: ItemCategory?
+    @Published var operationType: OperationType = .debit
+    @Published var dismiss: Bool = false
     var item: Item?
     
     private var cancellables = [AnyCancellable]()
     private let nameErrorMessage = "Name should not be empty"
-    private let scheduler: TestableSchedulerOf<RunLoop>
     private let locale: Locale
     private let context: NSManagedObjectContext
-    private var shouldSkipNameIsEmptyValidation = true
     
     init(item: Item? = nil,
          context: NSManagedObjectContext = CoreDataController.shared.container.viewContext,
-         locale: Locale = .current,
-         scheduler: TestableSchedulerOf<RunLoop> = TestableScheduler(RunLoop.main)) {
-        self.scheduler = scheduler
+         locale: Locale = .current) {
         self.context = context
         self.locale = locale
         self.item = item
+        
+        clearErrors()
+        updateFields()
     }
     
     func onTapSave() {
-        shouldSkipNameIsEmptyValidation = false
         nameError = name.isEmpty ? nameErrorMessage : nil
         if !name.isEmpty {
             saveItem()
         }
     }
     
-    func onTapCancel() {
-        item = nil
-        if context.hasChanges {
-            context.rollback()
-        }
-    }
-    
-    func onAppear() {
-        clearErrors()
-        updateFields()
-        shouldSkipNameIsEmptyValidation = true
-        startErrorsTimers()
-    }
-    
     func onDisappear() {
-        
+        context.rollback()
     }
     
     private func saveItem() {
         let item = item ?? Item(context: context)
         item.name = name
-        item.value = NSDecimalNumber(decimal: value)
+        if operationType == .debit {
+            item.value = NSDecimalNumber(decimal: -value)
+        } else {
+            item.value = NSDecimalNumber(decimal: value)
+        }
+        item.value = item.value
         item.account = selectedAccount
+        item.category = selectedCategory
         item.timestamp = Date()
         do {
             try context.save()
-            dismiss()
+            dismiss = true
         } catch {
             fatalError(error.localizedDescription)
         }
-    }
-    
-    private func dismiss() {
-        item = nil
     }
     
     private func clearErrors() {
@@ -92,18 +81,16 @@ class EditItemViewModel: ObservableObject {
     private func updateFields() {
         title = item?.name ?? "New Item"
         name = item?.name ?? ""
-        value = item?.value?.decimalValue ?? 0
-    }
-    
-    private func startErrorsTimers() {
-        $name
-            .removeDuplicates()
-            .debounce(for: .seconds(2), scheduler: scheduler)
-            .map { input -> String? in
-                if self.shouldSkipNameIsEmptyValidation { return nil }
-                return input.isEmpty ? self.nameErrorMessage : nil
+        if let decimalValue = item?.value?.decimalValue {
+            if decimalValue < 0 {
+                value = -decimalValue
+                operationType = .debit
+            } else {
+                value = decimalValue
+                operationType = .credit
             }
-            .assign(to: \.nameError, on: self)
-            .store(in: &cancellables)
+        }
+        selectedAccount = item?.account
+        selectedCategory = item?.category
     }
 }

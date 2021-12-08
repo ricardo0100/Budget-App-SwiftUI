@@ -19,10 +19,11 @@ struct SelectAccountCellView: View {
         } label: {
             if let account = selectedAccount {
                 HStack {
-                    Text(account.name ?? "")
                     Circle()
                         .foregroundColor(Color.from(hex: account.color))
-                        .frame(width: 10, height: 10, alignment: .center)
+                        .frame(width: 12, height: 12, alignment: .center)
+                        .padding(.horizontal, 6)
+                    Text(account.name ?? "")
                 }
             } else {
                 HStack {

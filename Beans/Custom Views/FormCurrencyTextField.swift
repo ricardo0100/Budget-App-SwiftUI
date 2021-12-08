@@ -44,7 +44,7 @@ struct FormCurrencyTextField: View {
                 Text(error).font(.caption2)
                     .foregroundColor(.red)
             }
-        }.padding(.bottom, 4)
+        }
     }
 }
 
