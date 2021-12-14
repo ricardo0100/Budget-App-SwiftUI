@@ -13,6 +13,11 @@ struct BeansApp: App {
     
     let persistence = CoreDataController.shared
     
+    init() {
+        UIPageControl.appearance().pageIndicatorTintColor = .lightGray
+        UIPageControl.appearance().currentPageIndicatorTintColor = .gray
+    }
+    
     var body: some Scene {
         WindowGroup {
             MainView()

@@ -17,32 +17,41 @@ struct RecentItemsView: View {
     private var items: FetchedResults<Item>
     
     var body: some View {
-        VStack {
-            if items.isEmpty {
-                Text("No items")
-                    .foregroundColor(.secondary)
-            } else {
-                List {
-                    Group {
-                        ForEach(items) { item in
-                            NavigationLink(destination: {
-                                EditItemView(viewModel: EditItemViewModel(item: item))
-                            }, label: {
-                                ItemCell(item: item)
-                            })
-                        }.onDelete(perform: deleteItems)
-                    }
+        GeometryReader { proxy in
+            VStack {
+                if items.isEmpty {
+                    Text("No items")
+                        .foregroundColor(.secondary)
+                } else {
+                    List {
+                        TabView {
+                            CategoriesOverview(viewModel: CategoriesOverviewViewModel())
+                            AccountsOverview()
+                            Text("")
+                        }.listRowInsets(EdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        .tabViewStyle(PageTabViewStyle())
+                        .frame(height: 180)
+                        Section {
+                            ForEach(items) { item in
+                                NavigationLink(destination: {
+                                    EditItemView(viewModel: EditItemViewModel(item: item))
+                                }, label: {
+                                    ItemCell(item: item)
+                                })
+                            }.onDelete(perform: deleteItems)
+                        }
+                    }   
                 }
             }
-        }
-        .navigationTitle("Recent Items")
-        .toolbar {
-            ToolbarItem(placement: .automatic) {
-                NavigationLink(destination: {
-                    EditItemView(viewModel: EditItemViewModel())
-                }, label: {
-                    Image(systemName: "plus")
-                })
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    NavigationLink(destination: {
+                        EditItemView(viewModel: EditItemViewModel())
+                    }, label: {
+                        Image(systemName: "plus")
+                    })
+                }
             }
         }
     }

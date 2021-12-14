@@ -10,8 +10,10 @@ import SwiftUI
 
 extension Color {
     
+    static let chartColors: [Color] = [.red, .blue, .green, .yellow, .purple, .mint, .orange, .brown]
+    
     static func fieldBackgroundColor(for colorScheme: ColorScheme) -> Color? {
-        colorScheme == .light ? Color.from(hex: "#F2F2F2") : Color.from(hex: "#363636")
+        colorScheme == .light ? Color.from(hex: "#E6E6E6") : Color.from(hex: "#363636")
     }
     
     static func redText(for colorScheme: ColorScheme) -> Color? {
